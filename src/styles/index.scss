@@ -1,0 +1,9 @@
+@import "~Sass-JSON/src/_sass-json.scss";
+@import "colors";
+
+$export: (
+        'colors': $colors
+);
+
+@debug json-encode;
+@include json-encode($value: $export, $selector: '#sassData');

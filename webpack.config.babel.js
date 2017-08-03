@@ -62,11 +62,15 @@ module.exports = {
     },
     devServer: {
         historyApiFallback: true,
-        noInfo: true
+        hot: true,
+        inline: true,
+        // noInfo: true
+        // historyApiFallback: {
+        //     index: path.resolve(PATHS.views, 'index.html'),
+        // },
+
     },
-    performance: {
-        hints: false
-    },
+    // performance: 'warning',
     devtool: '#eval-source-map'
 }
 
