@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import App from './components/App.vue'
-// import App from './components/App/App.vue'
-// import './components/App/app.scss'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+
+Vue.use(Vuetify);
 
 new Vue({
     el: '#app',

@@ -30,8 +30,21 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
+                test: /\.(eot|svg|ttf|woff|woff2)$/,
+                loader: 'file?name=/public/fonts/[name].[ext]'
+            },
+            {
                 test: /\.scss$/,
                 loaders: ['style-loader', 'css-loader', 'sass-loader'],
+            },
+            {
+                test: /\.css$/,
+                loaders: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.styl$/,
+                // loader: 'css-loader!stylus-loader?paths=node_modules/bootstrap-stylus/stylus/'
+                loader: ['style-loader','css-loader', 'stylus-loader']
             },
             {
                 test: /\.(png|jpg|gif|svg)$/,
