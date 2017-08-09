@@ -1,26 +1,70 @@
 <template>
-    <v-app id="app"  standalone>
+    <v-app id="app" standalone>
 
+        <v-navigation-drawer absolute persistent light :mini-variant.sync="mini" v-model="drawer" overflow>
+            <v-toolbar class="transparent">
+                <v-list class="pa-0">
+                    <v-list-tile avatar tag="div">
+                        <v-list-tile-avatar>
+                            <img src="https://s.gravatar.com/avatar/edebe1c8b202a4ffb065b200c8d12d57?s=80"/>
+                        </v-list-tile-avatar>
+                        <v-list-tile-content>
+                            <v-list-tile-title>Settings</v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
+                </v-list>
+            </v-toolbar>
+            <v-list class="pt-0" dense>
+                <v-divider></v-divider>
+                <v-list-tile v-for="item in items" :key="item.title">
+                    <v-list-tile-action>
+                        <v-icon>{{ item.icon }}</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
 
-        <nav-drawer
-                :colors='colors'
-                :items='items'
-                :drawer='drawer'
-                :themeColor='themeColor'
-                v-on:toggleDrawer="toggleDrawer"
-                v-on:updateColor="updateColor"
-        ></nav-drawer>
-        <nav-bar
-                :themeColor="themeColor"
-                v-on:toggleDrawer="toggleDrawer"
-        ></nav-bar>
+                <v-list-tile>
 
-        <main >
-            <v-container fluid :class="[themeColor, 'lighten-4']">
+                    <v-select
+                            label="Select A Theme"
+                            v-bind:items="colors"
+                            v-model="themeColor"
+                            class="theme-select"
+                            item-text="color"
+                            item-value="color"
+                            max-height="auto"
+                    >
+                        <template slot="item" scope="data">
+                            <template>
+                                <v-list-tile-content>
+                                    <v-btn fab
+                                           class="dropdown-fob"
+                                           v-bind:style="{'background-color': data.item.hexValue}">
+                                    </v-btn>
+                                </v-list-tile-content>
+                                <v-list-tile-content>
+                                    <v-list-tile-title v-text="data.item.color"></v-list-tile-title>
+                                </v-list-tile-content>
+                            </template>
+                        </template>
+                    </v-select>
+
+                </v-list-tile>
+
+            </v-list>
+        </v-navigation-drawer>
+        <v-toolbar fixed :class="[themeColor, 'darken-4']" dark>
+            <v-toolbar-side-icon @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
+            <v-toolbar-title>Joseph Sangiorgio</v-toolbar-title>
+        </v-toolbar>
+        <main>
+            <v-container fluid>
                 <!--v-router-->
 
                 <template>
-                    <v-expansion-panel class="info-accordion">
+                    <v-expansion-panel>
                         <v-expansion-panel-content v-for="(item,i) in 5" :key="i">
                             <div slot="header">Item</div>
                             <v-card>
@@ -46,13 +90,10 @@
 <script>
 
     import {forEach, map, toArray} from 'lodash'
-    import NavDrawer from './NavDrawer.vue'
-    import NavBar from './NavBar.vue'
-
 
     export default {
-        components: { NavDrawer, NavBar },
         data() {
+
             return {
                 drawer: false,
                 items: [
@@ -61,8 +102,10 @@
                     {title: 'Test', icon: 'question_answer'},
                     {title: 'Joe', icon: 'question_answer'}
                 ],
+                mini: false,
                 right: null,
-                themeColor: 'red',
+                themeColor: 'green',
+
             }
         },
         //        render(){
@@ -101,17 +144,7 @@
             //                console.log(a)
             //                return a
             //            }
-        },
-        methods: {
-            toggleDrawer(state) {
-                if (state != this.drawer) {
-                    this.drawer = state || !this.drawer;
-                }
-            },
-            updateColor(e) {
-                this.themeColor = e;
-            },
-        },
+        }
 
     }
 </script>
@@ -126,9 +159,6 @@
 
     .dropdown-fob {
         width: 36px;
-    }
-    .info-accordion{
-        background-color: white;
     }
 
 
