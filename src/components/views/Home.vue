@@ -1,5 +1,5 @@
 <template>
-    <template>
+    <v-container fluid>
         <v-expansion-panel class="info-accordion">
             <v-expansion-panel-content v-for="(item,i) in 50" :key="i">
                 <div slot="header">Item</div>
@@ -10,30 +10,19 @@
                 </v-card>
             </v-expansion-panel-content>
         </v-expansion-panel>
-    </template>
-    <v-fab-transition>
-        <v-btn
-                :class="['top-btn',themeColor, 'darken-2']"
-                fab
-                fixed
-                bottom
-                right
-                v-show="toTop"
-                @click.native="scrollToTop"
-        >
 
-            <v-icon>keyboard_arrow_up</v-icon>
-        </v-btn>
-    </v-fab-transition>
+
+
+
+    </v-container>
 </template>
 
 <script>
 
     export default {
+        props: ['themeColor', 'toTop'],
         data() {
-            return {
-
-            }
+            return {}
         },
 
     }

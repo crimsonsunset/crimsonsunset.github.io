@@ -17,26 +17,22 @@
         </v-toolbar>
         <v-list class="pt-0">
             <v-divider></v-divider>
-            <v-list-tile v-for="item in items" :key="item.title">
+            <v-list-tile v-for="item in items" :key="item.label">
                 <v-list-tile-action>
-                    <v-icon>{{ item.icon }}</v-icon>
+                    <v-icon
+                            :class="[`${themeColor}--text`, 'text--lighten-1']"
+                    >{{ item.icon }}</v-icon>
                 </v-list-tile-action>
                 <v-list-tile-content>
-                    <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                    <v-list-tile-title>
+                        <router-link :to="item.path">{{item.label}}</router-link>
+                    </v-list-tile-title>
                 </v-list-tile-content>
             </v-list-tile>
 
-            <!--<v-list-tile>-->
-                <!--<router-link to="About">About</router-link>-->
-            <!--</v-list-tile>-->
-
-            <!--<v-list-tile>-->
-                <!--<router-link to="Contact">Contact</router-link>-->
-            <!--</v-list-tile>-->
-
             <v-divider></v-divider>
 
-            <v-subheader class="grey--text text--darken-1">Customize this page</v-subheader>
+            <v-subheader class="grey--text text--darken-1">Customize this App</v-subheader>
             <v-list class="px-3">
 
                 <v-select
@@ -65,7 +61,9 @@
             </v-list>
 
             <div class="switch px-3">
-                <v-switch label='Return To Top Button'
+                <v-switch
+                        :color="themeColor"
+                        label='Return To Top Button'
                           v-model="localTop"
                 >
 
@@ -81,12 +79,16 @@
 
     import {forEach, map, toArray} from 'lodash'
     import RouterLink from 'vue-router'
+    import routes from '../config/routes'
+//
+//    console.log('items')
+//    console.log(routes)
 
     export default {
-        props: ['drawer', 'colors', 'items', 'toTop'],
+        props: ['drawer', 'colors', 'toTop', 'themeColor'],
         data() {
             return {
-                //                localDrawer: this.drawer
+                items: routes
             }
         },
         created: function () {

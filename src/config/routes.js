@@ -1,13 +1,34 @@
-import {get} from 'lodash'
+import * as Views from '../components/views'
 
-export default {
-    methods: {
-        getSassConfig(key){
-            console.log('in the config thing', key)
-            const fullConfig = JSON.parse(JSON.parse(window.getComputedStyle(
-                document.getElementById('sassData'), '::before'
-            ).content));
-            return get(fullConfig, [key]) || {}
-        },
+export default [
+    {
+        path: '/',
+        component: Views.Home,
+        icon: 'home',
+        label: 'Home'
+    },
+    {
+        path: '/About',
+        component: Views.About,
+        icon: 'android',
+        label: 'About'
+    },
+    {
+        path: '/contact',
+        component: Views.Contact,
+        icon: 'phone',
+        label: 'Contact'
+    },
+    {
+        path: '/Projects',
+        component: Views.Projects,
+        icon: 'build',
+        label: 'Projects'
+    },
+    {
+        path: '/Resume',
+        component: Views.Resume,
+        icon: 'assignment',
+        label: 'Resume'
     }
-}
+];
