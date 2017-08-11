@@ -1,0 +1,34 @@
+{
+  "profileData": {
+    "experience": [
+      {
+        "company": "Marvel Entertainment",
+        "title": "Web Interface Developer",
+        "timeFrame": "Jun 2015 - Present",
+        "description": "aaa"
+      },
+      {
+        "company": "Rutgers University",
+        "title": "Full Stack Web Development Instructor",
+        "timeFrame": "Feb 2017 - Present",
+        "description": "bbb"
+      },
+      {
+        "company": "ScrollMotion",
+        "title": "Front End Developer",
+        "timeFrame": "June 2012 - Jun 2015",
+        "description": "ccc"
+      }
+    ],
+    "projects": [
+      {
+        "title": "Project One",
+        "description": "Project Description here1"
+      },
+      {
+        "title": "Project Two",
+        "description": "Project Description here2"
+      }
+    ]
+  }
+}

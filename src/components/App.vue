@@ -1,39 +1,68 @@
 <template>
-    <v-app id="app"  standalone>
-
-
+    <v-app id="app"
+           :class="[themeColor, 'lighten-4']"
+    >
         <nav-drawer
                 :colors='colors'
                 :items='items'
                 :drawer='drawer'
+                :toTop='toTop'
                 :themeColor='themeColor'
                 v-on:toggleDrawer="toggleDrawer"
-                v-on:updateColor="updateColor"
+                v-on:updateConfigVal="updateConfigVal"
         ></nav-drawer>
         <nav-bar
                 :themeColor="themeColor"
                 v-on:toggleDrawer="toggleDrawer"
         ></nav-bar>
 
-        <main >
-            <v-container fluid :class="[themeColor, 'lighten-4']">
-                <!--v-router-->
+        <main>
+            <v-container fluid>
 
-                <template>
-                    <v-expansion-panel class="info-accordion">
-                        <v-expansion-panel-content v-for="(item,i) in 5" :key="i">
-                            <div slot="header">Item</div>
-                            <v-card>
-                                <v-card-text :class="[themeColor, 'lighten-2']">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-card-text>
-                            </v-card>
-                        </v-expansion-panel-content>
-                    </v-expansion-panel>
-                </template>
+                <!--<transition>-->
+                    <!--<keep-alive>-->
+                <!--<router-view>-->
+
+                    <template>
+                        <v-expansion-panel class="info-accordion">
+                            <v-expansion-panel-content v-for="(item,i) in 50" :key="i">
+                                <div slot="header">Item</div>
+                                <v-card>
+                                    <v-card-text :class="[themeColor, 'lighten-2']">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </v-card-text>
+                                </v-card>
+                            </v-expansion-panel-content>
+                        </v-expansion-panel>
+                    </template>
+
+                    <v-fab-transition>
+                        <v-btn
+                                :class="['top-btn',themeColor, 'darken-2']"
+                                fab
+                                fixed
+                                bottom
+                                right
+                                v-show="toTop"
+                                @click.native="scrollToTop"
+                        >
+
+                            <v-icon>keyboard_arrow_up</v-icon>
+                        </v-btn>
+                    </v-fab-transition>
+
+                <!--</router-view>-->
+
+
+                    <!--</keep-alive>-->
+                <!--</transition>-->
 
 
             </v-container>
             <template>
-                <v-footer class="pa-3">
+                <v-footer
+                        :class="['pa-3',themeColor, 'lighten-5']"
+                >
                     <v-spacer></v-spacer>
                     <div>Joe Sangiorgio © {{ new Date().getFullYear() }}</div>
                 </v-footer>
@@ -48,10 +77,11 @@
     import {forEach, map, toArray} from 'lodash'
     import NavDrawer from './NavDrawer.vue'
     import NavBar from './NavBar.vue'
+    import RouterView from 'vue-router'
 
 
     export default {
-        components: { NavDrawer, NavBar },
+        components: {NavDrawer, NavBar},
         data() {
             return {
                 drawer: false,
@@ -63,53 +93,32 @@
                 ],
                 right: null,
                 themeColor: 'red',
+                toTop: true,
             }
         },
-        //        render(){
-        //            console.log('rendering')
-        //        },
-        //        mounted(){
-        //            console.log('mounted')
-        //        },
         computed: {
             colors() {
                 return this.getSassConfig('colors')
             },
-
-
-            //            colors: ()=>{
-            //                const colorObj = {
-            //                    red: '#F44336',
-            //                    pink: '#e91e63',
-            //                    purple: '#9c27b0',
-            //                    indigo: '#3f51b5',
-            //                    blue: '#2196F3',
-            //                    cyan: '#00bcd4',
-            //                    teal: '#009688',
-            //                    green: '#4CAF50',
-            //                    light: '#8bc34a',
-            //                    lime: '#cddc39',
-            //                    yellow: '#ffeb3b',
-            //                    amber: '#ffc107',
-            //                    orange: '#ff9800',
-            //                    deep: '#ff5722',
-            //                    brown: '#795548',
-            //                    grey: '#9e9e9e',
-            //                    black: '#000000',
-            //                };
-            //                let a = map(colorObj, (e,i)=> {return {color: i, hexCode: e}})
-            //                console.log(a)
-            //                return a
-            //            }
         },
         methods: {
+            scrollToTop() {
+                const scrollDuration = 1000;
+                const scrollStep = -window.scrollY / (scrollDuration / 15),
+                    scrollInterval = setInterval(function () {
+                        if (window.scrollY != 0) {
+                            window.scrollBy(0, scrollStep);
+                        }
+                        else clearInterval(scrollInterval);
+                    }, 15);
+            },
             toggleDrawer(state) {
                 if (state != this.drawer) {
                     this.drawer = state || !this.drawer;
                 }
             },
-            updateColor(e) {
-                this.themeColor = e;
+            updateConfigVal(val, e) {
+                this[val] = e;
             },
         },
 
@@ -119,16 +128,23 @@
 
 <style lang="scss">
 
+    $minHeight: 89vh !important;
 
-    .theme-select {
-        margin-top: 60px !important;
-    }
-
-    .dropdown-fob {
-        width: 36px;
-    }
-    .info-accordion{
+    .info-accordion {
         background-color: white;
+    }
+
+    .top-btn {
+        /*border: 1px solid orange;*/
+        bottom: 50px !important;
+    }
+
+    .application {
+        min-height: $minHeight;
+    }
+
+    .container {
+        min-height: $minHeight;
     }
 
 

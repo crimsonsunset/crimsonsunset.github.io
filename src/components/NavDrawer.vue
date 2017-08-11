@@ -15,7 +15,7 @@
                 </v-list-tile>
             </v-list>
         </v-toolbar>
-        <v-list class="pt-0" dense>
+        <v-list class="pt-0">
             <v-divider></v-divider>
             <v-list-tile v-for="item in items" :key="item.title">
                 <v-list-tile-action>
@@ -26,13 +26,23 @@
                 </v-list-tile-content>
             </v-list-tile>
 
-            <v-list-tile>
+            <!--<v-list-tile>-->
+                <!--<router-link to="About">About</router-link>-->
+            <!--</v-list-tile>-->
+
+            <!--<v-list-tile>-->
+                <!--<router-link to="Contact">Contact</router-link>-->
+            <!--</v-list-tile>-->
+
+            <v-divider></v-divider>
+
+            <v-subheader class="grey--text text--darken-1">Customize this page</v-subheader>
+            <v-list class="px-3">
 
                 <v-select
                         label="Select A Theme"
                         v-bind:items="colors"
-                        @input="e => { this.$emit('updateColor',e); }"
-                        class="theme-select"
+                        @input="e => { this.$emit('updateConfigVal', 'themeColor', e) }"
                         item-text="color"
                         item-value="color"
                         max-height="auto"
@@ -41,7 +51,7 @@
                         <template>
                             <v-list-tile-content>
                                 <v-btn fab
-                                       class="dropdown-fob"
+                                       class="dropdown-btn"
                                        v-bind:style="{'background-color': data.item.hexValue}">
                                 </v-btn>
                             </v-list-tile-content>
@@ -52,7 +62,15 @@
                     </template>
                 </v-select>
 
-            </v-list-tile>
+            </v-list>
+
+            <div class="switch px-3">
+                <v-switch label='Return To Top Button'
+                          v-model="localTop"
+                >
+
+                </v-switch>
+            </div>
 
         </v-list>
     </v-navigation-drawer>
@@ -62,13 +80,18 @@
 <script>
 
     import {forEach, map, toArray} from 'lodash'
+    import RouterLink from 'vue-router'
 
     export default {
-        props: ['drawer', 'colors', 'items'],
+        props: ['drawer', 'colors', 'items', 'toTop'],
         data() {
             return {
                 //                localDrawer: this.drawer
             }
+        },
+        created: function () {
+            // `this` points to the vm instance
+            //            console.log('thiz create ',this)
         },
         methods: {},
         computed: {
@@ -78,6 +101,14 @@
                 },
                 set(inVal) {
                     this.$emit('toggleDrawer', inVal);
+                }
+            },
+            localTop: {
+                get() {
+                    return this.toTop;
+                },
+                set(inVal) {
+                    this.$emit('updateConfigVal', 'toTop', inVal);
                 }
             }
         }
@@ -91,8 +122,12 @@
         margin-top: 60px !important;
     }
 
-    .dropdown-fob {
+    .dropdown-btn {
         width: 36px;
+    }
+
+    .switch {
+        margin-top: -30px;
     }
 
 </style>
