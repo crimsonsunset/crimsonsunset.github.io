@@ -2,10 +2,10 @@
 
     <!--<div> {{message}}</div>-->
 
-        <v-toolbar fixed :class="[themeColor, 'darken-4']" dark>
-            <v-toolbar-side-icon @click="e => { this.$emit('toggleDrawer'); }"></v-toolbar-side-icon>
-            <v-toolbar-title>{{themeColor}}</v-toolbar-title>
-        </v-toolbar>
+    <v-toolbar :class="[themeColor, 'darken-4']" dark>
+        <v-toolbar-side-icon @click.stop="test"></v-toolbar-side-icon>
+        <v-toolbar-title>{{themeColor}}</v-toolbar-title>
+    </v-toolbar>
 
 </template>
 
@@ -16,10 +16,12 @@
     export default {
         props: ['themeColor'],
         data() {
-            return {
-            }
+            return {}
         },
         methods: {
+            test(e) {
+                this.$emit('toggleDrawer');
+            }
         }
     }
 </script>

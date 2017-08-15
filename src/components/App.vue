@@ -1,67 +1,57 @@
+
 <template>
-    <v-app id="app"
-           :class="[themeColor, 'lighten-4']"
+    <v-app
+            id="e3"
+            standalone
     >
-        <!--<v-parallax src="https://vuetifyjs.com/static/doc-images/parallax/material.jpg">-->
-        <!--<v-container fluid>-->
-            <nav-drawer
-                    :colors='colors'
-                    :drawer='drawer'
-                    :toTop='toTop'
-                    :themeColor='themeColor'
-                    v-on:toggleDrawer="toggleDrawer"
-                    v-on:updateConfigVal="updateConfigVal"
-            ></nav-drawer>
-            <nav-bar
-                    :themeColor="themeColor"
-                    v-on:toggleDrawer="toggleDrawer"
-            ></nav-bar>
 
-            <main>
+        <nav-drawer
+                :colors='colors'
+                :drawer='drawer'
+                :toTop='toTop'
+                :themeColor='themeColor'
+                v-on:toggleDrawer="toggleDrawer"
+                v-on:updateConfigVal="updateConfigVal"
+        ></nav-drawer>
 
 
-                <transition>
-                    <keep-alive>
-                        <router-view
-                                :themeColor="themeColor"
-                                :toTop='toTop'
-                        >
+        <nav-bar
+                :themeColor="themeColor"
+                v-on:toggleDrawer="toggleDrawer"
+        ></nav-bar>
+        
 
-                            <!--<v-fab-transition>-->
-                            <!--<v-btn-->
-                            <!--:class="['top-btn',themeColor, 'darken-2']"-->
-                            <!--fab-->
-                            <!--fixed-->
-                            <!--bottom-->
-                            <!--right-->
-                            <!--v-show="toTop"-->
-                            <!--@click.native="scrollToTop"-->
-                            <!--&gt;-->
-
-                            <!--<v-icon>keyboard_arrow_up</v-icon>-->
-                            <!--</v-btn>-->
-                            <!--</v-fab-transition>-->
-                        </router-view>
-                    </keep-alive>
-                </transition>
+        <main>
 
 
-                <v-fab-transition>
-                    <v-btn
-                            :class="['top-btn',themeColor, 'darken-2']"
-                            fab
-                            fixed
-                            bottom
-                            right
-                            v-show="toTop"
-                            @click.native="scrollToTop"
-                    >
+            <transition>
+                <keep-alive>
+                    <router-view
+                            :themeColor="themeColor"
+                            :toTop='toTop'>
 
-                        <v-icon>keyboard_arrow_up</v-icon>
-                    </v-btn>
-                </v-fab-transition>
+                    </router-view>
+                </keep-alive>
+            </transition>
 
-            </main>
+
+            <v-fab-transition>
+                <v-btn
+                        :class="['top-btn',themeColor, 'darken-2']"
+                        fab
+                        fixed
+                        bottom
+                        right
+                        v-show="toTop"
+                        dark
+                        @click.native="scrollToTop"
+                >
+
+                    <v-icon>keyboard_arrow_up</v-icon>
+                </v-btn>
+            </v-fab-transition>
+
+        </main>
 
         <!--</v-container>-->
         <v-footer
@@ -70,7 +60,8 @@
             <v-spacer></v-spacer>
             <div>Joe Sangiorgio © {{ new Date().getFullYear() }}</div>
         </v-footer>
-        <!--</v-parallax>-->
+
+
     </v-app>
 </template>
 
@@ -88,7 +79,7 @@
             return {
                 drawer: false,
                 right: null,
-                themeColor: 'red',
+                themeColor: 'indigo',
                 toTop: true,
             }
         },
@@ -110,7 +101,6 @@
 
     }
 </script>
-
 
 <style lang="scss">
 

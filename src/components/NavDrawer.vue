@@ -1,8 +1,14 @@
 <template>
 
     <v-navigation-drawer
+            class="pb-0"
+            persistent
+            absolute
+            height="100%"
+            clipped
+
             v-model="localDrawer"
-            overflow>
+            >
         <v-toolbar class="transparent">
             <v-list class="pa-0">
                 <v-list-tile avatar tag="div">
