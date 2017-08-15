@@ -1,7 +1,7 @@
 
 <template>
     <v-app
-            id="e3"
+            id="app"
             standalone
     >
 
@@ -19,7 +19,7 @@
                 :themeColor="themeColor"
                 v-on:toggleDrawer="toggleDrawer"
         ></nav-bar>
-        
+
 
         <main>
 
@@ -27,6 +27,7 @@
             <transition>
                 <keep-alive>
                     <router-view
+                            transition="scale-transition"
                             :themeColor="themeColor"
                             :toTop='toTop'>
 
@@ -54,13 +55,27 @@
         </main>
 
         <!--</v-container>-->
+
+        <!--<v-footer-->
+                <!--:class="['pa-3',themeColor, 'darken-4']"-->
+        <!--&gt;-->
+            <!--<v-spacer></v-spacer>-->
+            <!--<div>Joe Sangiorgio © {{ new Date().getFullYear() }}</div>-->
+        <!--</v-footer>-->
+
+
         <v-footer
-                :class="['pa-3',themeColor, 'darken-4']"
+                fixed
+                :class="['pa-3',themeColor, 'darken-4', 'footer']"
         >
             <v-spacer></v-spacer>
             <div>Joe Sangiorgio © {{ new Date().getFullYear() }}</div>
         </v-footer>
 
+
+        <!--<v-footer :absolute="footer.fixed">-->
+            <!--<span>© {{ new Date().getFullYear() }}</span>-->
+        <!--</v-footer>-->
 
     </v-app>
 </template>
@@ -121,6 +136,10 @@
 
     .container {
         min-height: $minHeight;
+    }
+
+    .footer {
+        color: white;
     }
 
 

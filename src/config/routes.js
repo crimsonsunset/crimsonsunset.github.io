@@ -14,7 +14,7 @@ export default [
         label: 'About'
     },
     {
-        path: '/contact',
+        path: '/Contact',
         component: Views.Contact,
         icon: 'phone',
         label: 'Contact'

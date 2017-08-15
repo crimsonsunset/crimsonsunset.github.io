@@ -4,14 +4,12 @@
 
     <v-toolbar :class="[themeColor, 'darken-4']" dark>
         <v-toolbar-side-icon @click.stop="test"></v-toolbar-side-icon>
-        <v-toolbar-title>{{themeColor}}</v-toolbar-title>
+        <v-toolbar-title>{{this.getRouteName()}}</v-toolbar-title>
     </v-toolbar>
 
 </template>
 
 <script>
-
-    import {forEach, map, toArray} from 'lodash'
 
     export default {
         props: ['themeColor'],
@@ -21,6 +19,10 @@
         methods: {
             test(e) {
                 this.$emit('toggleDrawer');
+            },
+            getRouteName(e) {
+                const routeName = this.$route.fullPath.substring(1);
+                return (routeName != '') ? routeName : 'Welcome!';
             }
         }
     }
