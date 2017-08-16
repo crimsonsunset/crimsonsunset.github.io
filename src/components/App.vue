@@ -56,13 +56,6 @@
 
         <!--</v-container>-->
 
-        <!--<v-footer-->
-                <!--:class="['pa-3',themeColor, 'darken-4']"-->
-        <!--&gt;-->
-            <!--<v-spacer></v-spacer>-->
-            <!--<div>Joe Sangiorgio © {{ new Date().getFullYear() }}</div>-->
-        <!--</v-footer>-->
-
 
         <v-footer
                 fixed

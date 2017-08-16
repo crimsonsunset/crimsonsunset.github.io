@@ -7,6 +7,12 @@
             height="100%"
             clipped
 
+
+            temporary
+            light
+            overflow
+            absolute
+
             v-model="localDrawer"
             >
         <v-toolbar class="transparent">
