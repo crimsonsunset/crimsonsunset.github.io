@@ -75,7 +75,7 @@
 
 <script>
 
-    import {forEach, map, toArray} from 'lodash'
+    import {forEach, map, toArray, keys} from 'lodash'
     import NavDrawer from './NavDrawer.vue'
     import NavBar from './NavBar.vue'
     import RouterView from 'vue-router'
@@ -102,8 +102,13 @@
                     this.drawer = state || !this.drawer;
                 }
             },
-            updateConfigVal(val, e) {
-                this[val] = e;
+            updateConfigVal(payload) {
+                const firstKey = keys(payload)[0];
+                if (firstKey != 0) {
+                    this[firstKey] = payload[firstKey];
+                } else {
+                    this[payload] = !this[payload]
+                }
             },
         },
 

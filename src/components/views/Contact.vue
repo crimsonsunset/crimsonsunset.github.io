@@ -13,7 +13,7 @@
         </contact-form>
 
         <v-layout row wrap>
-            <v-flex xs6  offset-xs3>
+            <v-flex xs12 md6 offset-md3>
                 <v-card
                         :class="[themeColor, 'lighten-1', 'white--text', 'elevation-8']"
                 >
@@ -35,9 +35,6 @@
             </v-flex>
 
         </v-layout>
-    </v-container>
-
-
     </v-container>
 
 </template>

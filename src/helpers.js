@@ -8,6 +8,10 @@ export default {
             ).content));
             return get(fullConfig, [key]) || {}
         },
+        emitEvent(event, payload){
+            console.log('emitz', event, payload)
+            this.$emit(event, payload);
+        },
         scrollToTop() {
             const scrollDuration = 500;
             const scrollStep = -window.scrollY / (scrollDuration / 15),
@@ -16,8 +20,6 @@ export default {
                         window.scrollBy(0, scrollStep);
                     }
                     else clearInterval(scrollInterval);
-
-                    
                 }, 15);
         },
     }

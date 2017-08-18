@@ -50,7 +50,7 @@
                 <v-select
                         label="Select A Theme"
                         v-bind:items="colors"
-                        @input="e => { this.$emit('updateConfigVal', 'themeColor', e) }"
+                        @input="e => { emitEvent('updateConfigVal', {'themeColor': e}) }"
                         item-text="color"
                         item-value="color"
                         max-height="auto"
