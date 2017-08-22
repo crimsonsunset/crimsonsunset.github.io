@@ -2,7 +2,9 @@
 
     <!--<div> {{message}}</div>-->
 
-    <v-toolbar :class="[themeColor, 'darken-4']" dark>
+    <v-toolbar
+            fixed
+            :class="[themeColor, 'darken-4']" dark>
         <v-toolbar-side-icon @click.stop="()=>emitEvent('toggleDrawer')"></v-toolbar-side-icon>
         <v-toolbar-title>{{'sddd'}}</v-toolbar-title>
         <!--<v-toolbar-title>{{this.getRouteName()}}</v-toolbar-title>-->

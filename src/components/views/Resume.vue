@@ -7,40 +7,61 @@
 
             <v-layout row wrap>
                 <v-flex xs12 sm8 offset-sm2>
-                    <v-card>
+                    <v-card
+                            v-for="(item,i) in profileData.experience"
+                            flat light
+                            :class="['mb-3',`${themeColor}--text`, `${themeColor} lighten-4`, 'text--darken-3', 'elevation-2']"
+                            :key="item.company"
+                            :value="currNavItem === item.name"
+                    >
                         <!--<v-card-media-->
-                                <!--src="/static/doc-images/cards/sunshine.jpg"-->
-                                <!--height="200px"-->
+                        <!--src="/static/doc-images/cards/sunshine.jpg"-->
+                        <!--height="200px"-->
                         <!--&gt;-->
                         <!--</v-card-media>-->
+
                         <v-card-title primary-title>
                             <div>
-                                <div class="headline">Top western road trips</div>
-                                <span class="grey--text">1,000 miles of wonder</span>
+                                <div class="headline">{{item.title}}</div>
+                                <span
+                                        class="grey--text">{{item.company}}</span>
                             </div>
                         </v-card-title>
                         <v-card-actions>
-                            <v-btn flat>Share</v-btn>
-                            <v-btn flat class="purple--text">Explore</v-btn>
+
                             <v-spacer></v-spacer>
-                            <v-btn icon @click.native="show = !show">
-                                <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
+                            <v-btn
+                                    icon
+                                    :id="`${item.company}`"
+                                    @click.native="(e)=>{
+                                   	toggleResumeCard(e.target.parentElement.id);
+                                   }"
+                            >
+                                <v-icon>{{ (expandedItem == item.company) ? 'keyboard_arrow_down' : 'keyboard_arrow_up'
+                                    }}
+                                </v-icon>
                             </v-btn>
                         </v-card-actions>
                         <v-slide-y-transition>
-                            <v-card-text v-show="show">
-                                I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
+                            <v-card-text v-show="expandedItem == item.company">
+
+                                <ul>
+                                    <li
+                                            v-for="(descItem,i2) in item.descArr"
+                                            flat
+                                            light
+                                            :class="['mb-2',`${themeColor}--text`, 'text--darken-4']"
+                                            :key="descItem"
+                                    >
+                                        {{descItem}}
+                                    </li>
+                                </ul>
                             </v-card-text>
                         </v-slide-y-transition>
 
-
                     </v-card>
+
                 </v-flex>
-            </v-layout>
-
-
-            <v-layout row wrap>
-
             </v-layout>
 
 
@@ -53,9 +74,8 @@
 
 
             <v-card class="resume-view__nav">
-                <v-bottom-nav absolute value="true" class="transparent">
-
-
+                <v-bottom-nav
+                        value="true" class="white">
                     <v-btn
                             v-for="(item,i) in navItems"
                             flat light
@@ -70,24 +90,24 @@
                     </v-btn>
 
                     <!--<v-btn flat light-->
-                           <!--:class="[`${themeColor}&#45;&#45;text`, 'text&#45;&#45;lighten-2']"-->
-                           <!--@click.native="e1 = 2" :value="e1 === 2">-->
-                        <!--<span>Projects</span>-->
-                        <!--<v-icon>build</v-icon>-->
+                    <!--:class="[`${themeColor}&#45;&#45;text`, 'text&#45;&#45;lighten-2']"-->
+                    <!--@click.native="e1 = 2" :value="e1 === 2">-->
+                    <!--<span>Projects</span>-->
+                    <!--<v-icon>build</v-icon>-->
                     <!--</v-btn>-->
 
                     <!--<v-btn flat light-->
-                           <!--:class="[`${themeColor}&#45;&#45;text`, 'text&#45;&#45;lighten-2']"-->
-                           <!--@click.native="e1 = 3" :value="e1 === 3">-->
-                        <!--<span>References</span>-->
-                        <!--<v-icon>group</v-icon>-->
+                    <!--:class="[`${themeColor}&#45;&#45;text`, 'text&#45;&#45;lighten-2']"-->
+                    <!--@click.native="e1 = 3" :value="e1 === 3">-->
+                    <!--<span>References</span>-->
+                    <!--<v-icon>group</v-icon>-->
                     <!--</v-btn>-->
 
                     <!--<v-btn flat light-->
-                           <!--:class="[`${themeColor}&#45;&#45;text`, 'text&#45;&#45;lighten-2']"-->
-                           <!--@click.native="e1 = 3" :value="e1 === 3">-->
-                        <!--<span>References</span>-->
-                        <!--<v-icon>group</v-icon>-->
+                    <!--:class="[`${themeColor}&#45;&#45;text`, 'text&#45;&#45;lighten-2']"-->
+                    <!--@click.native="e1 = 3" :value="e1 === 3">-->
+                    <!--<span>References</span>-->
+                    <!--<v-icon>group</v-icon>-->
                     <!--</v-btn>-->
 
 
@@ -108,8 +128,20 @@
 	export default {
 		props: ['themeColor', 'toTop'],
 		mounted() {
-			this.profileData = profileData;
+			let {experience} = profileData;
+			experience = experience.map((e, i) => {
 
+				const splitDescription = (description) => {
+					let descArr = description.split('•').slice(1)
+//					descArr = descArr.map((e) => `•${e}`).slice(1);
+					return descArr
+				};
+
+				e.descArr = splitDescription(e.description);
+				return e;
+			});
+			profileData.experience = experience;
+			this.profileData = profileData;
 
 
 		},
@@ -119,11 +151,11 @@
 					{
 						name: 'Experience',
 						icon: 'laptop_mac',
-                    },
+					},
 					{
 						name: 'Projects',
 						icon: 'build',
-                    },
+					},
 					{
 						name: 'Skills',
 						icon: 'check_box',
@@ -131,22 +163,31 @@
 					{
 						name: 'References',
 						icon: 'group',
-                    },
+					},
 					{
 						name: 'Education',
 						icon: 'school',
-                    },
+					},
 				],
-				show: false,
+				profileData: {},
+				expandedItem: '',
 				currNavItem: 'Experience',
 			}
 		},
 		computed: {},
 		methods: {
-			toggleResumeNavItem(itemName){
+			toggleResumeNavItem(itemName) {
 				this.currNavItem = itemName;
-            }
-        }
+			},
+			toggleResumeCard(itemName) {
+
+				if (itemName == this.expandedItem) {
+					this.expandedItem = '';
+				} else {
+					this.expandedItem = itemName;
+				}
+			}
+		}
 
 	}
 

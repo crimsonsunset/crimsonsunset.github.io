@@ -3,15 +3,11 @@
     <v-navigation-drawer
             class="pb-0"
             persistent
-            absolute
             height="100%"
             clipped
-
-
             temporary
             light
             overflow
-            absolute
 
             v-model="localDrawer"
             >

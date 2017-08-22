@@ -87,7 +87,7 @@
             return {
                 drawer: false,
                 right: null,
-                themeColor: 'indigo',
+                themeColor: 'green',
                 toTop: true
             }
         },
