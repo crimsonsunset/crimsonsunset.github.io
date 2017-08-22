@@ -19,12 +19,12 @@ export default [
         icon: 'phone',
         label: 'Contact'
     },
-    {
-        path: '/Projects',
-        component: Views.Projects,
-        icon: 'build',
-        label: 'Projects'
-    },
+    // {
+    //     path: '/Projects',
+    //     component: Views.Projects,
+    //     icon: 'build',
+    //     label: 'Projects'
+    // },
     {
         path: '/Resume',
         component: Views.Resume,

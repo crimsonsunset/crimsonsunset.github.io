@@ -88,7 +88,7 @@
                 drawer: false,
                 right: null,
                 themeColor: 'indigo',
-                toTop: true,
+                toTop: true
             }
         },
         computed: {

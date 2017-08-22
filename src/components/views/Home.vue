@@ -133,12 +133,14 @@
 		        let {$data, currSlider} = this;
 		        const currArr = $data[currKey];
 
+
 		        //other typers that are already going, ignore.
 		        if (currSlider != currKey) {
 		        	return
 		        } else {
 			        const {length} = currArr;
 			        if (currArr[length-1] == string) {
+//				        const sliderArr = ['build', 'teach', 'know', 'like'];
 //				        this.currSlider = 'teach'
 				        debugger;
 				        this.clickNext();
