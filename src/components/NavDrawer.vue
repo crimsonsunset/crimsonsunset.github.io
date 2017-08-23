@@ -68,6 +68,27 @@
 
             </v-list>
 
+            <v-list class="px-3">
+
+                <v-select
+                        label="Select An Animation"
+                        v-bind:items="animations"
+                        @input="e => { emitEvent('updateConfigVal', {'animation': e}) }"
+                        item-text="color"
+                        item-value="color"
+                        max-height="auto"
+                >
+                    <template slot="item" scope="data">
+                        <template>
+                            <v-list-tile-content>
+                                <v-list-tile-title v-text="data.item"></v-list-tile-title>
+                            </v-list-tile-content>
+                        </template>
+                    </template>
+                </v-select>
+
+            </v-list>
+
             <div class="switch px-3">
                 <v-switch
                         :color="themeColor"
@@ -93,7 +114,7 @@
 //    console.log(routes)
 
     export default {
-        props: ['drawer', 'colors', 'toTop', 'themeColor'],
+        props: ['drawer', 'colors', 'toTop', 'themeColor', 'animations'],
         data() {
             return {
                 items: routes

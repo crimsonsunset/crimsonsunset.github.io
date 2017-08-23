@@ -6,6 +6,7 @@
 
         <nav-drawer
                 :colors='colors'
+                :animations='animations'
                 :drawer='drawer'
                 :toTop='toTop'
                 :themeColor='themeColor'
@@ -26,7 +27,7 @@
             <transition>
                 <keep-alive>
                     <router-view
-                            transition="scale-transition"
+                            :animation="animation"
                             :themeColor="themeColor"
                             :toTop='toTop'>
 
@@ -85,14 +86,17 @@
 		data() {
 			return {
 				drawer: false,
-				right: null,
 				themeColor: 'green',
+				animation: 'fade',
 				toTop: true
 			}
 		},
 		computed: {
 			colors() {
 				return this.getSassConfig('colors')
+			},
+			animations() {
+				return this.getAnimationNames()
 			},
 		},
 		methods: {
@@ -124,7 +128,7 @@
 
     .top-btn {
         /*border: 1px solid orange;*/
-        bottom: 50px !important;
+        bottom: 60px !important;
     }
 
     .application {

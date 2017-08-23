@@ -1,8 +1,22 @@
 <template>
 
-            <v-layout row wrap>
-                <v-flex xs12 sm8 offset-sm2>
+
+
+        <v-layout row wrap >
+
+
+
+            <v-flex xs12 sm8 offset-sm2>
+
+                <!--:leave-active-class="`animated ${animation}`"-->
+                <transition-group
+                        name="custom-classes-transition"
+                        :enter-active-class="`animated ${animation}`"
+                >
+
+
                     <v-card
+                            transition="slide-x-transition"
                             v-for="(item,i) in profileData[this.name]"
                             flat light
                             :class="['mb-3',`${themeColor}--text`, `${themeColor} lighten-4`, 'text--darken-3', 'elevation-2']"
@@ -16,25 +30,25 @@
 
                         <v-card-title primary-title>
 
-                                <div class="headline full-width">{{item.title}}</div>
+                            <div class="headline full-width">{{item.title}}</div>
 
-                                <v-layout fluid class="full-width grey--text">
-                                    <v-flex
-                                            v-if="item.company"
-                                            xs8 >
-                                        <div
-                                                >{{item.company}}
-                                        </div>
-                                    </v-flex>
+                            <v-layout fluid class="full-width grey--text">
+                                <v-flex
+                                        v-if="item.company"
+                                        xs8>
+                                    <div
+                                    >{{item.company}}
+                                    </div>
+                                </v-flex>
 
-                                    <v-flex
-                                            v-if="item.timeFrame"
-                                            xs4>
-                                        <div
-                                                class="text-align--right">{{item.timeFrame}}
-                                        </div>
-                                    </v-flex>
-                                </v-layout>
+                                <v-flex
+                                        v-if="item.timeFrame"
+                                        xs4>
+                                    <div
+                                            class="text-align--right">{{item.timeFrame}}
+                                    </div>
+                                </v-flex>
+                            </v-layout>
 
                         </v-card-title>
                         <v-card-actions>
@@ -47,7 +61,8 @@
                                    	toggleResumeCard(e.target.parentElement.id);
                                    }"
                             >
-                                <v-icon>{{ (expandedItem == item[item.key]) ? 'keyboard_arrow_down' : 'keyboard_arrow_up'
+                                <v-icon>
+                                    {{ (expandedItem == item[item.key]) ? 'keyboard_arrow_down' : 'keyboard_arrow_up'
                                     }}
                                 </v-icon>
                             </v-btn>
@@ -71,93 +86,39 @@
 
                     </v-card>
 
-                </v-flex>
-            </v-layout>
+            </transition-group>
+            </v-flex>
+
+
+        </v-layout>
+
+
+
+
+    <!--<div id="example-3">-->
+    <!--<button @click="show = !show">-->
+    <!--Toggle render-->
+    <!--</button>-->
+    <!--<transition-->
+    <!--name="custom-classes-transition"-->
+    <!--enter-active-class="animated bounce"-->
+    <!--leave-active-class="animated bounce"-->
+    <!--&gt;-->
+    <!--<p v-if="show">hello</p>-->
+    <!--</transition>-->
+    <!--</div>-->
 
 
 </template>
 
 <script>
 
-	import axios from 'axios'
-//	import {profileData} from '../config/joeInfo.json'
-
-//	class GoogleImageSearch {
-//
-//		static searchImage(query) {
-//			query = encodeURIComponent(query)
-//
-//			return new Promise((resolve, reject) => {
-//
-//				// Fetches Items from Google Image Search URL
-//				fetch("https://cors-anywhere.herokuapp.com/https://www.google.com/search?source=lnms&sa=X&gbv=1&tbm=isch&q=" + query)
-//					.then(res => res.text())
-//					.then(res => {
-//
-//						// Transforms HTML string into DOM object
-//						let parser = new DOMParser()
-//						parser = parser.parseFromString(res, "text/html")
-//
-//						// Gets DOM element with image results
-//						let images = parser.getElementById("ires").childNodes[0]
-//
-//						if (images.nodeName === "DIV") {
-//
-//							resolve(this.googleGetMobile(images))
-//						} else if (images.nodeName === "TABLE") {
-//
-//							resolve(this.googleGetDesktop(images))
-//						} else {
-//
-//							reject("Unknown System")
-//						}
-//
-//					})
-//					.catch(err => reject(err))
-//			})
-//		}
-//
-//		static googleGetMobile(images) {
-//
-//			// Transforms DOM NodeList of images into Array.
-//			// Needed to use .map method
-//			images = Array.from(images.childNodes)
-//
-//			// Maps Image Sources
-//			return images.map((imgDiv) => {
-//				console.log(imgDiv.getAttribute("href"));
-//				return imgDiv.childNodes[0].src
-//			})
-//		}
-//
-//		static googleGetDesktop(images) {
-//
-//			// NodeList of table rows
-//			images = images.childNodes[0].childNodes
-//
-//			// Empty List of image URLs
-//			let imgSrc = []
-//
-//			// Traverses table node for images
-//			images.forEach((tRow) => {
-//				tRow = tRow.childNodes
-//				tRow.forEach((tCol) => {
-//					let aLink = tCol.childNodes[0].childNodes[0]
-//					imgSrc.push(aLink.src)
-//				})
-//			})
-//
-//			return imgSrc
-//		}
-//
-//	}
-
 	export default {
-		props: ['themeColor', 'name', 'profileData'],
+		props: ['themeColor', 'name', 'profileData', 'animation'],
 		mounted() {
 			console.log(this)
 		},
-        data() {
+		data() {
 			return {
 				expandedItem: ''
 			}

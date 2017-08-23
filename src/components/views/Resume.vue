@@ -3,18 +3,7 @@
 
     <section>
 
-        <!--<v-btn-->
-        <!--flat dark-->
-        <!--:class="[`${'black'}&#45;&#45;text`, 'text&#45;&#45;lighten-2']"-->
-        <!--@click.native="(e)=>{-->
-        <!--test(e);-->
-        <!--//                	GoogleImageSearch.searchImage('dog').then((e)=>{-->
-        <!--//                		console.log('sss', e)-->
-        <!--//                	})-->
-        <!--}"-->
-        <!--&gt;-->
-        <!--<span>zff</span>-->
-        <!--</v-btn>-->
+
 
         <v-container fluid class="mt-5 resume-view">
 
@@ -22,10 +11,18 @@
                     v-if="(currNavItem == 'Experience' || currNavItem == 'Projects') "
                     :profileData='this.profileData'
                     :themeColor='themeColor'
+                    :animation='animation'
                     :name="currNavItem.toLowerCase()"
             >
 
             </card-list>
+
+
+            <lazy-grid
+                    v-if="(currNavItem == 'Skills') "
+            >
+
+            </lazy-grid>
 
         </v-container>
 
@@ -63,11 +60,12 @@
 
 	import axios from 'axios'
 	import {profileData} from '../../config/joeInfo.json'
-	import CardList from '../CardList.vue'
+	import CardList from '../CardList.vue';
+	import LazyGrid from '../LazyGrid.vue';
 
 	export default {
-		props: ['themeColor'],
-		components: {CardList},
+		props: ['themeColor', 'animation'],
+		components: {CardList, LazyGrid},
 		mounted() {
 			const splitNameArr = ['experience', 'projects'];
 
@@ -88,7 +86,7 @@
 //				profileData[currExp] = currExp;
 				this.profileData = profileData;
 			});
-			console.log(this.profileData)
+			console.log(this.getAnimationNames())
 		},
 		data() {
 			return {
