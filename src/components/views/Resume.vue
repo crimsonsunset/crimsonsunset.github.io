@@ -18,75 +18,14 @@
 
         <v-container fluid class="mt-5 resume-view">
 
-            <v-layout row wrap>
-                <v-flex xs12 sm8 offset-sm2>
-                    <v-card
-                            v-for="(item,i) in profileData.experience"
-                            flat light
-                            :class="['mb-3',`${themeColor}--text`, `${themeColor} lighten-4`, 'text--darken-3', 'elevation-2']"
-                            :key="item.company"
-                            :value="currNavItem === item.name"
-                            :data-company="item.company"
-                            @click="(e)=>{
-                                   	//toggleResumeCard(e.target.parentElement.dataset.company);
-                                   }"
-                    >
+            <card-list
+                    v-if="(currNavItem == 'Experience' || currNavItem == 'Projects') "
+                    :profileData='this.profileData'
+                    :themeColor='themeColor'
+                    :name="currNavItem.toLowerCase()"
+            >
 
-                        <v-card-title primary-title>
-
-                                <div class="headline full-width">{{item.title}}</div>
-
-                                <v-layout fluid class="full-width grey--text">
-                                    <v-flex xs8 >
-                                        <div
-                                                >{{item.company}}
-                                        </div>
-                                    </v-flex>
-
-                                    <v-flex xs4>
-                                        <div
-                                                class="text-align--right">{{item.timeFrame}}
-                                        </div>
-                                    </v-flex>
-                                </v-layout>
-
-                        </v-card-title>
-                        <v-card-actions>
-
-                            <v-spacer></v-spacer>
-                            <v-btn
-                                    icon
-                                    :id="`${item.company}`"
-                                    @click.native="(e)=>{
-                                   	toggleResumeCard(e.target.parentElement.id);
-                                   }"
-                            >
-                                <v-icon>{{ (expandedItem == item.company) ? 'keyboard_arrow_down' : 'keyboard_arrow_up'
-                                    }}
-                                </v-icon>
-                            </v-btn>
-                        </v-card-actions>
-                        <v-slide-y-transition>
-                            <v-card-text v-show="expandedItem == item.company">
-
-                                <ul>
-                                    <li
-                                            v-for="(descItem,i2) in item.descArr"
-                                            flat
-                                            light
-                                            :class="['mb-2',`${themeColor}--text`, 'text--darken-4']"
-                                            :key="descItem"
-                                    >
-                                        {{descItem}}
-                                    </li>
-                                </ul>
-                            </v-card-text>
-                        </v-slide-y-transition>
-
-                    </v-card>
-
-                </v-flex>
-            </v-layout>
+            </card-list>
 
         </v-container>
 
@@ -124,96 +63,32 @@
 
 	import axios from 'axios'
 	import {profileData} from '../../config/joeInfo.json'
-
-	class GoogleImageSearch {
-
-		static searchImage(query) {
-			query = encodeURIComponent(query)
-
-			return new Promise((resolve, reject) => {
-
-				// Fetches Items from Google Image Search URL
-				fetch("https://cors-anywhere.herokuapp.com/https://www.google.com/search?source=lnms&sa=X&gbv=1&tbm=isch&q=" + query)
-					.then(res => res.text())
-					.then(res => {
-
-						// Transforms HTML string into DOM object
-						let parser = new DOMParser()
-						parser = parser.parseFromString(res, "text/html")
-
-						// Gets DOM element with image results
-						let images = parser.getElementById("ires").childNodes[0]
-
-						if (images.nodeName === "DIV") {
-
-							resolve(this.googleGetMobile(images))
-						} else if (images.nodeName === "TABLE") {
-
-							resolve(this.googleGetDesktop(images))
-						} else {
-
-							reject("Unknown System")
-						}
-
-					})
-					.catch(err => reject(err))
-			})
-		}
-
-		static googleGetMobile(images) {
-
-			// Transforms DOM NodeList of images into Array.
-			// Needed to use .map method
-			images = Array.from(images.childNodes)
-
-			// Maps Image Sources
-			return images.map((imgDiv) => {
-				console.log(imgDiv.getAttribute("href"));
-				return imgDiv.childNodes[0].src
-			})
-		}
-
-		static googleGetDesktop(images) {
-
-			// NodeList of table rows
-			images = images.childNodes[0].childNodes
-
-			// Empty List of image URLs
-			let imgSrc = []
-
-			// Traverses table node for images
-			images.forEach((tRow) => {
-				tRow = tRow.childNodes
-				tRow.forEach((tCol) => {
-					let aLink = tCol.childNodes[0].childNodes[0]
-					imgSrc.push(aLink.src)
-				})
-			})
-
-			return imgSrc
-		}
-
-	}
+	import CardList from '../CardList.vue'
 
 	export default {
-		props: ['themeColor', 'toTop'],
+		props: ['themeColor'],
+		components: {CardList},
 		mounted() {
-			let {experience} = profileData;
-			experience = experience.map((e, i) => {
+			const splitNameArr = ['experience', 'projects'];
 
-				const splitDescription = (description) => {
-					let descArr = description.split('•').slice(1)
-					//					descArr = descArr.map((e) => `•${e}`).slice(1);
-					return descArr
-				};
+			splitNameArr.forEach((e, i) => {
+				let currExp = profileData[e];
+				currExp.map((e2, i2) => {
 
-				e.descArr = splitDescription(e.description);
-				return e;
+					const splitDescription = (description) => {
+						let descArr = description.split('•').slice(1)
+						//					descArr = descArr.map((e) => `•${e}`).slice(1);
+						return descArr
+					};
+
+					e2.descArr = splitDescription(e2.description);
+					e2.key = (e == 'experience') ? 'company' : 'title'
+					return e2;
+				});
+//				profileData[currExp] = currExp;
+				this.profileData = profileData;
 			});
-			profileData.experience = experience;
-			this.profileData = profileData;
-
-
+			console.log(this.profileData)
 		},
 		data() {
 			return {
@@ -249,28 +124,13 @@
 			toggleResumeNavItem(itemName) {
 				this.currNavItem = itemName;
 			},
-			toggleResumeCard(itemName) {
-
-				if (itemName == this.expandedItem) {
-					this.expandedItem = '';
-				} else {
-					this.expandedItem = itemName;
-				}
-			},
-			test(itemName) {
-				GoogleImageSearch.searchImage('javascript').then((e) => {
-					console.log('d', e)
-				})
-			}
+//			test(itemName) {
+//				GoogleImageSearch.searchImage('javascript').then((e) => {
+//					console.log('d', e)
+//				})
+//			}
 		}
-
 	}
-
-
-	//
-	// Copyright (c) 2017 by Fedir Bobylev. All Rights Reserved.
-	//
-
 
 </script>
 
