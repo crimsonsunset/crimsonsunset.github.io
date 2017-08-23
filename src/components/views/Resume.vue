@@ -3,6 +3,19 @@
 
     <section>
 
+        <!--<v-btn-->
+        <!--flat dark-->
+        <!--:class="[`${'black'}&#45;&#45;text`, 'text&#45;&#45;lighten-2']"-->
+        <!--@click.native="(e)=>{-->
+        <!--test(e);-->
+        <!--//                	GoogleImageSearch.searchImage('dog').then((e)=>{-->
+        <!--//                		console.log('sss', e)-->
+        <!--//                	})-->
+        <!--}"-->
+        <!--&gt;-->
+        <!--<span>zff</span>-->
+        <!--</v-btn>-->
+
         <v-container fluid class="mt-5 resume-view">
 
             <v-layout row wrap>
@@ -13,19 +26,30 @@
                             :class="['mb-3',`${themeColor}--text`, `${themeColor} lighten-4`, 'text--darken-3', 'elevation-2']"
                             :key="item.company"
                             :value="currNavItem === item.name"
+                            :data-company="item.company"
+                            @click="(e)=>{
+                                   	//toggleResumeCard(e.target.parentElement.dataset.company);
+                                   }"
                     >
-                        <!--<v-card-media-->
-                        <!--src="/static/doc-images/cards/sunshine.jpg"-->
-                        <!--height="200px"-->
-                        <!--&gt;-->
-                        <!--</v-card-media>-->
 
                         <v-card-title primary-title>
-                            <div>
-                                <div class="headline">{{item.title}}</div>
-                                <span
-                                        class="grey--text">{{item.company}}</span>
-                            </div>
+
+                                <div class="headline full-width">{{item.title}}</div>
+
+                                <v-layout fluid class="full-width grey--text">
+                                    <v-flex xs8 >
+                                        <div
+                                                >{{item.company}}
+                                        </div>
+                                    </v-flex>
+
+                                    <v-flex xs4>
+                                        <div
+                                                class="text-align--right">{{item.timeFrame}}
+                                        </div>
+                                    </v-flex>
+                                </v-layout>
+
                         </v-card-title>
                         <v-card-actions>
 
@@ -64,7 +88,6 @@
                 </v-flex>
             </v-layout>
 
-
         </v-container>
 
         <v-flex
@@ -89,34 +112,11 @@
                         <v-icon>{{item.icon}}</v-icon>
                     </v-btn>
 
-                    <!--<v-btn flat light-->
-                    <!--:class="[`${themeColor}&#45;&#45;text`, 'text&#45;&#45;lighten-2']"-->
-                    <!--@click.native="e1 = 2" :value="e1 === 2">-->
-                    <!--<span>Projects</span>-->
-                    <!--<v-icon>build</v-icon>-->
-                    <!--</v-btn>-->
-
-                    <!--<v-btn flat light-->
-                    <!--:class="[`${themeColor}&#45;&#45;text`, 'text&#45;&#45;lighten-2']"-->
-                    <!--@click.native="e1 = 3" :value="e1 === 3">-->
-                    <!--<span>References</span>-->
-                    <!--<v-icon>group</v-icon>-->
-                    <!--</v-btn>-->
-
-                    <!--<v-btn flat light-->
-                    <!--:class="[`${themeColor}&#45;&#45;text`, 'text&#45;&#45;lighten-2']"-->
-                    <!--@click.native="e1 = 3" :value="e1 === 3">-->
-                    <!--<span>References</span>-->
-                    <!--<v-icon>group</v-icon>-->
-                    <!--</v-btn>-->
-
-
                 </v-bottom-nav>
             </v-card>
         </v-flex>
 
     </section>
-
 
 </template>
 
@@ -124,6 +124,76 @@
 
 	import axios from 'axios'
 	import {profileData} from '../../config/joeInfo.json'
+
+	class GoogleImageSearch {
+
+		static searchImage(query) {
+			query = encodeURIComponent(query)
+
+			return new Promise((resolve, reject) => {
+
+				// Fetches Items from Google Image Search URL
+				fetch("https://cors-anywhere.herokuapp.com/https://www.google.com/search?source=lnms&sa=X&gbv=1&tbm=isch&q=" + query)
+					.then(res => res.text())
+					.then(res => {
+
+						// Transforms HTML string into DOM object
+						let parser = new DOMParser()
+						parser = parser.parseFromString(res, "text/html")
+
+						// Gets DOM element with image results
+						let images = parser.getElementById("ires").childNodes[0]
+
+						if (images.nodeName === "DIV") {
+
+							resolve(this.googleGetMobile(images))
+						} else if (images.nodeName === "TABLE") {
+
+							resolve(this.googleGetDesktop(images))
+						} else {
+
+							reject("Unknown System")
+						}
+
+					})
+					.catch(err => reject(err))
+			})
+		}
+
+		static googleGetMobile(images) {
+
+			// Transforms DOM NodeList of images into Array.
+			// Needed to use .map method
+			images = Array.from(images.childNodes)
+
+			// Maps Image Sources
+			return images.map((imgDiv) => {
+				console.log(imgDiv.getAttribute("href"));
+				return imgDiv.childNodes[0].src
+			})
+		}
+
+		static googleGetDesktop(images) {
+
+			// NodeList of table rows
+			images = images.childNodes[0].childNodes
+
+			// Empty List of image URLs
+			let imgSrc = []
+
+			// Traverses table node for images
+			images.forEach((tRow) => {
+				tRow = tRow.childNodes
+				tRow.forEach((tCol) => {
+					let aLink = tCol.childNodes[0].childNodes[0]
+					imgSrc.push(aLink.src)
+				})
+			})
+
+			return imgSrc
+		}
+
+	}
 
 	export default {
 		props: ['themeColor', 'toTop'],
@@ -133,7 +203,7 @@
 
 				const splitDescription = (description) => {
 					let descArr = description.split('•').slice(1)
-//					descArr = descArr.map((e) => `•${e}`).slice(1);
+					//					descArr = descArr.map((e) => `•${e}`).slice(1);
 					return descArr
 				};
 
@@ -186,10 +256,21 @@
 				} else {
 					this.expandedItem = itemName;
 				}
+			},
+			test(itemName) {
+				GoogleImageSearch.searchImage('javascript').then((e) => {
+					console.log('d', e)
+				})
 			}
 		}
 
 	}
+
+
+	//
+	// Copyright (c) 2017 by Fedir Bobylev. All Rights Reserved.
+	//
+
 
 </script>
 

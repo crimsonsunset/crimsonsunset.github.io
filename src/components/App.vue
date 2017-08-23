@@ -1,4 +1,3 @@
-
 <template>
     <v-app
             id="app"
@@ -67,7 +66,7 @@
 
 
         <!--<v-footer :absolute="footer.fixed">-->
-            <!--<span>© {{ new Date().getFullYear() }}</span>-->
+        <!--<span>© {{ new Date().getFullYear() }}</span>-->
         <!--</v-footer>-->
 
     </v-app>
@@ -75,44 +74,44 @@
 
 <script>
 
-    import {forEach, map, toArray, keys} from 'lodash'
-    import NavDrawer from './NavDrawer.vue'
-    import NavBar from './NavBar.vue'
-    import RouterView from 'vue-router'
+	import {forEach, map, toArray, keys} from 'lodash'
+	import NavDrawer from './NavDrawer.vue'
+	import NavBar from './NavBar.vue'
+	import RouterView from 'vue-router'
 
 
-    export default {
-        components: {NavDrawer, NavBar},
-        data() {
-            return {
-                drawer: false,
-                right: null,
-                themeColor: 'green',
-                toTop: true
-            }
-        },
-        computed: {
-            colors() {
-                return this.getSassConfig('colors')
-            },
-        },
-        methods: {
-            toggleDrawer(state) {
-                if (state != this.drawer) {
-                    this.drawer = state || !this.drawer;
-                }
-            },
-            updateConfigVal(payload) {
-                const firstKey = keys(payload)[0];
-                if (firstKey != 0) {
-                    this[firstKey] = payload[firstKey];
-                } else {
-                    this[payload] = !this[payload]
-                }
-            },
-        },
+	export default {
+		components: {NavDrawer, NavBar},
+		data() {
+			return {
+				drawer: false,
+				right: null,
+				themeColor: 'green',
+				toTop: true
+			}
+		},
+		computed: {
+			colors() {
+				return this.getSassConfig('colors')
+			},
+		},
+		methods: {
+			toggleDrawer(state) {
+				if (state != this.drawer) {
+					this.drawer = state || !this.drawer;
+				}
+			},
+			updateConfigVal(payload) {
+				const firstKey = keys(payload)[0];
+				if (firstKey != 0) {
+					this[firstKey] = payload[firstKey];
+				} else {
+					this[payload] = !this[payload]
+				}
+			},
+		},
 
-    }
+	}
 </script>
 
 <style lang="scss">
@@ -138,6 +137,16 @@
 
     .footer {
         color: white;
+    }
+
+    .full-width {
+        width: 100%;
+    }
+
+    .text-align {
+        &--right {
+            text-align: right;
+        }
     }
 
 
