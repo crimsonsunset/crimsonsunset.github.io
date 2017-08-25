@@ -24,7 +24,6 @@
                 <v-carousel-item
                         src="NOT_AN_IMAGE"
                         v-for="(item,i) in $data"
-                        v-bind:src="'zzz'"
                         :key="i"
                 >
                     <h2> I {{i}}

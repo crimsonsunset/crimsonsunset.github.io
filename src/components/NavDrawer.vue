@@ -49,7 +49,7 @@
                         @input="e => { emitEvent('updateConfigVal', {'themeColor': e}) }"
                         item-text="color"
                         item-value="color"
-                        max-height="auto"
+                        max-height="400"
                 >
                     <template slot="item" scope="data">
                         <template>
@@ -76,7 +76,7 @@
                         @input="e => { emitEvent('updateConfigVal', {'animation': e}) }"
                         item-text="color"
                         item-value="color"
-                        max-height="auto"
+                        max-height="400"
                 >
                     <template slot="item" scope="data">
                         <template>
