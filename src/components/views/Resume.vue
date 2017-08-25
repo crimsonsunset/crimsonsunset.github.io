@@ -19,6 +19,8 @@
 
 
             <lazy-grid
+
+            :nameArr='this.profileData.skills.slice(0, 10)'
                     v-if="(currNavItem == 'Skills') "
             >
 
@@ -86,7 +88,6 @@
 //				profileData[currExp] = currExp;
 				this.profileData = profileData;
 			});
-			console.log(this.getAnimationNames())
 		},
 		data() {
 			return {
@@ -114,7 +115,7 @@
 				],
 				profileData: {},
 				expandedItem: '',
-				currNavItem: 'Experience',
+				currNavItem: 'Skills',
 			}
 		},
 		computed: {},

@@ -16,8 +16,8 @@ Vue.use(Vuetify);
 Vue.use(VueRouter);
 Vue.use(VueLazyload, {
 	preLoad: 1.3,
-	error: 'https://www.fillmurray.com/100/100',
-	loading: 'https://www.fillmurray.com/600/400',
+	error: 'https://www.placecage.com/100/100',
+	loading: 'https://www.placecage.com/200/200',
 	attempt: 1
 });
 // Vue.use(VueLazyload)
