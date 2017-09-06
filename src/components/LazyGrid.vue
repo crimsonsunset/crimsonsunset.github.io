@@ -43,7 +43,9 @@
 
 
                     <v-layout row justify-center>
-                        <v-dialog v-model="dialog" fullscreen transition="dialog-bottom-transition">
+                        <v-dialog
+                                v-model="dialog" fullscreen transition="dialog-bottom-transition"
+                        >
                             <v-card
                                     primary
                                     class="skill-card"
@@ -53,10 +55,11 @@
                                 <div
 
                                         @click="(e)=>{skillClicked(item)}"
-                                        >
+                                >
 
                                     <img
-                                            class="skill-card__image" :src="getFileName(item)" height="200" width="200"/>
+                                            class="skill-card__image" :src="getFileName(item)" height="200"
+                                            width="200"/>
                                     <!--<h5 class="skill-card__title">{{item}}</h5>-->
                                 </div>
 
@@ -64,13 +67,12 @@
                             </v-card>
 
 
-
-
-
                             <v-card>
-                                <v-toolbar dark class="primary">
+                                <v-toolbar dark
+                                           :class="[`${themeColor}`, 'darken-4', `white--text`]"
+                                >
                                     <v-spacer></v-spacer>
-                                    <v-toolbar-title>{{currSkill}}</v-toolbar-title>
+                                    <v-toolbar-title>{{currSkill}} [more info]</v-toolbar-title>
                                     <v-spacer></v-spacer>
                                     <v-toolbar-items>
                                         <v-btn icon @click.native="dialog = false" dark>
@@ -79,6 +81,66 @@
                                     </v-toolbar-items>
                                 </v-toolbar>
 
+
+                                <!--<p> {{pageInfo.name}}</p>-->
+                                <!--<p>  {{pageInfo.name}}</p>-->
+                                <!--<p> {{pageInfo.websiteUrl}}</p>-->
+
+
+                                <v-container
+                                        class="infoCard"
+                                        fluid
+                                        grid-list-lg
+                                >
+                                    <v-layout row wrap>
+
+                                        <v-flex xs10 offset-xs1>
+                                            <v-card
+                                                    :class="[`${themeColor}`, 'darken-2', `white--text`]"
+                                            >
+                                                <v-container >
+                                                    <v-layout row>
+                                                        <v-flex xs7>
+                                                            <div>
+                                                                <div class="headline"> {{pageInfo.name}}</div>
+                                                                <div> {{pageInfo.definitionTxt}}</div>
+                                                            </div>
+                                                        </v-flex>
+                                                        <v-flex xs5>
+                                                            <v-card-media
+                                                                    :src="pageInfo.imgSrc"
+                                                                    height="125px"
+                                                                    contain
+                                                            ></v-card-media>
+                                                        </v-flex>
+                                                    </v-layout>
+
+                                                    <v-card-actions>
+                                                        <v-btn
+                                                                @click="(e)=>{
+                                                                	openLink(pageInfo.wikiLink)
+                                                                }"
+                                                                flat
+                                                                class="white--text">More Info</v-btn>
+                                                        <v-btn
+                                                                @click="(e)=>{
+                                                                	openLink(pageInfo.jokeLink)
+                                                                }"
+                                                                flat
+                                                                class="white--text">I'm Feeling Lucky</v-btn>
+                                                    </v-card-actions>
+
+                                                </v-container>
+                                            </v-card>
+                                        </v-flex>
+
+
+                                    </v-layout>
+                                </v-container>
+
+
+
+
                             </v-card>
                         </v-dialog>
                     </v-layout>
@@ -86,38 +148,32 @@
                     <!--<img :src="getRandomImageUrl()" alt="Not found">-->
 
                     <!--<div-->
-                            <!--@click="(e)=>{skillClicked(item)}"-->
-                            <!--class="skill-card card">-->
+                    <!--@click="(e)=>{skillClicked(item)}"-->
+                    <!--class="skill-card card">-->
 
-                        <!--<img-->
-                                <!--class="skill-card__image" :src="getFileName(item)" height="200" width="200"/>-->
-                        <!--&lt;!&ndash;<h5 class="skill-card__title">{{item}}</h5>&ndash;&gt;-->
+                    <!--<img-->
+                    <!--class="skill-card__image" :src="getFileName(item)" height="200" width="200"/>-->
+                    <!--&lt;!&ndash;<h5 class="skill-card__title">{{item}}</h5>&ndash;&gt;-->
                     <!--</div>-->
 
 
-
-
                     <!--<v-card class="skill-card">-->
-                        <!--<v-card-media-->
-                                <!--:src="getFileName(item)"-->
-                                <!--height="200px"-->
-                        <!--&gt;-->
-                            <!--<v-container fill-height fluid>-->
-                                <!--<v-layout fill-height>-->
-                                    <!--<v-flex xs12 align-end flexbox>-->
-                                        <!--<span class="headline white&#45;&#45;text" v-text="item"></span>-->
-                                    <!--</v-flex>-->
-                                <!--</v-layout>-->
-                            <!--</v-container>-->
-                        <!--</v-card-media>-->
+                    <!--<v-card-media-->
+                    <!--:src="getFileName(item)"-->
+                    <!--height="200px"-->
+                    <!--&gt;-->
+                    <!--<v-container fill-height fluid>-->
+                    <!--<v-layout fill-height>-->
+                    <!--<v-flex xs12 align-end flexbox>-->
+                    <!--<span class="headline white&#45;&#45;text" v-text="item"></span>-->
+                    <!--</v-flex>-->
+                    <!--</v-layout>-->
+                    <!--</v-container>-->
+                    <!--</v-card-media>-->
                     <!--</v-card>-->
 
 
-
-
                 </div>
-
-
 
 
                 <!--<div v-for="element in list" :key="element.id"  @click="selected=element">-->
@@ -132,10 +188,10 @@
 
 
             <!--<div class="containerz">-->
-                <!--<img :src="getFileName('angular')" alt="Avatar" class="imagez">-->
-                <!--<div class="overlayz">-->
-                    <!--<div class="textz">Hello World</div>-->
-                <!--</div>-->
+            <!--<img :src="getFileName('angular')" alt="Avatar" class="imagez">-->
+            <!--<div class="overlayz">-->
+            <!--<div class="textz">Hello World</div>-->
+            <!--</div>-->
             <!--</div>-->
 
 
@@ -155,7 +211,7 @@
 	//    import picture from '../'
 
 	export default {
-		props: ['nameArr'],
+		props: ['nameArr', 'themeColor'],
 		directives: {
 			imagesLoaded
 		},
@@ -187,6 +243,7 @@
 				],
 				dialog: false,
 				currSkill: 'joe',
+				pageInfo: {},
 				option: {
 					//					getSortData: {
 					//						id: "id"
@@ -198,20 +255,62 @@
 		computed: {},
 		methods: {
 			layout() {
-				console.log('layzz', this.$refs)
+				//				console.log('layzz', this.$refs)
 				this.$refs.grid.layout('masonry');
 			},
 			getFileName(item) {
-				item = item.replace(' ', '-')
-				return `../src/assets/skills/${item.toLowerCase()}.png`
+				item = item.replace(' ', '-');
+				return `../src/assets/skills/${item.toLowerCase()}.png`;
 			},
 			shuffleGrid() {
 				this.$refs.grid.shuffle();
 			},
+			openLink(link) {
+				window.open(link)
+			},
 			skillClicked(skill) {
-				console.log('zz', skill);
+				console.log('skill clickedzz', skill);
+
 				this.currSkill = skill;
-//				this.dialog = true;
+				const that = this;
+
+				axios.get(`http://localhost:3000/scrape?endPath=${skill}`)
+					.then(({data}) => {
+						this.pageInfo = data;
+					})
+
+				//				const ajax = (url, verb, body) => {
+				//					axios[verb](url, body).then((data) => {
+				//						console.log('ajax data is', data);
+				//						dataGen.next(data.data);
+				//					})
+				//				};
+				//
+				//				function* steps() {
+				//					console.log('firsz step');
+				//					//step 1 - update crawler to start at the correct page
+				//					const crawlerUpdate = yield ajax(`https://api.apifier.com/v1/mx48SoS5vGsAhD86z/crawlers/DictionaryCrawler?token=${that.getToken('apifier')}`, 'put', {
+				//						"startUrls": [
+				//							{
+				//								"key": skill,
+				//								"value": `https://techterms.com/definition/${skill}`
+				//							}
+				//						]
+				//					});
+				//					console.log('crawlzUP ', crawlerUpdate.lastExecution.resultsUrl);
+				//
+				//					const {resultsUrl} = crawlerUpdate.lastExecution;
+				//
+				//					//step 3 - fetch crawler output
+				//					const update = yield ajax(resultsUrl, 'get');
+				//					//	                console.log('upzzz', update)
+				//					that.pageInfo = update[0].pageFunctionResult;
+				//					console.log(that)
+				//				}
+				//
+				//				const dataGen = steps();
+				//				dataGen.next();
+
 			}
 		}
 
@@ -227,6 +326,10 @@
         text-align: center;
         margin: 0 auto;
         align-items: center;
+    }
+
+    .infoCard{
+        min-height: 0px !important;
     }
 
     .skill-card {
@@ -248,8 +351,6 @@
             margin-top: 10px;
         }
     }
-
-
 
 
 </style>

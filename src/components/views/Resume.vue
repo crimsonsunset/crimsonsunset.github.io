@@ -4,7 +4,6 @@
     <section>
 
 
-
         <v-container fluid class="mt-5 resume-view">
 
             <card-list
@@ -19,8 +18,8 @@
 
 
             <lazy-grid
-
-            :nameArr='this.profileData.skills.slice(0, 10)'
+                    :nameArr='this.profileData.skills.slice(0, 10)'
+                    :themeColor='themeColor'
                     v-if="(currNavItem == 'Skills') "
             >
 
@@ -85,7 +84,7 @@
 					e2.key = (e == 'experience') ? 'company' : 'title'
 					return e2;
 				});
-//				profileData[currExp] = currExp;
+				//				profileData[currExp] = currExp;
 				this.profileData = profileData;
 			});
 		},
@@ -123,11 +122,11 @@
 			toggleResumeNavItem(itemName) {
 				this.currNavItem = itemName;
 			},
-//			test(itemName) {
-//				GoogleImageSearch.searchImage('javascript').then((e) => {
-//					console.log('d', e)
-//				})
-//			}
+			//			test(itemName) {
+			//				GoogleImageSearch.searchImage('javascript').then((e) => {
+			//					console.log('d', e)
+			//				})
+			//			}
 		}
 	}
 

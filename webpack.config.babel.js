@@ -20,6 +20,10 @@ module.exports = {
 						// other preprocessors should work out of the box, no loader config like this necessary.
 						'scss': 'vue-style-loader!css-loader!sass-loader',
 						'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
+					},
+					query: {
+						// cacheDirectory: true,
+						presets: ['es2015', 'stage-0']
 					}
 					// other vue-loader options go here
 				}
@@ -27,7 +31,11 @@ module.exports = {
 			{
 				test: /\.js$/,
 				loader: 'babel-loader',
-				exclude: /node_modules/
+				exclude: /node_modules/,
+				// query: {
+				// 	// cacheDirectory: true,
+				// 	presets: ['es2015', 'stage-0']
+				// }
 			},
 			{
 				test: /\.(eot|svg|ttf|woff|woff2)$/,

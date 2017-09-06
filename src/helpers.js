@@ -1,4 +1,5 @@
 import {get, sortBy} from 'lodash'
+import tokens from './config/tokens.json'
 
 export default {
 	methods: {
@@ -11,6 +12,7 @@ export default {
 		getAnimationNames() {
 			return animationNames;
 		},
+		getToken(key){return tokens[key]},
 		emitEvent(event, payload) {
 			console.log('emitz', event, payload)
 			this.$emit(event, payload);

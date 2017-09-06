@@ -66,7 +66,7 @@
 	import {sortBy, every, values, omit} from 'lodash'
 	import axios from 'axios';
 
-	axios.defaults.headers.common['Authorization'] = 'a591d32795940eb0fb84c81c28490aac8c8215bd'
+//	axios.defaults.headers.common['Authorization'] = 'a591d32795940eb0fb84c81c28490aac8c8215bd'
 
 	export default {
 		props: ['isOpen'],
@@ -119,24 +119,24 @@
 					}
 				}
 
-				const headers = {
-					"Access-Control-Allow-Credentials": true,
-//					"Access-Control-Max-Age": 1728000,
-					"Authorization": "a591d32795940eb0fb84c81c28490aac8c8215bd",
-					"Content-Type": "application/json",
-					"cache-control": "no-cache",
-				};
-
-
-				console.log(headers)
-//				var instance = axios.create({
+//				const headers = {
+//					"Access-Control-Allow-Credentials": true,
+////					"Access-Control-Max-Age": 1728000,
+//					"Authorization": "a591d32795940eb0fb84c81c28490aac8c8215bd",
+//					"Content-Type": "application/json",
+//					"cache-control": "no-cache",
+//				};
+//
+//
+//				console.log(headers)
+////				var instance = axios.create({
+////					headers
+////				});
+//
+//
+//				axios.get('https://api.sparkpost.com/api/v1/transmissions', {
 //					headers
 //				});
-
-
-				axios.get('https://api.sparkpost.com/api/v1/transmissions', {
-					headers
-				});
 
 
 //				instance({

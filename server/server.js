@@ -1,4 +1,6 @@
 const express = require('express');
+const cheerio = require('cheerio');
+var request = require('request');
 const app = express();
 const mailjet = require('node-mailjet')
 	.connect('a62b98ba9d1b79455f9f92ef61b8eed2', 'ea86a27e20e56f8a9cf4f79a8c08f6e0')
@@ -12,6 +14,34 @@ app.use(function (req, res, next) {
 
 app.get('/', function (req, res) {
 	res.send('Hello World!')
+})
+
+app.get('/scrape', function (req, res) {
+
+	const {endPath} = req.query;
+	const wikiLink = `https://en.wikipedia.org/wiki/${endPath}`;
+	const jokeLink = `http://lmgtfy.com/?q=${endPath}`;
+
+	request(`https://en.wikipedia.org/wiki/${endPath}`, (error, response, html) =>{
+		if (!error && response.statusCode == 200) {
+			const $ = cheerio.load(html);
+			const definitionTxt = $('.mw-parser-output p').first().text();
+			let imgSrc = $('.infobox.vevent tr').first().find('img').attr('src');
+			imgSrc = imgSrc.replace('//', 'https://');
+			let websiteUrl = $('.infobox.vevent tr').find('.url a').attr('href');
+			console.log(websiteUrl)
+			res.json({
+				name: endPath,
+				websiteUrl,
+				definitionTxt,
+				imgSrc,
+				wikiLink,
+				jokeLink,
+			});
+		}
+	});
+
+
 })
 
 app.listen(3000, function () {
