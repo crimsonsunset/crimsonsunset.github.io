@@ -82,11 +82,6 @@
                                 </v-toolbar>
 
 
-                                <!--<p> {{pageInfo.name}}</p>-->
-                                <!--<p>  {{pageInfo.name}}</p>-->
-                                <!--<p> {{pageInfo.websiteUrl}}</p>-->
-
-
                                 <v-container
                                         class="infoCard"
                                         fluid
@@ -108,6 +103,7 @@
                                                         </v-flex>
                                                         <v-flex xs5>
                                                             <v-card-media
+                                                                    v-if="pageInfo.imgSrc"
                                                                     :src="pageInfo.imgSrc"
                                                                     height="125px"
                                                                     contain
@@ -218,15 +214,6 @@
 		components: {isotope},
 		mounted() {
 
-			//			console.log('this.profileData')
-			//			console.log(this.skills)
-			//			console.log(isotopeLayout)
-			//			console.log(isotope)
-
-			//			GoogleImageSearch.searchImage('javascript').then((data) => {
-			//				console.log('sss', data)
-			//                this.imgUrl = data[0]
-			//			})
 		},
 		data() {
 			return {
@@ -255,11 +242,10 @@
 		computed: {},
 		methods: {
 			layout() {
-				//				console.log('layzz', this.$refs)
 				this.$refs.grid.layout('masonry');
 			},
 			getFileName(item) {
-				item = item.replace(' ', '-');
+				item = item.replace(' ', '_');
 				return `../src/assets/skills/${item.toLowerCase()}.png`;
 			},
 			shuffleGrid() {
@@ -273,44 +259,11 @@
 
 				this.currSkill = skill;
 				const that = this;
-
-				axios.get(`http://localhost:3000/scrape?endPath=${skill}`)
+				const sanitizedSkill  = skill.replace(' ', '_');
+				axios.get(`http://localhost:3000/scrape?endPath=${sanitizedSkill}`)
 					.then(({data}) => {
 						this.pageInfo = data;
 					})
-
-				//				const ajax = (url, verb, body) => {
-				//					axios[verb](url, body).then((data) => {
-				//						console.log('ajax data is', data);
-				//						dataGen.next(data.data);
-				//					})
-				//				};
-				//
-				//				function* steps() {
-				//					console.log('firsz step');
-				//					//step 1 - update crawler to start at the correct page
-				//					const crawlerUpdate = yield ajax(`https://api.apifier.com/v1/mx48SoS5vGsAhD86z/crawlers/DictionaryCrawler?token=${that.getToken('apifier')}`, 'put', {
-				//						"startUrls": [
-				//							{
-				//								"key": skill,
-				//								"value": `https://techterms.com/definition/${skill}`
-				//							}
-				//						]
-				//					});
-				//					console.log('crawlzUP ', crawlerUpdate.lastExecution.resultsUrl);
-				//
-				//					const {resultsUrl} = crawlerUpdate.lastExecution;
-				//
-				//					//step 3 - fetch crawler output
-				//					const update = yield ajax(resultsUrl, 'get');
-				//					//	                console.log('upzzz', update)
-				//					that.pageInfo = update[0].pageFunctionResult;
-				//					console.log(that)
-				//				}
-				//
-				//				const dataGen = steps();
-				//				dataGen.next();
-
 			}
 		}
 

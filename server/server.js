@@ -21,17 +21,18 @@ app.get('/scrape', function (req, res) {
 	const {endPath} = req.query;
 	const wikiLink = `https://en.wikipedia.org/wiki/${endPath}`;
 	const jokeLink = `http://lmgtfy.com/?q=${endPath}`;
+	console.log('endPath is: ', endPath);
+
 
 	request(`https://en.wikipedia.org/wiki/${endPath}`, (error, response, html) =>{
 		if (!error && response.statusCode == 200) {
 			const $ = cheerio.load(html);
 			const definitionTxt = $('.mw-parser-output p').first().text();
 			let imgSrc = $('.infobox.vevent tr').first().find('img').attr('src');
-			imgSrc = imgSrc.replace('//', 'https://');
+			imgSrc = (imgSrc) ? imgSrc.replace('//', 'https://') : ''
 			let websiteUrl = $('.infobox.vevent tr').find('.url a').attr('href');
-			console.log(websiteUrl)
 			res.json({
-				name: endPath,
+				name: endPath.replace('_', ' '),
 				websiteUrl,
 				definitionTxt,
 				imgSrc,
@@ -55,33 +56,33 @@ app.listen(3000, function () {
  */
 
 
-function sendMail() {
-	console.log('about to sendzz', mailjet)
-	let request = mailjet
-		.post("send")
-		.request({
-			"FromEmail": "jsangio1@gmail.com",
-			"FromName": "Mailjet Pilot",
-			"Subject": "Your email flight plan!",
-			"Text-part": "Dear passenger, welcome to Mailjet! May the delivery force be with you!",
-			"Html-part": "<h3>Dear passenger, welcome to Mailjet!</h3><br />May the delivery force be with you!",
-			"Recipients": [
-				{
-					"Email": "passenger@mailjet.com"
-				}
-			]
-		});
-
-
-	// request
-	// 	.on('success', function (response, body) {
-	// 		console.log(response.statusCode, body);
-	// 	})
-	// 	.on('error', function (err, response) {
-	// 		console.log(response.statusCode, err);
-	// 	});
-}
-
-
-sendMail();
+// function sendMail() {
+// 	console.log('about to sendzz', mailjet)
+// 	let request = mailjet
+// 		.post("send")
+// 		.request({
+// 			"FromEmail": "jsangio1@gmail.com",
+// 			"FromName": "Mailjet Pilot",
+// 			"Subject": "Your email flight plan!",
+// 			"Text-part": "Dear passenger, welcome to Mailjet! May the delivery force be with you!",
+// 			"Html-part": "<h3>Dear passenger, welcome to Mailjet!</h3><br />May the delivery force be with you!",
+// 			"Recipients": [
+// 				{
+// 					"Email": "passenger@mailjet.com"
+// 				}
+// 			]
+// 		});
+//
+//
+// 	// request
+// 	// 	.on('success', function (response, body) {
+// 	// 		console.log(response.statusCode, body);
+// 	// 	})
+// 	// 	.on('error', function (err, response) {
+// 	// 		console.log(response.statusCode, err);
+// 	// 	});
+// }
+//
+//
+// sendMail();
 

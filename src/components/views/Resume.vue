@@ -18,7 +18,7 @@
 
 
             <lazy-grid
-                    :nameArr='this.profileData.skills.slice(0, 10)'
+                    :nameArr='this.profileData.skills'
                     :themeColor='themeColor'
                     v-if="(currNavItem == 'Skills') "
             >
