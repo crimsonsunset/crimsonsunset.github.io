@@ -28,6 +28,7 @@
 
             <detail-accordion
                     :themeColor='themeColor'
+                    endpoint='references'
                     v-if="(currNavItem == 'References') "
             >
 
@@ -67,7 +68,6 @@
 
 <script>
 
-	import axios from 'axios'
 	import {profileData} from '../../config/joeInfo.json'
 	import CardList from '../CardList.vue';
 	import LazyGrid from '../LazyGrid.vue';
