@@ -25,6 +25,14 @@
 
             </lazy-grid>
 
+
+            <detail-accordion
+                    :themeColor='themeColor'
+                    v-if="(currNavItem == 'References') "
+            >
+
+            </detail-accordion>
+
         </v-container>
 
         <v-flex
@@ -63,10 +71,11 @@
 	import {profileData} from '../../config/joeInfo.json'
 	import CardList from '../CardList.vue';
 	import LazyGrid from '../LazyGrid.vue';
+	import DetailAccordion from '../DetailAccordion.vue';
 
 	export default {
 		props: ['themeColor', 'animation'],
-		components: {CardList, LazyGrid},
+		components: {CardList, LazyGrid, DetailAccordion},
 		mounted() {
 			const splitNameArr = ['experience', 'projects'];
 
@@ -114,7 +123,7 @@
 				],
 				profileData: {},
 				expandedItem: '',
-				currNavItem: 'Skills',
+				currNavItem: 'References',
 			}
 		},
 		computed: {},

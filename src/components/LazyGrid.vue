@@ -2,25 +2,6 @@
 
     <v-layout row wrap>
         <v-flex xs12>
-            <!--GRIDDZZ-->
-
-            <!--<div v-lazy:background-image="'https://www.fillmurray.com/600/400'"></div>-->
-
-            <!--<img class="mini-cover" :src="'https://www.fillmurray.com/600/400'" width="100%" height="400">-->
-
-            <!--<div v-lazy:background-image="imgUrl"></div>-->
-
-            <!--<isotope :list="nameArr" id="root_isotope" class="isoDefault" :options='option' >-->
-            <!--<div v-for="item in nameArr" @click="selected=item"  :key="item">-->
-
-            <!--<div class="skill-card">-->
-            <!--<img v-lazy="imgUrl"/>-->
-            <!--<h2> {{item}}</h2>-->
-            <!--</div>-->
-
-            <!--</div>-->
-            <!--</isotope>-->
-            <!--:class="[`${themeColor}&#45;&#45;text`, 'text&#45;&#45;lighten-2']"-->
             <v-btn
                     dark
                     @click.native="shuffleGrid"
@@ -93,17 +74,20 @@
                                             <v-card
                                                     :class="[`${themeColor}`, 'darken-2', `white--text`]"
                                             >
-                                                <v-container >
+                                                <v-container>
                                                     <v-layout row>
-                                                        <v-flex xs7>
+                                                        <v-flex
+                                                                class="xs12"
+                                                                >
                                                             <div>
                                                                 <div class="headline"> {{pageInfo.name}}</div>
                                                                 <div> {{pageInfo.definitionTxt}}</div>
                                                             </div>
                                                         </v-flex>
-                                                        <v-flex xs5>
+                                                        <v-flex
+                                                                v-if="pageInfo.imgSrc"
+                                                                xs5>
                                                             <v-card-media
-                                                                    v-if="pageInfo.imgSrc"
                                                                     :src="pageInfo.imgSrc"
                                                                     height="125px"
                                                                     contain
@@ -117,13 +101,15 @@
                                                                 	openLink(pageInfo.wikiLink)
                                                                 }"
                                                                 flat
-                                                                class="white--text">More Info</v-btn>
+                                                                class="white--text">More Info
+                                                        </v-btn>
                                                         <v-btn
                                                                 @click="(e)=>{
                                                                 	openLink(pageInfo.jokeLink)
                                                                 }"
                                                                 flat
-                                                                class="white--text">I'm Feeling Lucky</v-btn>
+                                                                class="white--text">I'm Feeling Lucky
+                                                        </v-btn>
                                                     </v-card-actions>
 
                                                 </v-container>
@@ -135,60 +121,15 @@
                                 </v-container>
 
 
-
-
                             </v-card>
                         </v-dialog>
                     </v-layout>
-
-                    <!--<img :src="getRandomImageUrl()" alt="Not found">-->
-
-                    <!--<div-->
-                    <!--@click="(e)=>{skillClicked(item)}"-->
-                    <!--class="skill-card card">-->
-
-                    <!--<img-->
-                    <!--class="skill-card__image" :src="getFileName(item)" height="200" width="200"/>-->
-                    <!--&lt;!&ndash;<h5 class="skill-card__title">{{item}}</h5>&ndash;&gt;-->
-                    <!--</div>-->
-
-
-                    <!--<v-card class="skill-card">-->
-                    <!--<v-card-media-->
-                    <!--:src="getFileName(item)"-->
-                    <!--height="200px"-->
-                    <!--&gt;-->
-                    <!--<v-container fill-height fluid>-->
-                    <!--<v-layout fill-height>-->
-                    <!--<v-flex xs12 align-end flexbox>-->
-                    <!--<span class="headline white&#45;&#45;text" v-text="item"></span>-->
-                    <!--</v-flex>-->
-                    <!--</v-layout>-->
-                    <!--</v-container>-->
-                    <!--</v-card-media>-->
-                    <!--</v-card>-->
 
 
                 </div>
 
 
-                <!--<div v-for="element in list" :key="element.id"  @click="selected=element">-->
-                <!--{{element.name}}-->
-                <!--<br>-->
-                <!--{{element.id}}-->
-                <!--<img :src="element.src" alt="Not found">-->
-                <!--</div>-->
             </isotope>
-
-            <!--<v-btn primary dark @click.native="dialog = true">Open Dialog</v-btn>-->
-
-
-            <!--<div class="containerz">-->
-            <!--<img :src="getFileName('angular')" alt="Avatar" class="imagez">-->
-            <!--<div class="overlayz">-->
-            <!--<div class="textz">Hello World</div>-->
-            <!--</div>-->
-            <!--</div>-->
 
 
         </v-flex>
@@ -259,7 +200,7 @@
 
 				this.currSkill = skill;
 				const that = this;
-				const sanitizedSkill  = skill.replace(' ', '_');
+				const sanitizedSkill = encodeURIComponent(skill.replace(' ', '_'));
 				axios.get(`http://localhost:3000/scrape?endPath=${sanitizedSkill}`)
 					.then(({data}) => {
 						this.pageInfo = data;
@@ -275,13 +216,14 @@
 <style lang="scss">
 
     .masonry-grid {
-        border: 2px solid red;
+        /*border: 2px solid red;*/
         text-align: center;
         margin: 0 auto;
         align-items: center;
+        margin-bottom: 40px;
     }
 
-    .infoCard{
+    .dialog .container {
         min-height: 0px !important;
     }
 

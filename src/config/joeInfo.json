@@ -65,29 +65,79 @@
       "GruntJS",
       "Gulp.js",
       "Underscore.js",
-      "Vagrant",
+      "Vagrant (software)",
       "Web Development",
       "Teaching",
       "Mentoring",
       "Tutoring",
       "Writing",
+      "User Interface",
       "XML",
       "Database",
-      "Python",
+      "Python (programming_language)",
       "SQL",
       "Mac OS",
       "Windows",
       "Linux",
-      "Android",
+      "Android (operating_system)",
       "WordPress",
-      "Java",
+      "Java (programming_language)",
       "Sketch (application)",
       "Photoshop",
       "PHP",
-      "C++",
+      "c++",
       "Mobile Applications",
       "Microsoft Office"
+    ],
+    "references": [
+      {
+        "name": "Hima Unnithan",
+        "title": "Full Stack Developer",
+        "date": "August 16, 2017",
+        "relationship": " Hima reported directly to Joseph",
+        "img": "https://media.licdn.com/mpr/mpr/shrinknp_100_100/AAEAAQAAAAAAAAqmAAAAJDA3MjhlZDI2LTMzNWQtNDFmMy1iODYwLTJmY2MzZTZjZTUyOQ.jpg",
+        "body": ""
+      },
+      {
+        "name": "Dave Bokil",
+        "title": "Full Stack Web Developer/Experienced Manager",
+        "date": "August 3, 2017",
+        "relationship": "Dave reported directly to Joseph",
+        "img": "https://media.licdn.com/mpr/mpr/shrinknp_100_100/AAEAAQAAAAAAAAyXAAAAJDk4NTlmODQ2LTk5YTgtNGMwOS1iMzA2LTUxOWM5ZGNlZGM1ZQ.jpg",
+        "body": ""
+      },
+      {
+        "name": "Diaeddin Motan",
+        "title": "Full Stack Web Developer",
+        "date": "August 2, 2017,",
+        "relationship": "Diaeddin reported directly to Joseph",
+        "img": "https://media.licdn.com/mpr/mpr/shrinknp_100_100/AAEAAQAAAAAAAAZ5AAAAJGM4ZDE5NGU4LTY1MzYtNGFlNS1iYzNhLTg0OGU3YmRiNjExOA.jpg",
+        "body": ""
+      },
+      {
+        "name": "Craig Ramey",
+        "title": "Web Developer at UA Builders Group",
+        "date": "July 14, 2017,",
+        "relationship": "Craig reported directly to Joseph",
+        "img": "https://media.licdn.com/mpr/mpr/shrinknp_100_100/AAEAAQAAAAAAAAVdAAAAJDVhZjBlMThkLTc5NDQtNGEwMS04ZGE3LWIxZDZlMjI4ZWQ2OQ.jpg",
+        "body": ""
+      },
+      {
+        "name": "James Larkin",
+        "title": "Full Stack Web Developer",
+        "date": "June 26, 2017,",
+        "relationship": "James reported directly to Joseph",
+        "img": "https://media.licdn.com/mpr/mpr/shrinknp_100_100/AAEAAQAAAAAAAAusAAAAJDc0YzI3MzY3LTJhYzctNDgzOC04YWRjLWMzMmU4NGQyOWQ5YQ.jpg",
+        "body": "Joe is super-efficient and encouraging as an instructor. I had the opportunity to take a course Joe was teaching as part of the program at Rutgers Coding Bootcamp. He was always willing to answer any questions and was able to quickly debug any issues students had while coding.It was clear to me that Joe was extremely knowledgeable about JavaScript and coding in general but he was always able to find a way to share that knowledge and explain topics so everyone in class could understand. He really has a knack for disarming difficult concepts even to those of us who were seeing JavaScript for the first time.I was continually impressed by his ability to keep the entire class going by providing a light and motivating atmosphere. Joe’s sense of humor had the class laughing even as we struggled through the difficult course material. I really enjoyed being in the great classroom environment that Joe created and I think that he would do great at any position that required him to lead and motivate a team!"
+      },
+      {
+        "name": "Ben Ratner",
+        "title": "Javascript Developer at StudioLabs, LLC",
+        "date": "May 31, 2017,",
+        "relationship": "Ben reported directly to Joseph",
+        "img": "https://media.licdn.com/mpr/mpr/shrinknp_100_100/AAEAAQAAAAAAAAzCAAAAJGQ0NWVhMzNlLWMwNWYtNGMwZi1iZjQ0LWVhMDhlYmRiYTkyNg.jpg",
+        "body": "My internship at Marvel was by far the most positive and rewarding work experiences I’ve ever had, and much of that was due to Joe taking on the role of my mentor. When I started at Marvel, Joe led me through the projects I would be working on and the technologies the team used, and I was able to start writing real code quickly. It is through his guidance that I learned so much during my time there.In addition to being an excellent teacher and mentor, Joe is an incredibly skilled developer. I spent eight months working alongside him and I was routinely astounded at the quality of his code, even while he was managing multiple projects and his other corporate responsibilities. He and I worked most closely on a rewrite of an internal company tool, where a traditional jQuery page was converted into modern ES6 ReactJS. The result was one of the company’s most functional tools with a great user experience across the board.Joe approaches his work and his colleagues with an open mind and a sense of humor. These qualities set him apart and make him not only a technical asset, but an asset to the company culture at large. His unique blend of mentorship and coding skill makes him a great fit for any team looking for developers."
+      }
     ]
-
   }
 }
