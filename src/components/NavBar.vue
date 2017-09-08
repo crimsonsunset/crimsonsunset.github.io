@@ -31,4 +31,8 @@
 
 <style lang="scss">
 
+    nav{
+        z-index: 100 !important;
+    }
+
 </style>

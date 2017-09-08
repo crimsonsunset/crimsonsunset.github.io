@@ -16,7 +16,6 @@
 
             </card-list>
 
-
             <lazy-grid
                     :nameArr='this.profileData.skills'
                     :themeColor='themeColor'
@@ -26,7 +25,6 @@
 
             </lazy-grid>
 
-
             <detail-accordion
                     :themeColor='themeColor'
                     endpoint='references'
@@ -35,6 +33,16 @@
             >
 
             </detail-accordion>
+
+
+            <parallax-card-list
+                    :themeColor='themeColor'
+                    endpoint='education'
+                    :animation='animation'
+                    v-if="(currNavItem == 'Education') "
+            >
+
+            </parallax-card-list>
 
         </v-container>
 
@@ -78,10 +86,11 @@
 	import CardList from '../CardList.vue';
 	import LazyGrid from '../LazyGrid.vue';
 	import DetailAccordion from '../DetailAccordion.vue';
+	import ParallaxCardList from '../ParallaxCardList.vue';
 
 	export default {
 		props: ['themeColor', 'animation'],
-		components: {CardList, LazyGrid, DetailAccordion},
+		components: {CardList, LazyGrid, DetailAccordion, ParallaxCardList},
 		mounted() {
 			const splitNameArr = ['experience', 'projects'];
 
@@ -129,7 +138,7 @@
 				],
 				profileData: {},
 				expandedItem: '',
-				currNavItem: 'References',
+				currNavItem: 'Education',
 			}
 		},
 		computed: {},
