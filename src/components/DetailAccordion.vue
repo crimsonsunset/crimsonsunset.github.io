@@ -3,65 +3,57 @@
     <v-layout row wrap>
         <v-flex xs12 md8 offset-md2 lg6 offset-lg3>
 
-            <v-expansion-panel popout>
-                <v-expansion-panel-content
-                        ripple
-                        v-for="(item,i) in this[endpoint]"
-                        :key="i"
-                        :class="[`${themeColor}`, 'lighten-1', `white--text`]"
-                >
-                    <div slot="header" class="mt-2 mb-2">
-                        <!--<v-avatar-->
-                                <!--class="grey lighten-4"-->
-                        <!--&gt;-->
-                            <!--<img-->
-                                    <!--:src="item.img"-->
-                                    <!--alt="avatar">-->
-                        <!--</v-avatar>-->
+            <!--<transition-group-->
+                    <!--name="custom-classes-transition"-->
+                    <!--:enter-active-class="`animated ${animation}`"-->
+            <!--&gt;-->
 
-                        <!--{{item.name}}-->
+                <v-expansion-panel
+                        :key="animation"
+                        :enter-active-class="`animated ${animation}`"
+                        transition="slide-x-transition"
+                        popout>
+                    <v-expansion-panel-content
+                            ripple
+                            v-for="(item,i) in this[endpoint]"
+                            :key="i"
+                            :class="[`${themeColor}`, 'lighten-1', `white--text`, 'mb-1']"
+                    >
+                        <div slot="header" class="mt-2 mb-2">
 
-                        <v-list-tile>
-                            <v-list-tile-avatar>
+                            <v-list-tile>
+                                <v-list-tile-avatar>
+                                    <img
+                                            :src="item.img"
+                                            alt="avatar">
 
-                                <!--<v-avatar-->
-                                        <!--class="grey lighten-4"-->
-                                <!--&gt;-->
-                                    <!--<img-->
-                                            <!--:src="item.img"-->
-                                            <!--alt="avatar">-->
-                                <!--</v-avatar>-->
-                                <img
-                                        :src="item.img"
-                                        alt="avatar">
-
-                            </v-list-tile-avatar>
+                                </v-list-tile-avatar>
 
 
-                            <v-list-tile-content class="ml-2 ">
-                                <v-list-tile-title>{{ item.name }}</v-list-tile-title>
-                                <v-list-tile-sub-title>{{ item.date }}</v-list-tile-sub-title>
-                            </v-list-tile-content>
+                                <v-list-tile-content class="ml-2 ">
+                                    <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+                                    <v-list-tile-sub-title>{{ item.date }}</v-list-tile-sub-title>
+                                </v-list-tile-content>
 
-                            <v-list-tile-action>
-                                <!--<v-btn icon>-->
-                                    <!--<v-icon class="grey&#45;&#45;text text&#45;&#45;lighten-1">info</v-icon>-->
-                                <!--</v-btn>-->
+                                <v-list-tile-action>
 
-                                <small>{{item.relationship}}</small>
+                                    <small>{{item.relationship}}</small>
 
-                            </v-list-tile-action>
-                        </v-list-tile>
+                                </v-list-tile-action>
+                            </v-list-tile>
 
+                        </div>
+                        <v-card>
+                            <v-card-text class="grey lighten-3">
 
+                                <div v-html="item.body"></div>
 
+                            </v-card-text>
+                        </v-card>
+                    </v-expansion-panel-content>
+                </v-expansion-panel>
 
-                    </div>
-                    <v-card>
-                        <v-card-text class="grey lighten-3">{{item.body}}</v-card-text>
-                    </v-card>
-                </v-expansion-panel-content>
-            </v-expansion-panel>
+            <!--</transition-group>-->
 
         </v-flex>
     </v-layout>
@@ -74,7 +66,7 @@
 	import axios from 'axios'
 
 	export default {
-		props: ['themeColor', 'endpoint'],
+		props: ['themeColor', 'endpoint', 'animation'],
 		mounted() {
 			const {endpoint} = this;
 			axios.get(`http://localhost:3000/api/${endpoint}`)
@@ -83,6 +75,8 @@
 					this[endpoint] = data;
 				});
 		},
+
+
 		data() {
 			return {
 				currRef: '',
@@ -91,10 +85,22 @@
 		},
 		computed: {},
 		methods: {
+
 			layout() {
 
 			},
-		}
+		},
+		//		render(createElement) {
+		//			return createElement(
+		//				'div',
+		//				{
+		//					attrs: {
+		//						'class': 'title'
+		//					}
+		//				},
+		//				['helszz']
+		//			);
+		//        }
 	}
 
 </script>

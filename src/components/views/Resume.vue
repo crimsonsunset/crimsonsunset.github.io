@@ -4,7 +4,7 @@
     <section>
 
 
-        <v-container fluid class="mt-5 resume-view">
+        <v-container fluid class="mt-3 resume-view">
 
             <card-list
                     v-if="(currNavItem == 'Experience' || currNavItem == 'Projects') "
@@ -20,6 +20,7 @@
             <lazy-grid
                     :nameArr='this.profileData.skills'
                     :themeColor='themeColor'
+                    :animation='animation'
                     v-if="(currNavItem == 'Skills') "
             >
 
@@ -29,6 +30,7 @@
             <detail-accordion
                     :themeColor='themeColor'
                     endpoint='references'
+                    :animation='animation'
                     v-if="(currNavItem == 'References') "
             >
 
@@ -44,7 +46,11 @@
 
             <v-card class="resume-view__nav">
                 <v-bottom-nav
-                        value="true" class="white">
+                        :value="true"
+                        shift
+                        :active.sync="currNavItem"
+                        class="white"
+                >
                     <v-btn
                             v-for="(item,i) in navItems"
                             flat light
@@ -52,7 +58,7 @@
                             :key="item.name"
                             :id="`${item.name}`"
                             @click.native="(e)=>{toggleResumeNavItem(e.target.parentElement.id)}"
-                            :value="currNavItem === item.name"
+                            :value="item.name"
                     >
                         <span>{{item.name}}</span>
                         <v-icon>{{item.icon}}</v-icon>
@@ -84,13 +90,13 @@
 				currExp.map((e2, i2) => {
 
 					const splitDescription = (description) => {
-						let descArr = description.split('•').slice(1)
+						let descArr = description.split('•').slice(1);
 						//					descArr = descArr.map((e) => `•${e}`).slice(1);
 						return descArr
 					};
 
 					e2.descArr = splitDescription(e2.description);
-					e2.key = (e == 'experience') ? 'company' : 'title'
+					e2.key = (e == 'experience') ? 'company' : 'title';
 					return e2;
 				});
 				//				profileData[currExp] = currExp;

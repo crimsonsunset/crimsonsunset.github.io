@@ -104,7 +104,7 @@
                 ],
                 mini: false,
                 right: null,
-                themeColor: 'green',
+                themeColor: 'blue',
 
             }
         },

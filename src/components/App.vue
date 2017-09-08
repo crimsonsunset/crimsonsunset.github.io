@@ -87,7 +87,7 @@
 			return {
 				drawer: false,
 				themeColor: 'green',
-				animation: 'fade',
+				animation: 'bounceIn',
 				toTop: true
 			}
 		},
