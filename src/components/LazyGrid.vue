@@ -50,7 +50,7 @@
 
                             <v-card>
                                 <v-toolbar dark
-                                           :class="[`${themeColor}`, 'darken-4', `white--text`]"
+                                           :class="[`${themeColor}`, 'darken-4', `white--text`, 'close-bar']"
                                 >
                                     <v-spacer></v-spacer>
                                     <v-toolbar-title>{{currSkill}} [more info]</v-toolbar-title>
@@ -246,6 +246,10 @@
         &__image {
             margin-top: 10px;
         }
+    }
+
+    .dialog__content{
+        z-index: 300 !important;
     }
 
 

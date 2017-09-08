@@ -2,118 +2,96 @@
 
     <div class="container">
 
-        <v-carousel
+        <section
                 v-for="(item,i) in this[endpoint]"
                 :key="i"
+                :data-key="`${i}`"
+                :ref="`bkg-${i}`"
                 :class="['background',`${themeColor}`, 'lighten-1', `white--text`, 'mb-1']"
         >
-            <!--:style="`background-image: url('${img}')`"-->
 
-
-            <!--<div-->
-            <!--v-for="(img,j) in item.imgArr"-->
-            <!--:key="j"-->
-            <!--class="carousel__item"-->
-            <!--:src="item.src"-->
-            <!--&gt;-->
-            <!--</div>-->
-
-
-            <v-carousel-item
-                    v-for="(img,j) in item.imgArr"
-                    :key="j"
-                    :src="img"
+            <v-container
+                    grid-list-md
+                    @click="(e)=>{nextImg(i)}"
             >
 
-                <div
-                        class="content-wrapper">
+                <v-layout row wrap class="content-wrapper">
 
 
-                    <v-layout row wrap>
-                        <v-flex xs12 md8 offset-md2 lg6 offset-lg3 mt-5>
+                    <v-flex
+                            class="content-box"
+                            xs12 md8 lg6 mt-5>
+
+                        <v-flex
+                                grid-list-md
+                                class="content-inner">
+
+                            <v-layout row wrap>
+                                <v-flex md2 mt-2 pl-2>
+                                    <v-avatar
+                                            :tile="false"
+                                            size="100px"
+
+                                    >
+                                        <img :src="item.img" alt="avatar">
+                                    </v-avatar>
+
+                                </v-flex>
+
+                                <v-flex md10
+                                        class="content-title">
+                                    {{item.name}}
+                                </v-flex>
 
 
-                            <v-avatar
-                                    :tile="false"
-                                    size="5"
-                            >
-                                <img :src="item.img" alt="avatar">
-                            </v-avatar>
+                            </v-layout>
 
-                            <v-container mt-5 class="content-title">
-                                {{item.name}}
-                            </v-container>
+                            <v-flex xs12>
+                                <v-list two-line class="content-inner__list">
+
+                                    <v-list-tile>
+
+                                        <!--<v-list-tile-action>-->
+                                        <!--<v-icon class="indigo&#45;&#45;text">phone</v-icon>-->
+                                        <!--</v-list-tile-action>-->
+
+
+                                        <v-list-tile-content>
+                                            <v-list-tile-title v-html="item.title"></v-list-tile-title>
+                                            <v-list-tile-sub-title class="white--text">{{item.date}}
+                                            </v-list-tile-sub-title>
+                                        </v-list-tile-content>
+                                    </v-list-tile>
+
+
+                                    <v-list-tile
+                                            v-for="(activity,j) in item.descArr"
+                                            :key="j"
+                                    >
+
+
+                                        <v-icon class="white--text icon">check_box</v-icon>
+
+
+                                        <v-list-tile-content>
+                                            <v-list-tile-title>{{activity}}</v-list-tile-title>
+                                        </v-list-tile-content>
+                                    </v-list-tile>
+
+
+                                </v-list>
+
+                            </v-flex>
+
 
                         </v-flex>
-                    </v-layout>
 
-                </div>
+                    </v-flex>
+                </v-layout>
 
+            </v-container>
+        </section>
 
-            </v-carousel-item>
-        </v-carousel>
-
-        <!--src="https://i.redd.it/4vqygabli4mx.jpg">-->
-        <!--<div class="content-wrapper">-->
-
-
-        <!--</div>-->
-
-
-        <!--<section-->
-        <!--v-for="(item,i) in this[endpoint]"-->
-        <!--:key="i"-->
-        <!--:class="['background',`${themeColor}`, 'lighten-1', `white&#45;&#45;text`, 'mb-1']"-->
-        <!--&gt;-->
-        <!--<div class="content-wrapper">-->
-
-
-        <!--<v-layout row wrap>-->
-        <!--<v-flex xs12 md8 offset-md2 lg6 offset-lg3 mt-5>-->
-
-
-        <!--<v-avatar-->
-        <!--:tile="false"-->
-        <!--size="5"-->
-        <!--&gt;-->
-        <!--<img :src="item.img" alt="avatar">-->
-        <!--</v-avatar>-->
-
-        <!--<v-container mt-5 class="content-title">-->
-        <!--Title goes here-->
-        <!--</v-container>-->
-
-        <!--&lt;!&ndash;<v-card&ndash;&gt;-->
-        <!--&lt;!&ndash;transparent&ndash;&gt;-->
-        <!--&lt;!&ndash;&gt;&ndash;&gt;-->
-
-        <!--&lt;!&ndash;<v-card-title primary-title>&ndash;&gt;-->
-        <!--&lt;!&ndash;<div class="content-title">SI TECH</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;<br/>&ndash;&gt;-->
-        <!--&lt;!&ndash;<div>its a cool school where people go</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;</v-card-title>&ndash;&gt;-->
-
-        <!--&lt;!&ndash;<v-card-text class="grey lighten-3">&ndash;&gt;-->
-
-        <!--&lt;!&ndash;<div> heres the descriptionszzz</div>&ndash;&gt;-->
-
-        <!--&lt;!&ndash;</v-card-text>&ndash;&gt;-->
-        <!--&lt;!&ndash;</v-card>&ndash;&gt;-->
-
-        <!--</v-flex>-->
-        <!--</v-layout>-->
-
-
-        <!--</div>-->
-        <!--</section>-->
-
-
-        <!--<section class="background">-->
-        <!--<div class="content-wrapper">-->
-        <!--<p class="content-title">Be All There</p>-->
-        <!--<p class="content-subtitle">The world is a great big place and if you give it a chance it can make you feel like a part of it despite how small it can make you feel.</p>-->
-        <!--</div>-->
-        <!--</section>-->
     </div>
 
 </template>
@@ -121,7 +99,7 @@
 <script>
 
 	import axios from 'axios'
-	import {throttle} from 'lodash'
+	import {throttle, map} from 'lodash'
 
 	let ticking = false;
 	let isFirefox = (/Firefox/i.test(navigator.userAgent));
@@ -141,10 +119,18 @@
 			const {endpoint} = this;
 			axios.get(`http://localhost:3000/api/${endpoint}`)
 				.then(({data}) => {
-					console.log(data);
 					this[endpoint] = data;
-					console.log(this[endpoint])
 					totalSlideNumber = data.length;
+					this[endpoint] = map(this[endpoint], (e, i) => {
+						return {
+							...e,
+							descArr: e.description.split('•').slice(1),
+							imgInd: 0
+						};
+					})
+
+					console.log(this[endpoint])
+
 				});
 		},
 		data() {
@@ -154,6 +140,16 @@
 		},
 		computed: {},
 		methods: {
+			nextImg(cardInd) {
+				const {endpoint, $refs} = this;
+				const currObj = this[endpoint][cardInd];
+				const currBkg = $refs[`bkg-${cardInd}`][0];
+
+				//if we're at the end of the array, reset imgInd to zero
+				let nextImgInd = (currObj.imgInd == currObj.imgArr.length - 1) ? 0 : currObj.imgInd + 1;
+				this[endpoint][cardInd].imgInd = nextImgInd;
+				currBkg.style.backgroundImage = `url(${currObj.imgArr[nextImgInd]})`;
+			},
 
 			//parallax methods [https://codepen.io/country_runner/full/mWXMgX/]
 			parallaxScroll(evt) {
@@ -236,9 +232,9 @@
     $transition-speed: 1.5s;
     $slide-number: 3;
 
-    html, body {
-        overflow: hidden;
-    }
+    /*html, body {*/
+    /*overflow: hidden;*/
+    /*}*/
 
     .background {
         background-size: cover;
@@ -251,6 +247,7 @@
         position: fixed;
         width: 100%;
         transform: translateY($parallax-offset);
+        cursor: pointer;
         @include transition($transition-speed, all, cubic-bezier(0.22, 0.44, 0, 1));
         &:before {
             content: "";
@@ -288,17 +285,40 @@
 
     .content {
         &-wrapper {
+            font-family: Roboto;
             height: 100vh;
             display: flex;
             justify-content: center;
             text-align: center;
             flex-flow: column nowrap;
             color: #fff;
-            text-transform: uppercase;
             transform: translateY($content-offset);
             will-change: transform;
             backface-visibility: hidden;
             @include transition($transition-speed + .5, all, cubic-bezier(0.22, 0.44, 0, 1));
+        }
+        &-box {
+
+            /*border: 2px solid blue;*/
+            flex-direction: column;
+            justify-content: center;
+            display: flex;
+        }
+        &-inner {
+            //margin-top: -25vh;
+            background-color: rgba(0, 0, 0, .3);
+            /*border: 2px solid red;*/
+            flex: 0 0 auto;
+            margin-top: -17vh;
+            &__list {
+                background-color: transparent !important;
+                .icon {
+                    width: 40px;
+                }
+                .list__tile__content {
+                    color: white !important;
+                }
+            }
         }
         &-title {
             font-size: 5vh;
@@ -333,6 +353,9 @@
             }
         }
     }
+
+
+
 
 
 </style>

@@ -132,11 +132,6 @@
 				} else {
 					this.expandedItem = itemName;
 				}
-			},
-			test(itemName) {
-				GoogleImageSearch.searchImage('javascript').then((e) => {
-					console.log('d', e)
-				})
 			}
 		}
 
