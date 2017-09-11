@@ -7,6 +7,7 @@
                 :key="i"
                 :data-key="`${i}`"
                 :ref="`bkg-${i}`"
+                @click="test"
                 :class="['background',`${themeColor}`, 'lighten-1', `white--text`, 'mb-1']"
         >
 
@@ -47,7 +48,7 @@
                             </v-layout>
 
                             <v-flex xs12>
-                                <v-list two-line class="content-inner__list">
+                                <v-list class="content-inner__list">
 
                                     <v-list-tile>
 
@@ -109,13 +110,23 @@
 	let currentSlideNumber = 0;
 	let totalSlideNumber = 2;
 	let delta;
-	const mousewheelEvent = isFirefox ? "DOMMouseScroll" : "wheel";
-//	const mouseEvent = throttle(this.parallaxScroll, 60);
+	let lastTouch;
+	const mousewheelEvent = isFirefox ? "DOMMouseScroll" : "mousewheel";
 
 	export default {
 		props: ['themeColor', 'endpoint', 'animation'],
 		mounted() {
 			window.addEventListener(mousewheelEvent, this.parallaxScroll, false);
+			window.addEventListener('touchstart', (e) => {
+				lastTouch= e.changedTouches[0].clientY
+			}, false);
+			window.addEventListener('touchend', this.parallaxScroll, false);
+
+
+//			window.addEventListener('touchstart', (e)=>{console.log('touch is starting', e.changedTouches[0].clientY)}, false);
+//			window.addEventListener('touchend', (e)=>{console.log('touch is ending', e.changedTouches[0].clientY)}, false);
+//
+
 			const {endpoint} = this;
 			axios.get(`http://localhost:3000/api/${endpoint}`)
 				.then(({data}) => {
@@ -127,14 +138,20 @@
 							descArr: e.description.split('•').slice(1),
 							imgInd: 0
 						};
-					})
-
-					console.log(this[endpoint])
-
+					});
+//					console.log(this[endpoint])
 				});
+			console.log('mounted', mousewheelEvent)
 		},
-		destroyed() {
-			document.removeEventListener(mousewheelEvent, this.parallaxScroll);
+		beforeDestroy() {
+			window.removeEventListener(mousewheelEvent, this.parallaxScroll);
+			window.removeEventListener('touchend', this.parallaxScroll);
+			ticking = false;
+			currentSlideNumber = 0;
+			totalSlideNumber = 2;
+			delta=undefined;
+			lastTouch=undefined;
+
 		},
 		data() {
 			return {
@@ -143,6 +160,10 @@
 		},
 		computed: {},
 		methods: {
+			test(){
+				console.log('test sszz')
+            },
+
 			nextImg(cardInd) {
 				const {endpoint, $refs} = this;
 				const currObj = this[endpoint][cardInd];
@@ -156,17 +177,26 @@
 
 			//parallax methods [https://codepen.io/country_runner/full/mWXMgX/]
 			parallaxScroll: throttle(function(evt) {
+
+				let isMobile;
 				// ------------- DETERMINE DELTA/SCROLL DIRECTION ------------- //
 				if (isFirefox) {
 					delta = evt.detail * (-120);
 				} else if (isIe) {
 					delta = -evt.deltaY;
-				} else {
+				}else if (evt.changedTouches){
+					delta = lastTouch - evt.changedTouches[0].clientY;
+					lastTouch = evt.changedTouches[0].clientY;
+					isMobile = true;
+                }
+				else {
 					delta = evt.wheelDelta;
 				}
+//				console.log('parazz', ticking, delta);
 
 				if (ticking != true) {
 					if (delta <= -scrollSensitivitySetting) {
+
 						//Down scroll
 						ticking = true;
 						if (currentSlideNumber !== totalSlideNumber - 1) {
@@ -175,7 +205,8 @@
 						}
 						this.slideDurationTimeout(slideDurationSetting);
 					}
-					if (delta >= scrollSensitivitySetting) {
+					if (delta >= scrollSensitivitySetting ) {
+
 						//Up scroll
 						ticking = true;
 						if (currentSlideNumber !== 0) {
@@ -185,7 +216,7 @@
 						this.slideDurationTimeout(slideDurationSetting);
 					}
 				}
-			}, 60),
+			},60),
 			slideDurationTimeout(slideDuration) {
 				// ------------- SET TIMEOUT TO TEMPORARILY "LOCK" SLIDES ------------- //
 				setTimeout(function () {
@@ -193,6 +224,7 @@
 				}, slideDuration);
 			},
 			nextItem() {
+				console.log('next item')
 				// ------------- SLIDE MOTION ------------- //
 				let previousSlide = document.querySelectorAll(".background")[currentSlideNumber - 1];
 				previousSlide.classList.remove('up-scroll');
@@ -312,7 +344,7 @@
             background-color: rgba(0, 0, 0, .3);
             /*border: 2px solid red;*/
             flex: 0 0 auto;
-            margin-top: -17vh;
+            margin-top: -22vh;
             &__list {
                 background-color: transparent !important;
                 .icon {

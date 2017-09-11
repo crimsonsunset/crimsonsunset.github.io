@@ -3,7 +3,7 @@
 
     <v-layout row wrap>
 
-        <v-flex xs12 sm8 offset-sm2 pb-5>
+        <v-flex xs10 offset-xs1 sm8 offset-sm2 pb-5>
 
             <!--:leave-active-class="`animated ${animation}`"-->
             <transition-group

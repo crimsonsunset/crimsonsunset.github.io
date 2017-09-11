@@ -138,7 +138,7 @@
 				],
 				profileData: {},
 				expandedItem: '',
-				currNavItem: 'Projects',
+				currNavItem: 'Education',
 			}
 		},
 		computed: {},
@@ -147,9 +147,7 @@
 				this.currNavItem = itemName;
 			},
 			//			test(itemName) {
-			//				GoogleImageSearch.searchImage('javascript').then((e) => {
-			//					console.log('d', e)
-			//				})
+
 			//			}
 		}
 	}
