@@ -109,13 +109,13 @@
 	let currentSlideNumber = 0;
 	let totalSlideNumber = 2;
 	let delta;
+	const mousewheelEvent = isFirefox ? "DOMMouseScroll" : "wheel";
+//	const mouseEvent = throttle(this.parallaxScroll, 60);
 
 	export default {
 		props: ['themeColor', 'endpoint', 'animation'],
 		mounted() {
-
-			const mousewheelEvent = isFirefox ? "DOMMouseScroll" : "wheel";
-			window.addEventListener(mousewheelEvent, throttle(this.parallaxScroll, 60), false);
+			window.addEventListener(mousewheelEvent, this.parallaxScroll, false);
 			const {endpoint} = this;
 			axios.get(`http://localhost:3000/api/${endpoint}`)
 				.then(({data}) => {
@@ -132,6 +132,9 @@
 					console.log(this[endpoint])
 
 				});
+		},
+		destroyed() {
+			document.removeEventListener(mousewheelEvent, this.parallaxScroll);
 		},
 		data() {
 			return {
@@ -152,7 +155,7 @@
 			},
 
 			//parallax methods [https://codepen.io/country_runner/full/mWXMgX/]
-			parallaxScroll(evt) {
+			parallaxScroll: throttle(function(evt) {
 				// ------------- DETERMINE DELTA/SCROLL DIRECTION ------------- //
 				if (isFirefox) {
 					delta = evt.detail * (-120);
@@ -182,7 +185,7 @@
 						this.slideDurationTimeout(slideDurationSetting);
 					}
 				}
-			},
+			}, 60),
 			slideDurationTimeout(slideDuration) {
 				// ------------- SET TIMEOUT TO TEMPORARILY "LOCK" SLIDES ------------- //
 				setTimeout(function () {
@@ -353,9 +356,6 @@
             }
         }
     }
-
-
-
 
 
 </style>

@@ -1,14 +1,16 @@
 <template>
 
-    <v-layout row wrap>
+    <v-layout row wrap class="masonry-container" :style="{width: `${containerWidth}px`}">
         <v-flex xs12>
-            <v-btn
-                    dark
-                    @click.native="shuffleGrid"
+            <v-flex xs2>
+                <v-btn
+                        :class="[`${themeColor}`, 'darken-2', `white--text`]"
+                        @click.native="shuffleGrid"
 
-            >
-                Shuffle!
-            </v-btn>
+                >
+                    Shuffle!
+                </v-btn>
+            </v-flex>
 
 
             <isotope
@@ -39,8 +41,8 @@
                                 >
 
                                     <img
-                                            class="skill-card__image" :src="getFileName(item)" height="200"
-                                            width="200"/>
+                                            class="skill-card__image" :src="getFileName(item)" :height="tileSize"
+                                            :width="tileSize"/>
                                     <!--<h5 class="skill-card__title">{{item}}</h5>-->
                                 </div>
 
@@ -78,7 +80,7 @@
                                                     <v-layout row>
                                                         <v-flex
                                                                 class="xs12"
-                                                                >
+                                                        >
                                                             <div>
                                                                 <div class="headline"> {{pageInfo.name}}</div>
                                                                 <div> {{pageInfo.definitionTxt}}</div>
@@ -142,10 +144,8 @@
 
 	import axios from 'axios';
 	import {random} from 'lodash';
-	//	import isotopeLayout from 'isotope-layout'
 	import isotope from 'vueisotope'
 	import imagesLoaded from 'vue-images-loaded'
-	//    import picture from '../'
 
 	export default {
 		props: ['nameArr', 'themeColor'],
@@ -154,6 +154,25 @@
 		},
 		components: {isotope},
 		mounted() {
+			//math to calc correct tile/container size
+			const DEFAULT_TILE_WIDTH = 200;
+			const currWidth = window.innerWidth - 28; //account for padding
+			let numTiles;
+
+			if (currWidth < 600) {
+				this.tileSize = currWidth / 3;
+				numTiles = 2;
+			} else {
+				this.tileSize = DEFAULT_TILE_WIDTH;
+				const offset = (currWidth > 1400) ? 2 : 1;
+				numTiles = Math.floor(currWidth / DEFAULT_TILE_WIDTH) - offset
+			}
+
+			this.containerWidth = (this.tileSize * numTiles) + (numTiles * 42);
+			//			console.log('numTiles: ', numTiles);
+			//			console.log('currWidth: ', currWidth);
+			//			console.log('this.containerWidth: ', this.containerWidth);
+			//			console.log('this.tileSize: ', this.tileSize);
 
 		},
 		data() {
@@ -172,12 +191,9 @@
 				dialog: false,
 				currSkill: 'joe',
 				pageInfo: {},
-				option: {
-					//					getSortData: {
-					//						id: "id"
-					//					},
-					//					sortBy : "id"
-				}
+				tileSize: '',
+				containerWidth: '',
+				option: {}
 			}
 		},
 		computed: {},
@@ -201,10 +217,29 @@
 				this.currSkill = skill;
 				const that = this;
 				const sanitizedSkill = encodeURIComponent(skill.replace(' ', '_'));
+
 				axios.get(`http://localhost:3000/scrape?endPath=${sanitizedSkill}`)
 					.then(({data}) => {
 						this.pageInfo = data;
-					})
+					}).catch(() => {
+					this.pageInfo = {
+						name: sanitizedSkill,
+						websiteUrl: 'https://www.google.com/',
+						definitionTxt: 'no definition available',
+						wikiLink: 'https://en.wikipedia.org',
+						jokeLink: 'http://lmgtfy.com/?q=catch+block'
+					}
+				})
+
+				//				this.pageInfo = {
+				//					name: sanitizedSkill,
+				//					websiteUrl : 'https://www.google.com/',
+				//					definitionTxt : 'no definition available',
+				//					wikiLink : 'https://en.wikipedia.org',
+				//					jokeLink: 'http://lmgtfy.com/?q=catch+block'
+				//				}
+
+
 			}
 		}
 
@@ -214,6 +249,11 @@
 </script>
 
 <style lang="scss">
+
+    .masonry-container {
+        /*border: 2px solid blue;*/
+        margin: 0 auto;
+    }
 
     .masonry-grid {
         /*border: 2px solid red;*/
@@ -248,7 +288,7 @@
         }
     }
 
-    .dialog__content{
+    .dialog__content {
         z-index: 300 !important;
     }
 

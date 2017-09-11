@@ -4,8 +4,6 @@
 
         <v-layout row wrap >
 
-
-
             <v-flex xs12 sm8 offset-sm2>
 
                 <!--:leave-active-class="`animated ${animation}`"-->
@@ -87,27 +85,11 @@
                     </v-card>
 
             </transition-group>
+
             </v-flex>
 
 
         </v-layout>
-
-
-
-
-    <!--<div id="example-3">-->
-    <!--<button @click="show = !show">-->
-    <!--Toggle render-->
-    <!--</button>-->
-    <!--<transition-->
-    <!--name="custom-classes-transition"-->
-    <!--enter-active-class="animated bounce"-->
-    <!--leave-active-class="animated bounce"-->
-    <!--&gt;-->
-    <!--<p v-if="show">hello</p>-->
-    <!--</transition>-->
-    <!--</div>-->
-
 
 </template>
 
@@ -115,9 +97,6 @@
 
 	export default {
 		props: ['themeColor', 'name', 'profileData', 'animation'],
-		mounted() {
-			console.log(this)
-		},
 		data() {
 			return {
 				expandedItem: ''

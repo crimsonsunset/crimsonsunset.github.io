@@ -10,7 +10,7 @@
             overflow
 
             v-model="localDrawer"
-            >
+    >
         <v-toolbar class="transparent">
             <v-list class="pa-0">
                 <v-list-tile avatar tag="div">
@@ -29,7 +29,8 @@
                 <v-list-tile-action>
                     <v-icon
                             :class="[`${themeColor}--text`, 'text--lighten-1']"
-                    >{{ item.icon }}</v-icon>
+                    >{{ item.icon }}
+                    </v-icon>
                 </v-list-tile-action>
                 <v-list-tile-content>
                     <v-list-tile-title>
@@ -93,7 +94,7 @@
                 <v-switch
                         :color="themeColor"
                         label='Return To Top Button'
-                          v-model="localTop"
+                        v-model="localTop"
                 >
 
                 </v-switch>
@@ -106,44 +107,44 @@
 
 <script>
 
-    import {forEach, map, toArray} from 'lodash'
-    import RouterLink from 'vue-router'
-    import routes from '../config/routes'
-//
-//    console.log('items')
-//    console.log(routes)
+	import {forEach, map, toArray} from 'lodash'
+	import RouterLink from 'vue-router'
+	import routes from '../config/routes'
+	//
+	//    console.log('items')
+	//    console.log(routes)
 
-    export default {
-        props: ['drawer', 'colors', 'toTop', 'themeColor', 'animations'],
-        data() {
-            return {
-                items: routes
-            }
-        },
-        created: function () {
-            // `this` points to the vm instance
-            //            console.log('thiz create ',this)
-        },
-        methods: {},
-        computed: {
-            localDrawer: {
-                get() {
-                    return this.drawer;
-                },
-                set(inVal) {
-                    this.$emit('toggleDrawer', inVal);
-                }
-            },
-            localTop: {
-                get() {
-                    return this.toTop;
-                },
-                set(inVal) {
-                    this.$emit('updateConfigVal', 'toTop', inVal);
-                }
-            }
-        }
-    }
+	export default {
+		props: ['drawer', 'colors', 'toTop', 'themeColor', 'animations'],
+		data() {
+			return {
+				items: routes
+			}
+		},
+		created: function () {
+			// `this` points to the vm instance
+			//            console.log('thiz create ',this)
+		},
+		methods: {},
+		computed: {
+			localDrawer: {
+				get() {
+					return this.drawer;
+				},
+				set(inVal) {
+					this.$emit('toggleDrawer', inVal);
+				}
+			},
+			localTop: {
+				get() {
+					return this.toTop;
+				},
+				set(inVal) {
+					this.$emit('updateConfigVal', 'toTop', inVal);
+				}
+			}
+		}
+	}
 </script>
 
 
@@ -160,5 +161,10 @@
     .switch {
         margin-top: -30px;
     }
+
+    .navigation-drawer {
+        margin-top: 57px !important;
+    }
+
 
 </style>

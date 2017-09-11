@@ -17,7 +17,7 @@
             </card-list>
 
             <lazy-grid
-                    :nameArr='this.profileData.skills'
+                    :nameArr='this.profileData.skills || []'
                     :themeColor='themeColor'
                     :animation='animation'
                     v-if="(currNavItem == 'Skills') "
@@ -138,7 +138,7 @@
 				],
 				profileData: {},
 				expandedItem: '',
-				currNavItem: 'Education',
+				currNavItem: 'Skills',
 			}
 		},
 		computed: {},
