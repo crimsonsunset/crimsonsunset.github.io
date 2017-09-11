@@ -105,7 +105,7 @@
 					};
 
 					e2.descArr = splitDescription(e2.description);
-					e2.key = (e == 'experience') ? 'company' : 'title';
+					e2.key = 'title';
 					return e2;
 				});
 				//				profileData[currExp] = currExp;
@@ -138,7 +138,7 @@
 				],
 				profileData: {},
 				expandedItem: '',
-				currNavItem: 'Skills',
+				currNavItem: 'Projects',
 			}
 		},
 		computed: {},

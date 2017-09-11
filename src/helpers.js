@@ -12,6 +12,11 @@ export default {
 		getAnimationNames() {
 			return animationNames;
 		},
+		isURL(str) {
+			const expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+			const regex = new RegExp(expression);
+			return str.match(regex);
+		},
 		getToken(key){return tokens[key]},
 		emitEvent(event, payload) {
 			console.log('emitz', event, payload)

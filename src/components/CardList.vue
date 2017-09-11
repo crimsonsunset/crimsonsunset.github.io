@@ -1,95 +1,97 @@
 <template>
 
 
+    <v-layout row wrap>
 
-        <v-layout row wrap >
+        <v-flex xs12 sm8 offset-sm2 pb-5>
 
-            <v-flex xs12 sm8 offset-sm2>
+            <!--:leave-active-class="`animated ${animation}`"-->
+            <transition-group
+                    name="custom-classes-transition"
+                    :enter-active-class="`animated ${animation}`"
+            >
 
-                <!--:leave-active-class="`animated ${animation}`"-->
-                <transition-group
-                        name="custom-classes-transition"
-                        :enter-active-class="`animated ${animation}`"
+                <v-card
+                        transition="slide-x-transition"
+                        v-for="(item,i) in profileData[this.name]"
+                        flat light
+                        :class="['mb-3',`${themeColor}--text`, `${themeColor} lighten-4`, 'text--darken-3', 'elevation-2']"
+                        :key="item[item.key]"
+                        :value="name === item.name"
+                        :data-key="item[item.key]"
+                        @click="(e)=>{
+                            	toggleResumeCard(item.title);
+                                   }"
                 >
+                    <v-card-title primary-title>
 
 
-                    <v-card
-                            transition="slide-x-transition"
-                            v-for="(item,i) in profileData[this.name]"
-                            flat light
-                            :class="['mb-3',`${themeColor}--text`, `${themeColor} lighten-4`, 'text--darken-3', 'elevation-2']"
-                            :key="item[item.key]"
-                            :value="name === item.name"
-                            :data-key="item[item.key]"
-                            @click="(e)=>{
-                                   	//toggleResumeCard(e.target.parentElement.dataset.company);
-                                   }"
-                    >
+                        <div class="headline full-width">
 
-                        <v-card-title primary-title>
+                            <div v-if="isURL(item.title)">
+                                <a :href="`http://${item.title}`" target="_blank"> {{item.title}}</a>
+                            </div>
+                            <div v-else>
+                                {{item.title}}
+                            </div>
+                        </div>
 
-                            <div class="headline full-width">{{item.title}}</div>
+                        <v-layout fluid class="full-width grey--text">
+                            <v-flex
+                                    v-if="item.company"
+                                    xs8>
+                                <div
+                                >{{item.company}}
+                                </div>
+                            </v-flex>
 
-                            <v-layout fluid class="full-width grey--text">
-                                <v-flex
-                                        v-if="item.company"
-                                        xs8>
-                                    <div
-                                    >{{item.company}}
-                                    </div>
-                                </v-flex>
+                            <v-flex
+                                    v-if="item.timeFrame"
+                                    xs4>
+                                <div
+                                        class="text-align--right">{{item.timeFrame}}
+                                </div>
+                            </v-flex>
+                        </v-layout>
 
-                                <v-flex
-                                        v-if="item.timeFrame"
-                                        xs4>
-                                    <div
-                                            class="text-align--right">{{item.timeFrame}}
-                                    </div>
-                                </v-flex>
-                            </v-layout>
+                    </v-card-title>
+                    <v-card-actions>
 
-                        </v-card-title>
-                        <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                                icon
+                                :id="`${item[item.key]}`"
+                        >
+                            <v-icon>
+                                {{ (expandedItem == item[item.key]) ? 'keyboard_arrow_down' : 'keyboard_arrow_up'
+                                }}
+                            </v-icon>
+                        </v-btn>
+                    </v-card-actions>
+                    <v-slide-y-transition>
+                        <v-card-text v-show="expandedItem == item[item.key]" class="description-text">
 
-                            <v-spacer></v-spacer>
-                            <v-btn
-                                    icon
-                                    :id="`${item[item.key]}`"
-                                    @click.native="(e)=>{
-                                   	toggleResumeCard(e.target.parentElement.id);
-                                   }"
-                            >
-                                <v-icon>
-                                    {{ (expandedItem == item[item.key]) ? 'keyboard_arrow_down' : 'keyboard_arrow_up'
-                                    }}
-                                </v-icon>
-                            </v-btn>
-                        </v-card-actions>
-                        <v-slide-y-transition>
-                            <v-card-text v-show="expandedItem == item[item.key]">
+                            <ul>
+                                <li
+                                        v-for="(descItem,i2) in item.descArr"
+                                        light
+                                        :class="['mb-2',`${themeColor}--text`, 'text--darken-4']"
+                                        :key="descItem"
+                                >
+                                    {{descItem}}
+                                </li>
+                            </ul>
+                        </v-card-text>
+                    </v-slide-y-transition>
 
-                                <ul>
-                                    <li
-                                            v-for="(descItem,i2) in item.descArr"
-                                            flat
-                                            light
-                                            :class="['mb-2',`${themeColor}--text`, 'text--darken-4']"
-                                            :key="descItem"
-                                    >
-                                        {{descItem}}
-                                    </li>
-                                </ul>
-                            </v-card-text>
-                        </v-slide-y-transition>
-
-                    </v-card>
+                </v-card>
 
             </transition-group>
 
-            </v-flex>
+        </v-flex>
 
 
-        </v-layout>
+    </v-layout>
 
 </template>
 
@@ -105,7 +107,7 @@
 		computed: {},
 		methods: {
 			toggleResumeCard(itemName) {
-				console.log('toggz', itemName)
+				console.log('toggz', itemName, this)
 				if (itemName == this.expandedItem) {
 					this.expandedItem = '';
 				} else {
@@ -119,6 +121,8 @@
 </script>
 
 <style lang="scss">
-
+    .description-text {
+        margin-top: -20px;
+    }
 
 </style>

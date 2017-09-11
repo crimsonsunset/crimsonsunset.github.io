@@ -37,7 +37,7 @@
         "description": "• Interfaced with third party vendor to implement user-facing points economy that allowed users redeem points for prizes • Primarily tasked with drastic re-skinning of vendor's unstyled embedded dashboard widgets • Could only style widgets utilizing plain CSS and pseudo selectors (content locked in iframe) • Drastic creativity was necessary to match designs to locked HTML structure in embedded widgets"
       },
       {
-        "title": "www.RateThatTruck.com",
+        "title": "RateThatTruck.com",
         "company": "Personal",
         "description": "• Turned personal passion into a prominent food truck blog that brings ratings and reviews to food enthusiasts • Version 1.0 was built using JavaScript, and PHP, heavily customizing a Wordpress theme • Utilized Wordpress, JavaScript, and PHP to create a cohesive site that is up to modern web standards• Version 2.0 added authentication, user interaction components, and was built from scratch on MERN stack • Utilizes headless Wordpress API to maintain blog functionality and conform to standard RESTful practices • Learned sketch to create wireframes for redesign, followed self-contained agile methodology to implement changes"
       },
