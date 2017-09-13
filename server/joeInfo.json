@@ -176,7 +176,7 @@
       "name": "Childhood",
       "location": "Staten Island, NY",
       "date": "November 1989 - September 2004",
-      "icon": "child_care",
+      "icon": "child_friendly",
       "descriptionArr": [
         "• Born: November 19, 1989",
         "• Went to Elementary School",
@@ -192,7 +192,6 @@
       "name": "Teen Years",
       "location": "Staten Island, NY",
       "date": "September 2004 - August 2007",
-      "icon": "directions_run",
       "icon": "face",
       "descriptionArr": [
         "• Attended Staten Island Technical High School",

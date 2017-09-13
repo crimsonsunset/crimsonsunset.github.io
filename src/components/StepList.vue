@@ -38,7 +38,6 @@
     <!--</v-flex>-->
 
 
-
     <!--<v-stepper-header>-->
     <!--<template v-for="(item,n) in this[endpoint]">-->
     <!--<v-stepper-step-->
@@ -54,22 +53,19 @@
     <!--</v-stepper-header>-->
 
 
-
     <v-flex>
         <v-stepper
                 vertical
+                ref="stepper"
                 v-model="currStep">
-
-
-
-
 
             <template
                     v-for="(item, n) in bio">
                 <v-stepper-step
-                        :step="n"
-                        :complete="currStep > n-1"
+                        :step="n+1"
+                        :complete="currStep > n"
                         editable
+                        ref="steps"
                 >
 
                     {{`${item.name}: ${item.location}`}}
@@ -79,7 +75,7 @@
 
 
                 <v-stepper-content
-                        :step="n"
+                        :step="n+1"
                         :key="n"
                 >
                     <v-card class="grey lighten-1 mb-5" height="200px">
@@ -87,7 +83,7 @@
                         {{item.descriptionArr}}
 
                     </v-card>
-                    <v-btn primary @click="nextStep(n)">Continue</v-btn>
+                    <v-btn primary @click="nextStep(n+1)">Continue</v-btn>
                 </v-stepper-content>
             </template>
 
@@ -102,13 +98,13 @@
 <script type="text/jsx">
 
 	import axios from 'axios'
-	import {map, times} from 'lodash'
+	import {map, times, find, forEach} from 'lodash'
 
 	export default {
 		props: ['themeColor', 'endpoint', 'animation'],
 
-        //todo: this is a hack because the stepper component is very picky about data it recieves and gets crippled when its incomplete
-        beforeCreate() {
+		//todo: this is a hack because the stepper component is very picky about data it recieves and gets crippled when its incomplete
+		beforeCreate() {
 			console.log("beforeCreate!", this);
 			this.bio = times(4, () => {
 					return {
@@ -120,23 +116,28 @@
 					}
 				}
 			);
-//            			debugger;
+			//            			debugger;
 		},
 		created() {
 			const {endpoint} = this;
-						axios.get(`http://localhost:3000/api/${endpoint}`)
-							.then(({data}) => {
-								this[endpoint] = data;
-								this.totalSlideNumber = data.length;
-								console.log(this)
-								this.$forceUpdate();
-							});
+			axios.get(`http://localhost:3000/api/${endpoint}`)
+				.then(({data}) => {
+					this[endpoint] = data;
+					this.totalSlideNumber = data.length;
+
+					//adjust icons
+                    const stepRefs = this.$refs['stepper'].$el.getElementsByTagName('span');
+					forEach(stepRefs, (e, i) => {
+						const newSpan = `<span class="stepper__step__step"><i class="material-icons icon">${this[endpoint][i].icon}</i></span>`
+						e.outerHTML = newSpan;
+					});
+					this.$forceUpdate();
+				});
 
 
 		},
-		beforeDestroy() {
-
-		},
+		//		mounted() {
+		//		},
 		data() {
 			return {
 				e6: 0,
@@ -150,66 +151,66 @@
 				totalSlideNumber: 4
 			}
 		},
-//				render(h) {
-//					const {endpoint} = this;
-//					const currArr = this[endpoint];
-//
-//		//			console.log('currArr');
-//		//			console.log(currArr);
-//					let steps;
-//					if (currArr.length > 0) {
-//		//				console.log('doing')
-//
-//		                steps = map(currArr, (item, i) => {
-//							//				console.log('eee')
-//							//				console.log(e)
-//		//					console.log(i)
-//
-//			                const stepNum = i + 1;
-//							return (
-//                                            <template>
-//                                                <v-stepper-step
-//                                                step={i}
-//                                                complete={this.currStep > i-1}
-//                                                    editable
-//                                            >
-//
-//												{`${item.name}: ${item.location}`}
-//
-//                                                <small>{`${item.date}`}</small>
-//                                            </v-stepper-step>
-//
-//
-//                                            <v-stepper-content
-//                                                    step={i}
-//                                                    key={i}
-//                                        >
-//                                            <v-card class="grey lighten-1 mb-5" height="200px">
-//
-//												{item.descriptionArr}
-//
-//                                            </v-card>
-//                                            <v-btn primary on-click-native={()=>{}}>Continue</v-btn>
-//                                    </v-stepper-content>
-//		                </template>)
-//						})
-//
-//						console.log('steps')
-//						console.log(steps)
-//					}
-//
-//					return (
-//
-//                            <v-flex>
-//                                <v-stepper
-//                                        vertical
-//                                        v-model={this.currStep}>
-//								{steps}
-//                                </v-stepper>
-//                            </v-flex>
-//
-//					)
-//				},
+		//				render(h) {
+		//					const {endpoint} = this;
+		//					const currArr = this[endpoint];
+		//
+		//		//			console.log('currArr');
+		//		//			console.log(currArr);
+		//					let steps;
+		//					if (currArr.length > 0) {
+		//		//				console.log('doing')
+		//
+		//		                steps = map(currArr, (item, i) => {
+		//							//				console.log('eee')
+		//							//				console.log(e)
+		//		//					console.log(i)
+		//
+		//			                const stepNum = i + 1;
+		//							return (
+		//                                            <template>
+		//                                                <v-stepper-step
+		//                                                step={i}
+		//                                                complete={this.currStep > i-1}
+		//                                                    editable
+		//                                            >
+		//
+		//												{`${item.name}: ${item.location}`}
+		//
+		//                                                <small>{`${item.date}`}</small>
+		//                                            </v-stepper-step>
+		//
+		//
+		//                                            <v-stepper-content
+		//                                                    step={i}
+		//                                                    key={i}
+		//                                        >
+		//                                            <v-card class="grey lighten-1 mb-5" height="200px">
+		//
+		//												{item.descriptionArr}
+		//
+		//                                            </v-card>
+		//                                            <v-btn primary on-click-native={()=>{}}>Continue</v-btn>
+		//                                    </v-stepper-content>
+		//		                </template>)
+		//						})
+		//
+		//						console.log('steps')
+		//						console.log(steps)
+		//					}
+		//
+		//					return (
+		//
+		//                            <v-flex>
+		//                                <v-stepper
+		//                                        vertical
+		//                                        v-model={this.currStep}>
+		//								{steps}
+		//                                </v-stepper>
+		//                            </v-flex>
+		//
+		//					)
+		//				},
 		computed: {},
 		methods: {
 			nextStep(n) {
@@ -218,12 +219,27 @@
 				} else {
 					this.currStep = n + 1
 				}
-			}
+			},
+
+			addStepRef(e) {
+				console.log('sss')
+				console.log(e)
+				return `step-${e}`
+			},
 		},
 	}
 
 </script>
 
 <style lang="scss">
+
+    .stepper__step__step {
+
+        height: 50px ;
+        width: 50px ;
+        i {
+            font-size: 35px !important;
+        }
+    }
 
 </style>
