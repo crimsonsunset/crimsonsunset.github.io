@@ -1,17 +1,34 @@
 <template>
-    <div> avbout page</div>
+    <v-container
+            fluid
+            mt-1
+    >
+
+        <v-layout row wrap>
+
+
+            <step-list
+                    endpoint="bio"
+            >
+
+            </step-list>
+
+        </v-layout>
+    </v-container>
+
 </template>
 
 <script>
 
-    export default {
-        data() {
-            return {
+	import StepList from '../StepList.vue'
 
-            }
-        },
+	export default {
+		components: {StepList},
+		data() {
+			return {}
+		},
 
-    }
+	}
 </script>
 
 <style lang="scss">

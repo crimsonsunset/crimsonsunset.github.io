@@ -62,17 +62,31 @@
             </v-btn>
         </div>
 
+        <!--<v-parallax-->
+                <!--src="http://media.advance.net/newyorkupstatecom_national_desk_blog/photo/2016/08/24/suny-binghamton-university-4c06049fab09a429.jpg"-->
+                <!--jumbotron-->
+        <!--&gt;</v-parallax>-->
 
-        <!--<v-expansion-panel class="info-accordion">-->
-        <!--<v-expansion-panel-content v-for="(item,i) in 50" :key="i">-->
-        <!--<div slot="header">Item</div>-->
-        <!--<v-card>-->
-        <!--<v-card-text :class="[themeColor, 'lighten-2']">-->
-        <!--Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.-->
-        <!--</v-card-text>-->
-        <!--</v-card>-->
-        <!--</v-expansion-panel-content>-->
-        <!--</v-expansion-panel>-->
+        <!--<v-alert info-->
+                 <!--transition="scale-transition"-->
+                 <!--value="true">-->
+            <!--This is a info alert.-->
+        <!--</v-alert>-->
+
+
+        <!--<v-layout row wrap>-->
+        <!--<v-flex xs8 offset-xs2 mt-3>-->
+            <!--<v-card-->
+                    <!--:class="[themeColor, 'white&#45;&#45;text', 'home-page__cta']"-->
+                    <!--&gt;-->
+                <!--<v-card-title primary-title>-->
+                    <!--<div class="headline">Click on the menu to get started!</div>-->
+
+                <!--</v-card-title>-->
+            <!--</v-card>-->
+        <!--</v-flex>-->
+        <!--</v-layout>-->
+
 
 
     </v-container>
@@ -154,8 +168,10 @@
 
 
     .home-page {
-        &__hello {
+
+        &__hello, &__cta .headline {
             text-align: center;
+            margin: 0 auto;
         }
         &__btn-container {
             display: flex;
