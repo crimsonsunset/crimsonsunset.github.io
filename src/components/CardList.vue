@@ -3,7 +3,7 @@
 
     <v-layout row wrap>
 
-        <v-flex xs10 offset-xs1 sm8 offset-sm2 pb-5>
+        <v-flex xs10 offset-xs1 sm8 offset-sm2 pb-5 class="card-list">
 
             <!--:leave-active-class="`animated ${animation}`"-->
             <transition-group
@@ -39,7 +39,7 @@
                         <v-layout fluid class="full-width grey--text">
                             <v-flex
                                     v-if="item.company"
-                                    xs8>
+                                    xs7>
                                 <div
                                 >{{item.company}}
                                 </div>
@@ -47,7 +47,7 @@
 
                             <v-flex
                                     v-if="item.timeFrame"
-                                    xs4>
+                                    xs5>
                                 <div
                                         class="text-align--right">{{item.timeFrame}}
                                 </div>
@@ -121,6 +121,18 @@
 </script>
 
 <style lang="scss">
+
+    .card-list{
+        .card__title--primary {
+            padding-top: 10px;
+
+        }
+        .card__actions{
+            padding: 0;
+            padding-bottom: 5px;
+        }
+    }
+
     .description-text {
         margin-top: -20px;
     }

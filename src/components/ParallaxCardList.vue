@@ -7,7 +7,6 @@
                 :key="i"
                 :data-key="`${i}`"
                 :ref="`bkg-${i}`"
-                @click="test"
                 :class="['background',`${themeColor}`, 'lighten-1', `white--text`, 'mb-1']"
         >
 
@@ -141,7 +140,7 @@
 					});
 //					console.log(this[endpoint])
 				});
-			console.log('mounted', mousewheelEvent)
+//			console.log('mounted', mousewheelEvent)
 		},
 		beforeDestroy() {
 			window.removeEventListener(mousewheelEvent, this.parallaxScroll);
@@ -160,9 +159,9 @@
 		},
 		computed: {},
 		methods: {
-			test(){
-				console.log('test sszz')
-            },
+//			test(){
+//				console.log('test sszz')
+//            },
 
 			nextImg(cardInd) {
 				const {endpoint, $refs} = this;
@@ -224,16 +223,22 @@
 				}, slideDuration);
 			},
 			nextItem() {
-				console.log('next item')
+//				console.log('next item')
 				// ------------- SLIDE MOTION ------------- //
 				let previousSlide = document.querySelectorAll(".background")[currentSlideNumber - 1];
-				previousSlide.classList.remove('up-scroll');
-				previousSlide.classList.add("down-scroll");
+
+				if (previousSlide) {
+					previousSlide.classList.remove('up-scroll');
+					previousSlide.classList.add("down-scroll");
+				}
 			},
 			previousItem() {
 				let currentSlide = document.querySelectorAll(".background")[currentSlideNumber];
-				currentSlide.classList.remove('down-scroll');
-				currentSlide.classList.add("up-scroll");
+				if (currentSlide) {
+					currentSlide.classList.remove('down-scroll');
+					currentSlide.classList.add("up-scroll");
+				}
+
 			}
 
 		},

@@ -86,7 +86,7 @@
 		data() {
 			return {
 				drawer: false,
-				themeColor: 'green',
+				themeColor: 'cyan',
 				animation: 'bounceIn',
 				toTop: true
 			}

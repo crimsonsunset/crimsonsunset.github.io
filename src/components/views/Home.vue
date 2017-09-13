@@ -1,18 +1,18 @@
 <template>
-    <v-container fluid>
-
-
-
+    <v-container
+            class="home-page"
+            fluid mt-3>
         <v-flex xs12 md6 offset-md3>
-            <h1 class="hello"> Hi, I'm Joe.</h1>
+            <h1 class="home-page__hello"> Hi, I'm Joe.</h1>
         </v-flex>
 
 
-<!--{{this.items}}-->
+        <!--{{this.items}}-->
 
         <v-carousel
                 cycle
                 dark
+                class="elevation-0"
                 :interval='6000000'
                 :leftControlIcon='false'
                 ref="home-carousel"
@@ -40,6 +40,7 @@
                             :erase-delay='200'
                             erase-style='select-all'
                             caret-animation='blink'
+                            ref="home-typer"
                             @erased='(e)=>{
                                 	onErased(e,i);
                                 }'
@@ -52,10 +53,14 @@
         </v-carousel>
 
 
-        <button
-                @click="clickNext"
-        >clizkz
-        </button>
+        <div class="home-page__btn-container">
+            <v-btn
+                    :class="[themeColor, 'darken-2', 'white--text', 'home-page__btn-next', 'text-lg-right']"
+                    ref="btn-next"
+                    @click="clickNext"
+            >Tell me more!
+            </v-btn>
+        </div>
 
 
         <!--<v-expansion-panel class="info-accordion">-->
@@ -75,113 +80,87 @@
 
 <script>
 
-    import {VueTyper} from 'vue-typer'
-    import {find, keys} from 'lodash'
+	import {VueTyper} from 'vue-typer'
+	import {find, keys, delay} from 'lodash'
 
-    let currSliderIndex = 0;
+	let currSliderIndex = 0;
 
-    export default {
-        components: {VueTyper},
-        props: ['themeColor', 'toTop'],
-        data() {
-            return {
-                sliderData: {
-                    build: ["Websites", "Web Apps"],
-                    teach: ["Front End Development", "Full Stack Development", "", "Servers", "Smart Homes", "", "SmartHomes", "SmartHomes"],
-                    know: ["Javascript [ES6/7]", "HTML5", "Sass", "CSS3", "JSON", "Python", "React", "Redux/Flux", "Vue", "Bootstrap", "Material UI", "Lodash", "Webpack", "Gulp", "Grunt"],
-                    like: ["Coding", "Teaching", "Racquetball", "Snowboarding", "Tinkering", "Learning", "Live Music", "Food Trucks"]
-                }
-            }
-        },
-        computed: {
-//            items() {
-//                const elemData = this.$data;
-//                const typeArr = keys(this.$data);
-//                let items = {};
-//                typeArr.forEach((e, i) => {
-//                    items[e] = elemData[e]
-//                });
-//                return items;
-//            },
-            sliderKeys(){
-                return keys(this.sliderData)
-            }
-            //            currSlider:{
-            //	            get() {
-            //	            	console.log('this')
-            //	            	console.log(this)
-            //		            return 'build';
-            //	            },
-            //	            set(inVal) {
-            //		            this.currSlider = inVal;
-            //	            }
-            //            }
-        },
-        methods: {
-            onErased: function (string, currKey) {
+	export default {
+		components: {VueTyper},
+		props: ['themeColor', 'toTop'],
+		data() {
+			return {
+				sliderData: {
+					//					build: ["Websites", "Web Apps", "Native Apps", "Servers", "Layouts", "Wireframes", "Raspberry Pi Hacks", "Home Automation Systems"],
+					//                    teach: ["Front End Development", "Full Stack Development", "Servers", "Comp Sci Concepts"],
+					//					know: ["Javascript [ES6/7]", "HTML5", "Sass", "CSS3", "JSON", "Python", "React", "Redux/Flux", "Vue", "Bootstrap", "Material UI", "Lodash", "Webpack", "Gulp", "Grunt"],
+					//					like: ["Coding", "Teaching", "Racquetball", "Snowboarding", "Smart Homes", "Tinkering", "Learning", "Live Music", "Food Trucks"]
 
+					build: ["Websites", "Web Apps"],
+					teach: ["Front End Development", 'joe things'],
+					know: ["Javascript [ES6/7]", "HTML5"],
+					like: ["Coding", "Teaching"]
+				}
+			}
+		},
+		computed: {
+			sliderKeys() {
+				return keys(this.sliderData)
+			}
+		},
+		methods: {
+			onErased: function (string, currKey) {
 
-                let {sliderData, sliderKeys} = this;
-                const currArr = sliderData[currKey];
+				let {sliderData, sliderKeys} = this;
+				const currArr = sliderData[currKey];
 
-                //other typers that are already going, ignore.
-                if (sliderKeys[currSliderIndex] != currKey) {
-                    return
-                } else {
-                    const {length} = currArr;
-                    if (currArr[length - 1] == string) {
-                        currSliderIndex++;
-//                        debugger;
-                        this.clickNext();
-                    }
-                }
-            },
-            test(){
-                console.log('hey compelzzz', this)
-            },
-            clickNext(){
-                const children = this.$refs['home-carousel'].$el.children;
-                let nextBtn = find(children, (e) => e.className.includes('right'));
-                nextBtn = nextBtn.children[0];
-                nextBtn.click();
-            }
-        }
+				//other typers that are already going, ignore.
+				if (sliderKeys[currSliderIndex] != currKey) {
+					return
+				} else {
+					const {length} = currArr;
+					if (currArr[length - 1] == string) {
+						this.clickNext();
+					}
+				}
+			},
+			test() {
+				//                console.log('hey compelzzz', this)
+			},
+			clickNext() {
+				currSliderIndex++;
+				const children = this.$refs['home-carousel'].$el.children;
+				let nextBtn = find(children, (e) => e.className.includes('right'));
+				nextBtn = nextBtn.children[0];
+				nextBtn.click();
+				delay(this.restartTyper, 100)
+			},
+			restartTyper() {
+				//have past the bounds of the array
+				if (!this.$refs['home-typer'][currSliderIndex]) {
+					currSliderIndex = 0;
+					this.$refs['home-typer'][currSliderIndex].reset();
+				} else {
+					this.$refs['home-typer'][currSliderIndex].reset();
+				}
+			}
+		}
 
-    }
+	}
 </script>
 
-
-<!--@keyframes rocking {-->
-<!--0%,100% {transform: rotateZ(-10deg);},-->
-<!--50%     {transform: rotateZ(10deg);}-->
-<!--}-->
-
-<!--.vue-typer {-->
-<!--font-family: Roboto, 'Helvetica Neue', Helvetica, sans-serif;-->
-<!--}-->
-<!--.vue-typer .custom.char.typed {-->
-<!--color: #009688;-->
-<!--}-->
-<!--.vue-typer .custom.char.selected {-->
-<!--color: #E91E63;-->
-<!--}-->
-
-<!--.vue-typer .custom.caret {-->
-<!--animation: rocking 1s ease-in-out 0s infinite;-->
-<!--}-->
-<!--.vue-typer .custom.caret.typing {-->
-<!--background-color: #009688;-->
-<!--}-->
-<!--.vue-typer .custom.caret.selecting {-->
-<!--display: inline-block;-->
-<!--background-color: #E91E63;-->
-<!--}-->
 
 <style lang="scss">
 
 
-    .hello {
-        text-align: center;
+    .home-page {
+        &__hello {
+            text-align: center;
+        }
+        &__btn-container {
+            display: flex;
+            justify-content: flex-end;
+        }
     }
 
     #home-carousel {
@@ -189,10 +168,10 @@
 
         .carousel__controls {
             display: none;
-
         }
     }
 
+    //typer styles
     .vue-typer {
         font-family: monospace;
         font-size: 24px

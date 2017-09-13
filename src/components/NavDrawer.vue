@@ -90,7 +90,7 @@
 
             </v-list>
 
-            <div class="switch px-3">
+            <v-flex class="switch px-3">
                 <v-switch
                         :color="themeColor"
                         label='Return To Top Button'
@@ -98,7 +98,7 @@
                 >
 
                 </v-switch>
-            </div>
+            </v-flex>
 
         </v-list>
     </v-navigation-drawer>
