@@ -3,7 +3,7 @@
     <transition
 
             name="custom-classes-transition"
-            :enter-active-class="`animated ${animation}`"
+            :enter-active-class="`animated ${settingsObj.animation}`"
     >
     <v-layout row wrap mb-5 class="detail-accordion">
         <v-flex xs12 md8 offset-md2 lg6 offset-lg3>
@@ -25,7 +25,7 @@
                         v-for="(item,i) in this[endpoint]"
                         :key="i"
 
-                        :class="[`${themeColor}`, 'lighten-1', `white--text`, 'mb-1']"
+                        :class="[`${settingsObj.themeColor}`, 'lighten-1', `white--text`, 'mb-1']"
                 >
                     <div
                             slot="header" class="mt-1 mb-1">
@@ -77,7 +77,7 @@
 	import axios from 'axios'
 
 	export default {
-		props: ['themeColor', 'endpoint', 'animation'],
+		props: ['endpoint', 'settingsObj'],
 		mounted() {
 			const {endpoint} = this;
 			axios.get(`https://crimsonsunset-portfolio.herokuapp.com/api/${endpoint}`)

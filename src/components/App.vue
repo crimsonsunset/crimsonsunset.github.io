@@ -3,22 +3,23 @@
 
             id="app"
             standalone
-            :class="[`${themeColor}`, 'lighten-5']"
+            :class="[`${settingsObj.themeColor}`, 'lighten-5']"
     >
 
         <nav-drawer
                 :colors='colors'
                 :animations='animations'
+
                 :drawer='drawer'
-                :toTop='toTop'
-                :themeColor='themeColor'
+                :settingsObj='settingsObj'
+
                 v-on:toggleDrawer="toggleDrawer"
                 v-on:updateConfigVal="updateConfigVal"
         ></nav-drawer>
 
 
         <nav-bar
-                :themeColor="themeColor"
+                :settingsObj='settingsObj'
                 v-on:toggleDrawer="toggleDrawer"
         ></nav-bar>
 
@@ -28,13 +29,12 @@
             <!--:leave-active-class="`animated ${animation}`"-->
             <transition
                     name="custom-classes-transition"
-                    :enter-active-class="`animated ${animation}`"
+                    :enter-active-class="`animated ${settingsObj.animation}`"
             >
                 <keep-alive>
                     <router-view
-                            :animation="animation"
-                            :themeColor="themeColor"
-                            :toTop='toTop'>
+                            :settingsObj='settingsObj'
+                    >
 
                     </router-view>
                 </keep-alive>
@@ -43,12 +43,12 @@
 
             <v-fab-transition>
                 <v-btn
-                        :class="['top-btn',themeColor, 'darken-2']"
+                        :class="['top-btn',settingsObj.themeColor, 'darken-2']"
                         fab
                         fixed
                         bottom
                         right
-                        v-show="toTop"
+                        v-show="settingsObj.toTop"
                         dark
                         @click.native="scrollToTop"
                 >
@@ -64,7 +64,7 @@
 
         <v-footer
                 fixed
-                :class="['pa-3',themeColor, 'darken-4', 'footer']"
+                :class="['pa-3',settingsObj.themeColor, 'darken-4', 'footer']"
         >
             <v-spacer></v-spacer>
             <div>Joe Sangiorgio © {{ new Date().getFullYear() }}</div>
@@ -90,10 +90,19 @@
 		components: {NavDrawer, NavBar},
 		data() {
 			return {
+				settingsObj:{
+					themeColor: 'red',
+					animation: 'fadeInUp',
+					toTop: true
+                },
+
+
+//				themeColor: 'red',
+//				animation: 'fadeInUp',
+//				toTop: true
+
+
 				drawer: false,
-				themeColor: 'cyan',
-				animation: 'fadeInUp',
-				toTop: true
 			}
 		},
 		computed: {
@@ -112,10 +121,13 @@
 			},
 			updateConfigVal(payload) {
 				const firstKey = keys(payload)[0];
+
+				console.log(payload, firstKey)
+
 				if (firstKey != 0) {
-					this[firstKey] = payload[firstKey];
+					this.settingsObj[firstKey] = payload[firstKey];
 				} else {
-					this[payload] = !this[payload]
+					this.settingsObj[payload] = !this.settingsObj[payload]
 				}
 			},
 		},

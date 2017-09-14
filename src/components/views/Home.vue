@@ -1,92 +1,91 @@
 <template>
     <v-container
             class="home-page"
-            fluid mt-5>
+            fluid mt-4>
         <v-flex xs12 md6 offset-md3>
             <h1 class="home-page__hello"> Hi, I'm Joe.</h1>
-        </v-flex>
 
+            <!--{{this.items}}-->
 
-        <!--{{this.items}}-->
-
-        <v-carousel
-                cycle
-                dark
-                class="elevation-0"
-                :interval='6000000'
-                :leftControlIcon='false'
-                ref="home-carousel"
-                id="home-carousel"
-        >
-
-            <!--{{sliderData}}-->
-
-
-            <v-carousel-item
-                    src="NOT_AN_IMAGE"
-                    v-for="(item,i) in sliderData"
-                    :key="i"
+            <v-carousel
+                    cycle
+                    dark
+                    class="elevation-0"
+                    :interval='6000000'
+                    :leftControlIcon='false'
+                    ref="home-carousel"
+                    id="home-carousel"
             >
-                <h2> I {{i}}
+
+                <!--{{sliderData}}-->
 
 
-                    <vue-typer
-                            :text='sliderData[i]'
-                            :shuffle='false'
-                            initial-action='typing'
-                            :pre-type-delay='70'
-                            :type-delay='60'
-                            :pre-erase-delay='750'
-                            :erase-delay='200'
-                            erase-style='select-all'
-                            caret-animation='blink'
-                            ref="home-typer"
-                            @erased='(e)=>{
+                <v-carousel-item
+                        src="NOT_AN_IMAGE"
+                        v-for="(item,i) in sliderData"
+                        :key="i"
+                >
+                    <h2> I {{i}}
+
+
+                        <vue-typer
+                                :text='sliderData[i]'
+                                :shuffle='false'
+                                initial-action='typing'
+                                :pre-type-delay='70'
+                                :type-delay='60'
+                                :pre-erase-delay='750'
+                                :erase-delay='200'
+                                erase-style='select-all'
+                                caret-animation='blink'
+                                ref="home-typer"
+                                @erased='(e)=>{
                                 	onErased(e,i);
                                 }'
-                    ></vue-typer>
+                        ></vue-typer>
 
-                </h2>
+                    </h2>
 
-            </v-carousel-item>
+                </v-carousel-item>
 
-        </v-carousel>
+            </v-carousel>
 
 
-        <div class="home-page__btn-container">
-            <v-btn
-                    :class="[themeColor, 'darken-2', 'white--text', 'home-page__btn-next', 'text-lg-right']"
-                    ref="btn-next"
-                    @click="clickNext"
-            >Tell me more!
-            </v-btn>
-        </div>
+            <div class="home-page__btn-container">
+                <v-btn
+                        :class="[settingsObj.themeColor, 'darken-2', 'white--text', 'home-page__btn-next', 'text-lg-right']"
+                        ref="btn-next"
+                        @click="clickNext"
+                >Tell me more!
+                </v-btn>
+            </div>
+
+        </v-flex>
 
         <!--<v-parallax-->
-                <!--src="http://media.advance.net/newyorkupstatecom_national_desk_blog/photo/2016/08/24/suny-binghamton-university-4c06049fab09a429.jpg"-->
-                <!--jumbotron-->
+        <!--src="http://media.advance.net/newyorkupstatecom_national_desk_blog/photo/2016/08/24/suny-binghamton-university-4c06049fab09a429.jpg"-->
+        <!--jumbotron-->
         <!--&gt;</v-parallax>-->
 
         <!--<v-alert info-->
-                 <!--transition="scale-transition"-->
-                 <!--value="true">-->
-            <!--This is a info alert.-->
+        <!--transition="scale-transition"-->
+        <!--value="true">-->
+        <!--This is a info alert.-->
         <!--</v-alert>-->
 
 
         <!--<v-layout row wrap>-->
         <!--<v-flex xs8 offset-xs2 mt-3>-->
-            <!--<v-card-->
-                    <!--:class="[themeColor, 'white&#45;&#45;text', 'home-page__cta']"-->
-                    <!--&gt;-->
-                <!--<v-card-title primary-title>-->
-                    <!--<div class="headline">Click on the menu to get started!</div>-->
+        <!--<v-card-->
+        <!--:class="[themeColor, 'white&#45;&#45;text', 'home-page__cta']"-->
+        <!--&gt;-->
+        <!--<v-card-title primary-title>-->
+        <!--<div class="headline">Click on the menu to get started!</div>-->
 
-                <!--</v-card-title>-->
-            <!--</v-card>-->
+        <!--</v-card-title>-->
+        <!--</v-card>-->
         <!--</v-flex>-->
         <!--</v-layout>-->
-
 
 
     </v-container>
@@ -101,19 +100,19 @@
 
 	export default {
 		components: {VueTyper},
-		props: ['themeColor', 'toTop'],
+		props: ['settingsObj', 'toTop'],
 		data() {
 			return {
 				sliderData: {
-										build: ["Websites", "Web Apps", "Native Apps", "Servers", "Layouts", "Wireframes", "Raspberry Pi Hacks", "Home Automation Systems"],
-					                    teach: ["Front End Development", "Full Stack Development", "Servers", "Comp Sci Concepts"],
-										know: ["Javascript [ES6/7]", "HTML5", "Sass", "CSS3", "JSON", "Python", "React", "Redux/Flux", "Vue", "Bootstrap", "Material UI", "Lodash", "Webpack", "Gulp", "Grunt"],
-										like: ["Coding", "Teaching", "Racquetball", "Snowboarding", "Smart Homes", "Tinkering", "Learning", "Live Music", "Food Trucks"]
+					build: ["Websites", "Web Apps", "Native Apps", "Servers", "Layouts", "Wireframes", "Raspberry Pi Hacks", "Home Automation Systems"],
+					teach: ["Front End Development", "Full Stack Development", "Servers", "Comp Sci Concepts"],
+					know: ["Javascript [ES6/7]", "HTML5", "Sass", "CSS3", "JSON", "Python", "React", "Redux/Flux", "Vue", "Bootstrap", "Material UI", "Lodash", "Webpack", "Gulp", "Grunt"],
+					like: ["Coding", "Teaching", "Racquetball", "Snowboarding", "Smart Homes", "Tinkering", "Learning", "Live Music", "Food Trucks"]
 
-//					build: ["Websites", "Web Apps"],
-//					teach: ["Front End Development", 'joe things'],
-//					know: ["Javascript [ES6/7]", "HTML5"],
-//					like: ["Coding", "Teaching"]
+					//					build: ["Websites", "Web Apps"],
+					//					teach: ["Front End Development", 'joe things'],
+					//					know: ["Javascript [ES6/7]", "HTML5"],
+					//					like: ["Coding", "Teaching"]
 				}
 			}
 		},
@@ -181,7 +180,11 @@
     #home-carousel {
         height: 200px;
 
-        .carousel__item{
+        .btn__content{
+            visibility: hidden;
+        }
+
+        .carousel__item {
             text-align: center;
         }
         .carousel__controls {

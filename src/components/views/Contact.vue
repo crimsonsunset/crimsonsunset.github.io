@@ -2,7 +2,7 @@
     <transition
 
             name="custom-classes-transition"
-            :enter-active-class="`animated ${animation}`"
+            :enter-active-class="`animated ${settingsObj.animation}`"
     >
 
     <v-container
@@ -24,7 +24,7 @@
         <v-layout row wrap>
             <v-flex xs12 md6 offset-md3>
                 <v-card
-                        :class="[themeColor, 'lighten-1', 'white--text', 'elevation-8']"
+                        :class="[settingsObj.themeColor, 'lighten-1', 'white--text', 'elevation-8']"
                 >
                     <v-card-title primary-title>
                         <div class="headline">Thank you for Visiting</div>
@@ -56,7 +56,7 @@
 
     export default {
         components: {ContactForm},
-        props: ['themeColor', 'animation'],
+        props: ['settingsObj'],
         data() {
             return {
                 openForm: false
@@ -64,7 +64,6 @@
         },
         methods: {
             toggleForm() {
-            	console.log(this.animation)
                 this.openForm = !this.openForm;
             }
         },

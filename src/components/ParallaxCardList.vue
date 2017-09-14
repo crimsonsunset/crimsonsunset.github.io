@@ -3,7 +3,7 @@
     <transition
 
             name="custom-classes-transition"
-            :enter-active-class="`animated ${animation}`"
+            :enter-active-class="`animated ${settingsObj.animation}`"
     >
 
     <div class="container">
@@ -13,7 +13,7 @@
                 :key="i"
                 :data-key="`${i}`"
                 :ref="`bkg-${i}`"
-                :class="['background',`${themeColor}`, 'lighten-1', `white--text`, 'mb-1']"
+                :class="['background',`${settingsObj.themeColor}`, 'lighten-1', `white--text`, 'mb-1']"
         >
 
             <v-container
@@ -121,7 +121,7 @@
 	const mousewheelEvent = isFirefox ? "DOMMouseScroll" : "mousewheel";
 
 	export default {
-		props: ['themeColor', 'endpoint', 'animation'],
+		props: ['settingsObj', 'endpoint'],
 		mounted() {
 			window.addEventListener(mousewheelEvent, this.parallaxScroll, false);
 			window.addEventListener('touchstart', (e) => {

@@ -7,7 +7,7 @@
         <v-layout row wrap>
 
             <step-list
-                    :themeColor="themeColor"
+                    :settingsObj="settingsObj"
                     endpoint="bio"
             >
 
@@ -24,7 +24,7 @@
 
 	export default {
 		components: {StepList},
-		props: ['themeColor'],
+		props: ['settingsObj'],
 		data() {
 			return {}
 		},

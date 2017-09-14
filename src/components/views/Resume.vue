@@ -8,8 +8,7 @@
             <card-list
                     v-if="(currNavItem == 'Experience' || currNavItem == 'Projects') "
                     :profileData='this.profileData'
-                    :themeColor='themeColor'
-                    :animation='animation'
+                    :settingsObj='settingsObj'
                     :name="currNavItem.toLowerCase()"
             >
 
@@ -17,26 +16,23 @@
 
             <lazy-grid
                     :nameArr='this.profileData.skills || []'
-                    :themeColor='themeColor'
-                    :animation='animation'
+                    :settingsObj='settingsObj'
                     v-if="(currNavItem == 'Skills') "
             >
 
             </lazy-grid>
 
             <detail-accordion
-                    :themeColor='themeColor'
+                    :settingsObj='settingsObj'
                     endpoint='references'
-                    :animation='animation'
                     v-if="(currNavItem == 'References') "
             >
 
             </detail-accordion>
 
             <parallax-card-list
-                    :themeColor='themeColor'
+                    :settingsObj='settingsObj'
                     endpoint='education'
-                    :animation='animation'
                     v-if="(currNavItem == 'Education') "
             >
 
@@ -59,7 +55,7 @@
                     <v-btn
                             v-for="(item,i) in navItems"
                             flat light
-                            :class="[`${themeColor}--text`, 'text--lighten-2']"
+                            :class="[`${settingsObj.themeColor}--text`, 'text--lighten-2']"
                             :key="item.name"
                             :id="`${item.name}`"
                             @click.native="(e)=>{toggleResumeNavItem(e.target.parentElement.id)}"
@@ -86,7 +82,7 @@
 	import ParallaxCardList from '../ParallaxCardList.vue';
 
 	export default {
-		props: ['themeColor', 'animation'],
+		props: ['settingsObj'],
 		components: {CardList, LazyGrid, DetailAccordion, ParallaxCardList},
 		mounted() {
 			const splitNameArr = ['experience', 'projects'];
@@ -135,7 +131,7 @@
 				],
 				profileData: {},
 				expandedItem: '',
-				currNavItem: 'References',
+				currNavItem: 'Experience',
 			}
 		},
 		computed: {},

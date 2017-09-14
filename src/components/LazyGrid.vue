@@ -4,7 +4,7 @@
     <transition
 
             name="custom-classes-transition"
-            :enter-active-class="`animated ${animation}`"
+            :enter-active-class="`animated ${settingsObj.animation}`"
     >
 
 
@@ -16,7 +16,7 @@
 
                 <v-flex xs2>
                     <v-btn
-                            :class="[`${themeColor}`, 'darken-2', `white--text`]"
+                            :class="[`${settingsObj.themeColor}`, 'darken-2', `white--text`]"
                             @click.native="shuffleGrid"
 
                     >
@@ -45,7 +45,7 @@
                         <transition-group
                                 :key="item"
                                 name="custom-classes-transition"
-                                :enter-active-class="`animated ${animation}`"
+                                :enter-active-class="`animated ${settingsObj.animation}`"
                         >
 
                             <v-layout
@@ -89,7 +89,7 @@
             >
                 <v-card>
                     <v-toolbar dark
-                               :class="[`${themeColor}`, 'darken-4', `white--text`, 'close-bar']"
+                               :class="[`${settingsObj.themeColor}`, 'darken-4', `white--text`, 'close-bar']"
                     >
                         <v-spacer></v-spacer>
                         <v-toolbar-title>{{currSkill}} [more info]</v-toolbar-title>
@@ -110,7 +110,7 @@
 
                             <v-flex xs10 offset-xs1>
                                 <v-card
-                                        :class="[`${themeColor}`, 'darken-2', `white--text`]"
+                                        :class="[`${settingsObj.themeColor}`, 'darken-2', `white--text`]"
                                 >
                                     <v-container>
                                         <v-layout row>
@@ -176,7 +176,7 @@
 	import imagesLoaded from 'vue-images-loaded'
 
 	export default {
-		props: ['nameArr', 'themeColor', 'animation'],
+		props: ['nameArr', 'settingsObj'],
 		directives: {
 			imagesLoaded
 		},

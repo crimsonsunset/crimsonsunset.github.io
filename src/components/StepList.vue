@@ -28,7 +28,7 @@
                         :key="n"
                 >
                     <v-card
-                            :class="[`${themeColor} lighten-2`, 'white--text', 'mb-3', 'elevation-3']"
+                            :class="[`${settingsObj.themeColor} lighten-2`, 'white--text', 'mb-3', 'elevation-3']"
                     >
 
                         <v-card-text class="description-text">
@@ -47,7 +47,7 @@
 
                     </v-card>
                     <v-btn
-                            :class="[`${themeColor} darken-2`, 'white--text']"
+                            :class="[`${settingsObj.themeColor} darken-2`, 'white--text']"
                             @click="currStep=n+2">Continue
                     </v-btn>
                 </v-stepper-content>
@@ -68,7 +68,7 @@
 	import {map, times, delay, forEach} from 'lodash'
 
 	export default {
-		props: ['themeColor', 'endpoint', 'animation'],
+		props: ['settingsObj', 'endpoint'],
 
 		//todo: this is a hack because the stepper component is very picky about data it recieves and gets crippled when its incomplete
 		beforeCreate() {
@@ -86,7 +86,8 @@
 			//            			debugger;
 		},
 		created() {
-			const {endpoint, themeColor} = this;
+			const {endpoint} = this;
+			const {themeColor} = this.settingsObj;
 			//			axios.get(`http://localhost:3000/api/${endpoint}`)
 			axios.get(`https://crimsonsunset-portfolio.herokuapp.com/api/${endpoint}`)
 				.then(({data}) => {
@@ -98,8 +99,11 @@
 						const newSpan = `<span class="stepper__step__step ${themeColor}"><i class="material-icons icon">${this[endpoint][i].icon}</i></span>`
 						e.outerHTML = newSpan;
 					});
-					this.currStep = 1;
-					this.$forceUpdate()
+					delay(() => {
+						this.currStep = 1;
+						this.$forceUpdate()
+					}, 400)
+
 				});
 
 

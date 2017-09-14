@@ -28,7 +28,7 @@
             <v-list-tile v-for="item in items" :key="item.label">
                 <v-list-tile-action>
                     <v-icon
-                            :class="[`${themeColor}--text`, 'text--lighten-1']"
+                            :class="[`${settingsObj.themeColor}--text`, 'text--lighten-1']"
                     >{{ item.icon }}
                     </v-icon>
                 </v-list-tile-action>
@@ -92,7 +92,7 @@
 
             <v-flex class="switch px-3">
                 <v-switch
-                        :color="themeColor"
+                        :color="settingsObj.themeColor"
                         label='Return To Top Button'
                         v-model="localTop"
                 >
@@ -115,7 +115,7 @@
 	//    console.log(routes)
 
 	export default {
-		props: ['drawer', 'colors', 'toTop', 'themeColor', 'animations'],
+		props: ['drawer', 'colors', 'animations', 'settingsObj'],
 		data() {
 			return {
 				items: routes

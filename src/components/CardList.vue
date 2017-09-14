@@ -8,14 +8,14 @@
             <!--:leave-active-class="`animated ${animation}`"-->
             <transition-group
                     name="custom-classes-transition"
-                    :enter-active-class="`animated ${animation}`"
+                    :enter-active-class="`animated ${settingsObj.animation}`"
             >
 
                 <v-card
                         transition="slide-x-transition"
                         v-for="(item,i) in profileData[this.name]"
                         flat light
-                        :class="['mb-3',`${themeColor}--text`, `${themeColor} lighten-4`, 'text--darken-3', 'elevation-2']"
+                        :class="['mb-3',`${settingsObj.themeColor}--text`, `${settingsObj.themeColor} lighten-4`, 'text--darken-3', 'elevation-2']"
                         :key="item[item.key]"
                         :value="name === item.name"
                         :data-key="item[item.key]"
@@ -75,7 +75,7 @@
                                 <li
                                         v-for="(descItem,i2) in item.descArr"
                                         light
-                                        :class="['mb-2',`${themeColor}--text`, 'text--darken-4']"
+                                        :class="['mb-2',`${settingsObj.themeColor}--text`, 'text--darken-4']"
                                         :key="descItem"
                                 >
                                     {{descItem}}
@@ -98,7 +98,7 @@
 <script>
 
 	export default {
-		props: ['themeColor', 'name', 'profileData', 'animation'],
+		props: ['settingsObj', 'name', 'profileData'],
 		data() {
 			return {
 				expandedItem: ''
