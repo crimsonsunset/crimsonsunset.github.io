@@ -1,25 +1,34 @@
 <template>
 
-    <v-layout row wrap class="detail-accordion">
-        <v-flex xs10 offset-xs1 md8 offset-md2 lg6 offset-lg3>
+    <transition
 
-            <!--<transition-group-->
-            <!--name="custom-classes-transition"-->
-            <!--:enter-active-class="`animated ${animation}`"-->
-            <!--&gt;-->
+            name="custom-classes-transition"
+            :enter-active-class="`animated ${animation}`"
+    >
+    <v-layout row wrap mb-5 class="detail-accordion">
+        <v-flex xs12 md8 offset-md2 lg6 offset-lg3>
+
 
             <v-expansion-panel
-                    :key="animation"
-                    :enter-active-class="`animated ${animation}`"
-                    transition="slide-x-transition"
+                    :full-screen="$vuetify.breakpoint.xsOnly"
                     popout>
+
+                <!--<transition-group-->
+                <!--@click={test}-->
+                <!--name="custom-classes-transition"-->
+                <!--:enter-active-class="`animated ${animation}`"-->
+                <!--&gt;-->
+
                 <v-expansion-panel-content
+                        transition="slide-x-transition"
                         ripple
                         v-for="(item,i) in this[endpoint]"
                         :key="i"
+
                         :class="[`${themeColor}`, 'lighten-1', `white--text`, 'mb-1']"
                 >
-                    <div slot="header" class="mt-2 mb-2">
+                    <div
+                            slot="header" class="mt-1 mb-1">
 
                         <v-list-tile>
                             <v-list-tile-avatar>
@@ -51,12 +60,14 @@
                         </v-card-text>
                     </v-card>
                 </v-expansion-panel-content>
-            </v-expansion-panel>
 
-            <!--</transition-group>-->
+                <!--</transition-group>-->
+
+            </v-expansion-panel>
 
         </v-flex>
     </v-layout>
+    </transition>
 
 
 </template>
@@ -71,7 +82,6 @@
 			const {endpoint} = this;
 			axios.get(`https://crimsonsunset-portfolio.herokuapp.com/api/${endpoint}`)
 				.then(({data}) => {
-				console.log('data', data)
 					this[endpoint] = data;
 					this.$forceUpdate();
 				});
@@ -87,8 +97,8 @@
 		computed: {},
 		methods: {
 
-			layout() {
-
+			test(e) {
+				console.log('ss', e)
 			},
 		},
 		//		render(createElement) {
@@ -114,7 +124,6 @@
         }
     }
 
-
     @media only screen and (max-width: 500px) {
 
         .detail-accordion {
@@ -122,9 +131,13 @@
                 display: none;
             }
 
+            .list__tile__avatar {
+
+                margin-left: -20px;
+            }
+
         }
     }
-
 
 
 </style>

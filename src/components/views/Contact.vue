@@ -1,4 +1,10 @@
 <template>
+    <transition
+
+            name="custom-classes-transition"
+            :enter-active-class="`animated ${animation}`"
+    >
+
     <v-container
             fluid
             style="min-height: 0;"
@@ -12,6 +18,8 @@
         >
 
         </contact-form>
+
+
 
         <v-layout row wrap>
             <v-flex xs12 md6 offset-md3>
@@ -36,7 +44,9 @@
             </v-flex>
 
         </v-layout>
+
     </v-container>
+    </transition>
 
 </template>
 
@@ -46,7 +56,7 @@
 
     export default {
         components: {ContactForm},
-        props: ['themeColor'],
+        props: ['themeColor', 'animation'],
         data() {
             return {
                 openForm: false
@@ -54,6 +64,7 @@
         },
         methods: {
             toggleForm() {
+            	console.log(this.animation)
                 this.openForm = !this.openForm;
             }
         },

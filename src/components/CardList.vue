@@ -123,6 +123,10 @@
 <style lang="scss">
 
     .card-list{
+        .headline{
+            margin-bottom: 5px;
+        }
+
         .card__title--primary {
             padding-top: 10px;
 

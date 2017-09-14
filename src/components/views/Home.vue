@@ -1,7 +1,7 @@
 <template>
     <v-container
             class="home-page"
-            fluid mt-3>
+            fluid mt-5>
         <v-flex xs12 md6 offset-md3>
             <h1 class="home-page__hello"> Hi, I'm Joe.</h1>
         </v-flex>
@@ -105,15 +105,15 @@
 		data() {
 			return {
 				sliderData: {
-					//					build: ["Websites", "Web Apps", "Native Apps", "Servers", "Layouts", "Wireframes", "Raspberry Pi Hacks", "Home Automation Systems"],
-					//                    teach: ["Front End Development", "Full Stack Development", "Servers", "Comp Sci Concepts"],
-					//					know: ["Javascript [ES6/7]", "HTML5", "Sass", "CSS3", "JSON", "Python", "React", "Redux/Flux", "Vue", "Bootstrap", "Material UI", "Lodash", "Webpack", "Gulp", "Grunt"],
-					//					like: ["Coding", "Teaching", "Racquetball", "Snowboarding", "Smart Homes", "Tinkering", "Learning", "Live Music", "Food Trucks"]
+										build: ["Websites", "Web Apps", "Native Apps", "Servers", "Layouts", "Wireframes", "Raspberry Pi Hacks", "Home Automation Systems"],
+					                    teach: ["Front End Development", "Full Stack Development", "Servers", "Comp Sci Concepts"],
+										know: ["Javascript [ES6/7]", "HTML5", "Sass", "CSS3", "JSON", "Python", "React", "Redux/Flux", "Vue", "Bootstrap", "Material UI", "Lodash", "Webpack", "Gulp", "Grunt"],
+										like: ["Coding", "Teaching", "Racquetball", "Snowboarding", "Smart Homes", "Tinkering", "Learning", "Live Music", "Food Trucks"]
 
-					build: ["Websites", "Web Apps"],
-					teach: ["Front End Development", 'joe things'],
-					know: ["Javascript [ES6/7]", "HTML5"],
-					like: ["Coding", "Teaching"]
+//					build: ["Websites", "Web Apps"],
+//					teach: ["Front End Development", 'joe things'],
+//					know: ["Javascript [ES6/7]", "HTML5"],
+//					like: ["Coding", "Teaching"]
 				}
 			}
 		},
@@ -127,7 +127,6 @@
 
 				let {sliderData, sliderKeys} = this;
 				const currArr = sliderData[currKey];
-
 				//other typers that are already going, ignore.
 				if (sliderKeys[currSliderIndex] != currKey) {
 					return
@@ -182,6 +181,9 @@
     #home-carousel {
         height: 200px;
 
+        .carousel__item{
+            text-align: center;
+        }
         .carousel__controls {
             display: none;
         }

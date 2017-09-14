@@ -1,161 +1,169 @@
 <template>
 
 
-    <v-layout row wrap class="masonry-container" :style="{width: `${containerWidth}px`}">
+    <transition
+
+            name="custom-classes-transition"
+            :enter-active-class="`animated ${animation}`"
+    >
 
 
-        <v-flex xs12>
+        <v-layout row wrap class="masonry-container" :style="{width: `${containerWidth}px`}">
 
 
-            <v-flex xs2>
-                <v-btn
-                        :class="[`${themeColor}`, 'darken-2', `white--text`]"
-                        @click.native="shuffleGrid"
-
-                >
-                    Shuffle!
-                </v-btn>
-            </v-flex>
+            <v-flex xs12>
 
 
-            <isotope
-                    class="masonry-grid"
-                    :list="nameArr"
-                    ref="grid"
-                    :options='option'
-                    @layout="'masonry'"
-                    v-images-loaded:on.progress="layout"
-            >
+                <v-flex xs2>
+                    <v-btn
+                            :class="[`${themeColor}`, 'darken-2', `white--text`]"
+                            @click.native="shuffleGrid"
 
-
-                <v-flex
-                        v-for="item in nameArr"
-                        @click="selected=item"
-                        :key="item"
-                        transition="scale-transition"
-                >
-
-                    <transition-group
-                            :key="item"
-                            name="custom-classes-transition"
-                            :enter-active-class="`animated ${animation}`"
                     >
-
-                        <v-layout
-                                :key="item"
-                                transition="scale-transition"
-                                row justify-center>
-
-
-                            <v-card
-                                    primary
-                                    transition="scale-transition"
-                                    class="skill-card"
-                                    slot="activator"
-                                    @click="(e)=>{skillClicked(item)}"
-                            >
-
-                                <img
-                                        class="skill-card__image" :src="getFileName(item)" :height="tileSize"
-                                        :width="tileSize"/>
-
-                            </v-card>
-
-
-                        </v-layout>
-
-                    </transition-group>
+                        Shuffle!
+                    </v-btn>
                 </v-flex>
 
 
-            </isotope>
-
-
-        </v-flex>
-
-
-        <v-dialog
-                v-if="currSkill != 'NA'"
-                v-model="currSkill"
-                fullscreen
-                transition="dialog-bottom-transition"
-        >
-            <v-card>
-                <v-toolbar dark
-                           :class="[`${themeColor}`, 'darken-4', `white--text`, 'close-bar']"
+                <isotope
+                        class="masonry-grid"
+                        :list="nameArr"
+                        ref="grid"
+                        :options='option'
+                        @layout="'masonry'"
+                        v-images-loaded:on.progress="layout"
                 >
-                    <v-spacer></v-spacer>
-                    <v-toolbar-title>{{currSkill}} [more info]</v-toolbar-title>
-                    <v-spacer></v-spacer>
-                    <v-toolbar-items>
-                        <v-btn icon @click.native="currSkill = 'NA'" dark>
-                            <v-icon>close</v-icon>
-                        </v-btn>
-                    </v-toolbar-items>
-                </v-toolbar>
 
-                <v-container
-                        class="infoCard"
-                        fluid
-                        grid-list-lg
-                >
-                    <v-layout row wrap>
 
-                        <v-flex xs10 offset-xs1>
-                            <v-card
-                                    :class="[`${themeColor}`, 'darken-2', `white--text`]"
-                            >
-                                <v-container>
-                                    <v-layout row>
-                                        <v-flex
-                                                class="xs12"
-                                        >
-                                            <div>
-                                                <div class="headline"> {{pageInfo.name}}</div>
-                                                <div> {{pageInfo.definitionTxt}}</div>
-                                            </div>
-                                        </v-flex>
-                                        <v-flex
-                                                v-if="pageInfo.imgSrc"
-                                                xs5>
-                                            <v-card-media
-                                                    :src="pageInfo.imgSrc"
-                                                    height="125px"
-                                                    contain
-                                            ></v-card-media>
-                                        </v-flex>
-                                    </v-layout>
+                    <v-flex
+                            v-for="item in nameArr"
+                            @click="selected=item"
+                            :key="item"
+                            transition="scale-transition"
+                    >
 
-                                    <v-card-actions>
-                                        <v-btn
-                                                @click="(e)=>{
+                        <transition-group
+                                :key="item"
+                                name="custom-classes-transition"
+                                :enter-active-class="`animated ${animation}`"
+                        >
+
+                            <v-layout
+                                    :key="item"
+                                    transition="scale-transition"
+                                    row justify-center>
+
+
+                                <v-card
+                                        primary
+                                        transition="scale-transition"
+                                        class="skill-card"
+                                        slot="activator"
+                                        @click="(e)=>{skillClicked(item)}"
+                                >
+
+                                    <img
+                                            class="skill-card__image" :src="getFileName(item)" :height="tileSize"
+                                            :width="tileSize"/>
+
+                                </v-card>
+
+
+                            </v-layout>
+
+                        </transition-group>
+                    </v-flex>
+
+
+                </isotope>
+
+
+            </v-flex>
+
+
+            <v-dialog
+                    v-if="currSkill != 'NA'"
+                    v-model="currSkill"
+                    fullscreen
+                    transition="dialog-bottom-transition"
+            >
+                <v-card>
+                    <v-toolbar dark
+                               :class="[`${themeColor}`, 'darken-4', `white--text`, 'close-bar']"
+                    >
+                        <v-spacer></v-spacer>
+                        <v-toolbar-title>{{currSkill}} [more info]</v-toolbar-title>
+                        <v-spacer></v-spacer>
+                        <v-toolbar-items>
+                            <v-btn icon @click.native="currSkill = 'NA'" dark>
+                                <v-icon>close</v-icon>
+                            </v-btn>
+                        </v-toolbar-items>
+                    </v-toolbar>
+
+                    <v-container
+                            class="infoCard"
+                            fluid
+                            grid-list-lg
+                    >
+                        <v-layout row wrap>
+
+                            <v-flex xs10 offset-xs1>
+                                <v-card
+                                        :class="[`${themeColor}`, 'darken-2', `white--text`]"
+                                >
+                                    <v-container>
+                                        <v-layout row>
+                                            <v-flex
+                                                    class="xs12"
+                                            >
+                                                <div>
+                                                    <div class="headline"> {{pageInfo.name}}</div>
+                                                    <div> {{pageInfo.definitionTxt}}</div>
+                                                </div>
+                                            </v-flex>
+                                            <v-flex
+                                                    v-if="pageInfo.imgSrc"
+                                                    xs5>
+                                                <v-card-media
+                                                        :src="pageInfo.imgSrc"
+                                                        height="125px"
+                                                        contain
+                                                ></v-card-media>
+                                            </v-flex>
+                                        </v-layout>
+
+                                        <v-card-actions>
+                                            <v-btn
+                                                    @click="(e)=>{
                                                                 	openLink(pageInfo.wikiLink)
                                                                 }"
-                                                flat
-                                                class="white--text">More Info
-                                        </v-btn>
-                                        <v-btn
-                                                @click="(e)=>{
+                                                    flat
+                                                    class="white--text">More Info
+                                            </v-btn>
+                                            <v-btn
+                                                    @click="(e)=>{
                                                                 	openLink(pageInfo.jokeLink)
                                                                 }"
-                                                flat
-                                                class="white--text">I'm Feeling Lucky
-                                        </v-btn>
-                                    </v-card-actions>
+                                                    flat
+                                                    class="white--text">I'm Feeling Lucky
+                                            </v-btn>
+                                        </v-card-actions>
 
-                                </v-container>
-                            </v-card>
-                        </v-flex>
-
-
-                    </v-layout>
-                </v-container>
-            </v-card>
-
-        </v-dialog>
+                                    </v-container>
+                                </v-card>
+                            </v-flex>
 
 
-    </v-layout>
+                        </v-layout>
+                    </v-container>
+                </v-card>
+
+            </v-dialog>
+
+
+        </v-layout>
+    </transition>
 
 
 </template>

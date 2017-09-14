@@ -1,5 +1,11 @@
 <template>
 
+    <transition
+
+            name="custom-classes-transition"
+            :enter-active-class="`animated ${animation}`"
+    >
+
     <div class="container">
 
         <section
@@ -93,6 +99,8 @@
         </section>
 
     </div>
+
+    </transition>
 
 </template>
 

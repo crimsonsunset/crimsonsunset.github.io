@@ -1,8 +1,7 @@
 <template>
 
-    <v-layout row wrap>
 
-        <v-flex xs10 offset-xs1 sm8 offset-sm2 pb-5 class="card-list">
+    <v-flex xs12 md8 offset-md2 pb-5 mt-3 class="card-list">
         <v-stepper
                 vertical
                 ref="stepper"
@@ -29,7 +28,7 @@
                         :key="n"
                 >
                     <v-card
-                            :class="[`${themeColor} lighten-2`, 'white--text', 'mb-3']"
+                            :class="[`${themeColor} lighten-2`, 'white--text', 'mb-3', 'elevation-3']"
                     >
 
                         <v-card-text class="description-text">
@@ -49,7 +48,7 @@
                     </v-card>
                     <v-btn
                             :class="[`${themeColor} darken-2`, 'white--text']"
-                            @click="nextStep(n+1)">Continue
+                            @click="currStep=n+2">Continue
                     </v-btn>
                 </v-stepper-content>
             </template>
@@ -58,10 +57,8 @@
         </v-stepper>
 
 
-        </v-flex>
+    </v-flex>
 
-
-    </v-layout>
 
 </template>
 
@@ -90,7 +87,7 @@
 		},
 		created() {
 			const {endpoint, themeColor} = this;
-//			axios.get(`http://localhost:3000/api/${endpoint}`)
+			//			axios.get(`http://localhost:3000/api/${endpoint}`)
 			axios.get(`https://crimsonsunset-portfolio.herokuapp.com/api/${endpoint}`)
 				.then(({data}) => {
 					this[endpoint] = data;
@@ -101,101 +98,27 @@
 						const newSpan = `<span class="stepper__step__step ${themeColor}"><i class="material-icons icon">${this[endpoint][i].icon}</i></span>`
 						e.outerHTML = newSpan;
 					});
-//					delay(()=>{this.$forceUpdate()}, 200);
+					this.currStep = 1;
 					this.$forceUpdate()
 				});
 
 
 		},
-		//		mounted() {
-		//		},
+//		mounted() {
+//		},
 		data() {
 			return {
-				e6: 0,
-				n: 0,
-				i: 0,
-				currStep: 0,
-				steps: [{
-					name: 'ggg'
-				}, {}, {}, {}],
+				currStep: -1,
 				item: '',
 				totalSlideNumber: 4
 			}
 		},
-		//				render(h) {
-		//					const {endpoint} = this;
-		//					const currArr = this[endpoint];
-		//
-		//		//			console.log('currArr');
-		//		//			console.log(currArr);
-		//					let steps;
-		//					if (currArr.length > 0) {
-		//		//				console.log('doing')
-		//
-		//		                steps = map(currArr, (item, i) => {
-		//							//				console.log('eee')
-		//							//				console.log(e)
-		//		//					console.log(i)
-		//
-		//			                const stepNum = i + 1;
-		//							return (
-		//                                            <template>
-		//                                                <v-stepper-step
-		//                                                step={i}
-		//                                                complete={this.currStep > i-1}
-		//                                                    editable
-		//                                            >
-		//
-		//												{`${item.name}: ${item.location}`}
-		//
-		//                                                <small>{`${item.date}`}</small>
-		//                                            </v-stepper-step>
-		//
-		//
-		//                                            <v-stepper-content
-		//                                                    step={i}
-		//                                                    key={i}
-		//                                        >
-		//                                            <v-card class="grey lighten-1 mb-5" height="200px">
-		//
-		//												{item.descriptionArr}
-		//
-		//                                            </v-card>
-		//                                            <v-btn primary on-click-native={()=>{}}>Continue</v-btn>
-		//                                    </v-stepper-content>
-		//		                </template>)
-		//						})
-		//
-		//						console.log('steps')
-		//						console.log(steps)
-		//					}
-		//
-		//					return (
-		//
-		//                            <v-flex>
-		//                                <v-stepper
-		//                                        vertical
-		//                                        v-model={this.currStep}>
-		//								{steps}
-		//                                </v-stepper>
-		//                            </v-flex>
-		//
-		//					)
-		//				},
 		computed: {},
 		methods: {
 			nextStep(n) {
-				if (n === this.steps) {
-					this.currStep = 0
-				} else {
-					this.currStep = n + 1
-				}
-			},
+				console.log('nextstep', this.currStep, n);
+				this.currStep = n + 1
 
-			addStepRef(e) {
-				console.log('sss')
-				console.log(e)
-				return `step-${e}`
 			},
 		},
 	}
@@ -206,9 +129,31 @@
 
     .stepper {
 
-        .description-text{
+        &__step {
+
+            padding: 24px 24px 26px !important;
+        }
+
+        &__step--active div {
+            font-size: 18px;
+        }
+
+        &__label {
+            font-size: 16px;
+            small {
+                font-size: 13px;
+            }
+        }
+
+        &__content {
+            padding: 0px 22px 0px 8px !important;
+            margin-bottom: 8px !important;
+        }
+
+        .description-text {
             font-size: 16px;
             line-height: 30px;
+            margin-top: 0px;
         }
 
         &__step__step {
@@ -220,5 +165,21 @@
             }
         }
     }
+
+    @media only screen and (max-width: 500px) {
+
+        .stepper {
+            &__step {
+                padding: 24px 0px 6px 6px !important;
+            }
+            &__content {
+                /*margin: 4px 0 4px 36px !important;*/
+
+                padding: 0px !important;
+                margin: 10px !important;
+            }
+        }
+    }
+
 
 </style>

@@ -1,7 +1,9 @@
 <template>
     <v-app
+
             id="app"
             standalone
+            :class="[`${themeColor}`, 'lighten-5']"
     >
 
         <nav-drawer
@@ -23,8 +25,11 @@
 
         <main>
 
-
-            <transition>
+            <!--:leave-active-class="`animated ${animation}`"-->
+            <transition
+                    name="custom-classes-transition"
+                    :enter-active-class="`animated ${animation}`"
+            >
                 <keep-alive>
                     <router-view
                             :animation="animation"
@@ -87,7 +92,7 @@
 			return {
 				drawer: false,
 				themeColor: 'cyan',
-				animation: 'bounceIn',
+				animation: 'fadeInUp',
 				toTop: true
 			}
 		},
@@ -141,6 +146,7 @@
 
     .footer {
         color: white;
+        height: 5vh;
     }
 
     .full-width {
@@ -151,7 +157,7 @@
         &--right {
             text-align: right;
         }
-        &--center{
+        &--center {
             text-align: center;
         }
     }

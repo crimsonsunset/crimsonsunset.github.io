@@ -3,8 +3,7 @@
 
     <section>
 
-
-        <v-container fluid class="mt-3 resume-view">
+        <v-container fluid class="mt-3 resume-view" >
 
             <card-list
                     v-if="(currNavItem == 'Experience' || currNavItem == 'Projects') "
@@ -34,7 +33,6 @@
 
             </detail-accordion>
 
-
             <parallax-card-list
                     :themeColor='themeColor'
                     endpoint='education'
@@ -55,7 +53,6 @@
             <v-card class="resume-view__nav">
                 <v-bottom-nav
                         :value="true"
-                        shift
                         :active.sync="currNavItem"
                         class="white"
                 >
@@ -164,12 +161,9 @@
     }
 
     .resume-view {
-        //border: $bw solid red;
-        //min-height: $resumeHeight;
 
         &__nav {
             margin-top: -3vh;
-            //border: $bw solid red;
         }
 
     }
@@ -178,6 +172,23 @@
 
         color: black
     }
+
+
+    @media only screen and (max-width: 400px) {
+
+        .resume-view {
+            &__nav {
+                .btn__content span{
+                    display: none;
+                }
+                .btn{
+                    min-width: 10px !important;
+                }
+            }
+
+        }
+    }
+
 
 
 </style>

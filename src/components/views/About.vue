@@ -1,11 +1,10 @@
 <template>
     <v-container
-            fluid
+            class="no-pad"
             mt-1
     >
 
         <v-layout row wrap>
-
 
             <step-list
                     :themeColor="themeColor"
