@@ -218,7 +218,10 @@
 		computed: {},
 		methods: {
 			layout() {
-				this.$refs.grid.layout('masonry');
+				if (this.$refs.grid) {
+					this.$refs.grid.layout('masonry');
+				}
+
 			},
 			getFileName(item) {
 				item = item.replace(' ', '_');
@@ -235,7 +238,7 @@
 				const that = this;
 				const sanitizedSkill = encodeURIComponent(skill.replace(' ', '_'));
 
-				axios.get(`http://localhost:3000/scrape?endPath=${sanitizedSkill}`)
+				axios.get(`https://crimsonsunset-portfolio.herokuapp.com/scrape?endPath=${sanitizedSkill}`)
 					.then(({data}) => {
 						this.pageInfo = data;
 						this.currSkill = skill;

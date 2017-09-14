@@ -127,7 +127,8 @@
 //
 
 			const {endpoint} = this;
-			axios.get(`http://localhost:3000/api/${endpoint}`)
+//			axios.get(`http://localhost:3000/api/${endpoint}`)
+			axios.get(`https://crimsonsunset-portfolio.herokuapp.com/api/${endpoint}`)
 				.then(({data}) => {
 					this[endpoint] = data;
 					totalSlideNumber = data.length;
@@ -138,6 +139,7 @@
 							imgInd: 0
 						};
 					});
+					this.$forceUpdate()
 //					console.log(this[endpoint])
 				});
 //			console.log('mounted', mousewheelEvent)

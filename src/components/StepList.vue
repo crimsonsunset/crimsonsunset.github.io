@@ -1,59 +1,8 @@
 <template>
 
-    <!--<v-flex class="stepper">-->
-    <!--<v-stepper-->
-    <!--:steps="this[endpoint]"-->
-    <!--v-model="e6"-->
-    <!--vertical>-->
+    <v-layout row wrap>
 
-    <!--<v-flex-->
-    <!--v-for="(item,i) in this[endpoint]"-->
-    <!--:key="i"-->
-    <!--&gt;-->
-
-    <!--<v-stepper-step-->
-    <!--editable-->
-    <!--:key="i"-->
-    <!--:step="i"-->
-    <!--:complete="e6 > 1"-->
-    <!--&gt;-->
-    <!--{{item.name}}-->
-    <!--<small>-->
-    <!--{{item.date}}-->
-    <!--</small>-->
-
-    <!--</v-stepper-step>-->
-
-    <!--<v-stepper-content-->
-    <!--:step="i"-->
-    <!--&gt;-->
-    <!--<v-card class="grey lighten-1 mb-5" height="200px"></v-card>-->
-    <!--<v-btn primary @click.native="e6 = 2">Continue</v-btn>-->
-    <!--</v-stepper-content>-->
-    <!--</v-flex>-->
-
-
-    <!--</v-stepper>-->
-
-    <!--</v-flex>-->
-
-
-    <!--<v-stepper-header>-->
-    <!--<template v-for="(item,n) in this[endpoint]">-->
-    <!--<v-stepper-step-->
-    <!--:key="n"-->
-    <!--:step="n"-->
-    <!--:complete="currStep > n"-->
-    <!--editable-->
-    <!--&gt;-->
-    <!--Step {{ n + 1 }}-->
-    <!--</v-stepper-step>-->
-    <!--<v-divider v-if="n !== steps"></v-divider>-->
-    <!--</template>-->
-    <!--</v-stepper-header>-->
-
-
-    <v-flex>
+        <v-flex xs10 offset-xs1 sm8 offset-sm2 pb-5 class="card-list">
         <v-stepper
                 vertical
                 ref="stepper"
@@ -65,6 +14,7 @@
                         :step="n+1"
                         :complete="currStep > n"
                         editable
+
                         ref="steps"
                 >
 
@@ -78,12 +28,29 @@
                         :step="n+1"
                         :key="n"
                 >
-                    <v-card class="grey lighten-1 mb-5" height="200px">
+                    <v-card
+                            :class="[`${themeColor} lighten-2`, 'white--text', 'mb-3']"
+                    >
 
-                        {{item.descriptionArr}}
+                        <v-card-text class="description-text">
+
+                            <ul>
+                                <li
+                                        v-for="(descItem,i2) in item.descriptionArr"
+                                        light
+                                        :key="descItem"
+                                >
+                                    {{descItem}}
+                                </li>
+                            </ul>
+                        </v-card-text>
+
 
                     </v-card>
-                    <v-btn primary @click="nextStep(n+1)">Continue</v-btn>
+                    <v-btn
+                            :class="[`${themeColor} darken-2`, 'white--text']"
+                            @click="nextStep(n+1)">Continue
+                    </v-btn>
                 </v-stepper-content>
             </template>
 
@@ -91,14 +58,17 @@
         </v-stepper>
 
 
-    </v-flex>
+        </v-flex>
+
+
+    </v-layout>
 
 </template>
 
 <script type="text/jsx">
 
 	import axios from 'axios'
-	import {map, times, find, forEach} from 'lodash'
+	import {map, times, delay, forEach} from 'lodash'
 
 	export default {
 		props: ['themeColor', 'endpoint', 'animation'],
@@ -119,19 +89,20 @@
 			//            			debugger;
 		},
 		created() {
-			const {endpoint} = this;
-			axios.get(`http://localhost:3000/api/${endpoint}`)
+			const {endpoint, themeColor} = this;
+//			axios.get(`http://localhost:3000/api/${endpoint}`)
+			axios.get(`https://crimsonsunset-portfolio.herokuapp.com/api/${endpoint}`)
 				.then(({data}) => {
 					this[endpoint] = data;
 					this.totalSlideNumber = data.length;
-
 					//adjust icons
-                    const stepRefs = this.$refs['stepper'].$el.getElementsByTagName('span');
+					const stepRefs = this.$refs['stepper'].$el.getElementsByTagName('span');
 					forEach(stepRefs, (e, i) => {
-						const newSpan = `<span class="stepper__step__step"><i class="material-icons icon">${this[endpoint][i].icon}</i></span>`
+						const newSpan = `<span class="stepper__step__step ${themeColor}"><i class="material-icons icon">${this[endpoint][i].icon}</i></span>`
 						e.outerHTML = newSpan;
 					});
-					this.$forceUpdate();
+//					delay(()=>{this.$forceUpdate()}, 200);
+					this.$forceUpdate()
 				});
 
 
@@ -233,12 +204,20 @@
 
 <style lang="scss">
 
-    .stepper__step__step {
+    .stepper {
 
-        height: 50px ;
-        width: 50px ;
-        i {
-            font-size: 35px !important;
+        .description-text{
+            font-size: 16px;
+            line-height: 30px;
+        }
+
+        &__step__step {
+
+            height: 50px;
+            width: 50px;
+            i {
+                font-size: 35px !important;
+            }
         }
     }
 

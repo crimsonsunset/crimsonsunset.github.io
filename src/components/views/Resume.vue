@@ -138,7 +138,7 @@
 				],
 				profileData: {},
 				expandedItem: '',
-				currNavItem: 'Education',
+				currNavItem: 'References',
 			}
 		},
 		computed: {},

@@ -69,9 +69,11 @@
 		props: ['themeColor', 'endpoint', 'animation'],
 		mounted() {
 			const {endpoint} = this;
-			axios.get(`http://localhost:3000/api/${endpoint}`)
+			axios.get(`https://crimsonsunset-portfolio.herokuapp.com/api/${endpoint}`)
 				.then(({data}) => {
+				console.log('data', data)
 					this[endpoint] = data;
+					this.$forceUpdate();
 				});
 		},
 

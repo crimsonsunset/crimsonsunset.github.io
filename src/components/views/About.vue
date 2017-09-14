@@ -8,6 +8,7 @@
 
 
             <step-list
+                    :themeColor="themeColor"
                     endpoint="bio"
             >
 
@@ -24,6 +25,7 @@
 
 	export default {
 		components: {StepList},
+		props: ['themeColor'],
 		data() {
 			return {}
 		},
