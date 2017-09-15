@@ -45,6 +45,7 @@
             <v-list class="px-3">
 
                 <v-select
+                        class="controls"
                         label="Select A Theme"
                         v-bind:items="colors"
                         @input="e => { emitEvent('updateConfigVal', {'themeColor': e}) }"
@@ -72,6 +73,7 @@
             <v-list class="px-3">
 
                 <v-select
+                        class="controls"
                         label="Select An Animation"
                         v-bind:items="animations"
                         @input="e => { emitEvent('updateConfigVal', {'animation': e}) }"
@@ -90,15 +92,40 @@
 
             </v-list>
 
-            <v-flex class="switch px-3">
+            <v-flex px-3 class="">
                 <v-switch
+                        class="controls"
                         :color="settingsObj.themeColor"
                         label='Return To Top Button'
-                        v-model="localTop"
+                        v-model="settingsObj.toTop"
+                        @change="e => { emitEvent('updateConfigVal', {'toTop': e}) }"
                 >
 
                 </v-switch>
             </v-flex>
+
+            <v-flex px-3 >
+                <v-switch
+                        class="controls"
+                        :color="settingsObj.themeColor"
+                        label='Remember Settings'
+                        v-model="settingsObj.rememberSettings"
+                        @change="e => { emitEvent('updateConfigVal', {'rememberSettings': e}) }"
+                >
+                </v-switch>
+            </v-flex>
+
+            <v-flex px-3 >
+                <v-switch
+                        class="controls"
+                        :color="settingsObj.themeColor"
+                        label='Remember Location'
+                        v-model="settingsObj.rememberLocation"
+                        @change="e => { emitEvent('updateConfigVal', {'rememberLocation': e}) }"
+                >
+                </v-switch>
+            </v-flex>
+
 
         </v-list>
     </v-navigation-drawer>
@@ -125,7 +152,11 @@
 			// `this` points to the vm instance
 			//            console.log('thiz create ',this)
 		},
-		methods: {},
+		methods: {
+			settingsChange(e){
+				console.log('emizz', e)
+            }
+        },
 		computed: {
 			localDrawer: {
 				get() {
@@ -133,14 +164,6 @@
 				},
 				set(inVal) {
 					this.$emit('toggleDrawer', inVal);
-				}
-			},
-			localTop: {
-				get() {
-					return this.toTop;
-				},
-				set(inVal) {
-					this.$emit('updateConfigVal', 'toTop', inVal);
 				}
 			}
 		}
@@ -158,13 +181,18 @@
         width: 36px;
     }
 
-    .switch {
-        margin-top: -30px;
+    .controls {
+        margin-top: -25px !important;
     }
 
     .navigation-drawer {
         margin-top: 57px !important;
     }
+
+
+    /*.application--light .switch:not(.input-group--dirty) .input-group--selection-controls__container{*/
+        /*color: red !important;*/
+    /*}*/
 
 
 </style>

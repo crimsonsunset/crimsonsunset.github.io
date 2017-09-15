@@ -35,7 +35,8 @@ export default {
 	}
 }
 
-const animationNames = sortBy(["bounce",
+const animationNames = sortBy([
+	"bounce",
 	"flash",
 	"pulse",
 	"rubberBand",
@@ -110,4 +111,4 @@ const animationNames = sortBy(["bounce",
 	"slideOutDown",
 	"slideOutLeft",
 	"slideOutRight",
-	"slideOutUp"])
+	"slideOutUp"]);

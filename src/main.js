@@ -8,22 +8,24 @@ import * as helpers from './helpers'
 import 'vuetify/dist/vuetify.min.css'
 import './styles/index.scss'
 import 'animate.css/animate.min.css'
+import store from 'store'
 
 Vue.use(Vuetify);
 Vue.use(VueRouter);
 
 const helpersMixin = Vue.mixin(helpers.default);
 Vue.mixin(helpersMixin);
+Object.defineProperty(Vue.prototype, '$store', { value: store });
 
 const router = new VueRouter({
 	mode: 'history',
 	routes
 });
 
-new Vue({
-    el: '#app',
-    router,
-    render: (h) => {
-        return h(App)
-    }
+const main = new Vue({
+	el: '#app',
+	router,
+	render: (h) => {
+		return h(App)
+	}
 });

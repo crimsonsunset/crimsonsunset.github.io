@@ -34,6 +34,7 @@
                 <keep-alive>
                     <router-view
                             :settingsObj='settingsObj'
+                            :drawer='drawer'
                     >
 
                     </router-view>
@@ -88,49 +89,97 @@
 
 	export default {
 		components: {NavDrawer, NavBar},
+		beforeCreate() {
+			console.log('beforecreate', this.$store)
+
+			this.defaultSettings = {
+				themeColor: 'red',
+				animation: 'fadeInUp',
+				toTop: true,
+				rememberSettings: false,
+				rememberLocation: true,
+			};
+
+//			console.log((this.$store.get('settings')))
+			this.settingsObj = (this.$store.get('settings') || {})
+		},
+
 		data() {
 			return {
-				settingsObj:{
-					themeColor: 'red',
-					animation: 'fadeInUp',
-					toTop: true
-                },
+				settingsObj: {
+					...this.defaultSettings,
+					...this.settingsObj,
+				},
 
-
-//				themeColor: 'red',
-//				animation: 'fadeInUp',
-//				toTop: true
-
-
-				drawer: false,
+				drawer: false
 			}
 		},
 		computed: {
 			colors() {
+				console.log(this.settingsObj)
 				return this.getSassConfig('colors')
 			},
 			animations() {
 				return this.getAnimationNames()
 			},
+
+			//			settingsObj() {
+			//				if (this.settingsObj) {
+			//
+			//				} else {
+			//
+			//				}
+			//				return {
+			//
+			//				}
+			//			}
 		},
 		methods: {
 			toggleDrawer(state) {
 				if (state != this.drawer) {
 					this.drawer = state || !this.drawer;
 				}
-			},
+			}
+			,
 			updateConfigVal(payload) {
 				const firstKey = keys(payload)[0];
 
-				console.log(payload, firstKey)
+				//				console.log('hey made it', payload)
+				//				console.log(payload, firstKey)
 
 				if (firstKey != 0) {
 					this.settingsObj[firstKey] = payload[firstKey];
 				} else {
 					this.settingsObj[payload] = !this.settingsObj[payload]
 				}
-			},
-		},
+
+				//				console.log(this.settingsObj[payload])
+
+				//settings that require further action after toggled
+				const save = this.settingsObj[firstKey];
+				switch (firstKey) {
+					case 'rememberSettings':
+						this.toggleStoreVal('settings', save, this.settingsObj);
+						return;
+					case 'rememberLocation':
+						const {path} = this.$route;
+						this.toggleStoreVal('location', save, path);
+						return;
+					default:
+						return;
+				}
+			}
+			,
+			toggleStoreVal(key, save, newVal) {
+
+				if (save) {
+					this.$store.set(key, newVal)
+				} else {
+					this.$store.remove(key)
+				}
+			}
+		}
+		,
 
 	}
 </script>

@@ -100,7 +100,7 @@
 
 	export default {
 		components: {VueTyper},
-		props: ['settingsObj', 'toTop'],
+		props: ['settingsObj', 'toTop', 'drawer'],
 		data() {
 			return {
 				sliderData: {
@@ -144,8 +144,12 @@
 				const children = this.$refs['home-carousel'].$el.children;
 				let nextBtn = find(children, (e) => e.className.includes('right'));
 				nextBtn = nextBtn.children[0];
-				nextBtn.click();
-				delay(this.restartTyper, 100)
+
+				//clicking button will close the drawer, so block it here
+				if (!this.drawer) {
+					nextBtn.click();
+					delay(this.restartTyper, 100)
+				}
 			},
 			restartTyper() {
 				//have past the bounds of the array
