@@ -21,7 +21,7 @@
 
 
                 <v-carousel-item
-                        src="NOT_AN_IMAGE"
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
                         v-for="(item,i) in sliderData"
                         :key="i"
                 >
