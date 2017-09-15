@@ -3,15 +3,16 @@
 </template>
 
 <script>
+	import {routeExporter} from '../../helpers'
 
-    export default {
+    export default routeExporter({
         data() {
             return {
 
             }
         },
 
-    }
+    })
 </script>
 
 <style lang="scss">

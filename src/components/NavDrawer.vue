@@ -51,7 +51,11 @@
                         @input="e => { emitEvent('updateConfigVal', {'themeColor': e}) }"
                         item-text="color"
                         item-value="color"
-                        max-height="400"
+                        :hint="`Currently: ${settingsObj.themeColor}`"
+                        single-line
+                        persistent-hint
+                        hide-details
+
                 >
                     <template slot="item" scope="data">
                         <template>
@@ -77,9 +81,12 @@
                         label="Select An Animation"
                         v-bind:items="animations"
                         @input="e => { emitEvent('updateConfigVal', {'animation': e}) }"
-                        item-text="color"
-                        item-value="color"
-                        max-height="400"
+                        :hint="`Currently: ${settingsObj.animation}`"
+
+                        single-line
+                        persistent-hint
+                        hide-details
+
                 >
                     <template slot="item" scope="data">
                         <template>
@@ -148,10 +155,6 @@
 				items: routes
 			}
 		},
-		created: function () {
-			// `this` points to the vm instance
-			//            console.log('thiz create ',this)
-		},
 		methods: {
 			settingsChange(e){
 				console.log('emizz', e)
@@ -182,7 +185,7 @@
     }
 
     .controls {
-        margin-top: -25px !important;
+        margin-top: -10px !important;
     }
 
     .navigation-drawer {

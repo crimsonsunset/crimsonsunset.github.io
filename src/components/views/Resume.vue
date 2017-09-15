@@ -80,8 +80,9 @@
 	import LazyGrid from '../LazyGrid.vue';
 	import DetailAccordion from '../DetailAccordion.vue';
 	import ParallaxCardList from '../ParallaxCardList.vue';
+	import {routeExporter} from '../../helpers'
 
-	export default {
+	export default routeExporter({
 		props: ['settingsObj'],
 		components: {CardList, LazyGrid, DetailAccordion, ParallaxCardList},
 		mounted() {
@@ -138,12 +139,9 @@
 		methods: {
 			toggleResumeNavItem(itemName) {
 				this.currNavItem = itemName;
-			},
-			//			test(itemName) {
-
-			//			}
+			}
 		}
-	}
+	})
 
 </script>
 

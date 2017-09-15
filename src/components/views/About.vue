@@ -21,15 +21,18 @@
 <script>
 
 	import StepList from '../StepList.vue'
+	import {routeExporter} from '../../helpers'
 
-	export default {
+	export default routeExporter({
 		components: {StepList},
 		props: ['settingsObj'],
-		data() {
+        data() {
 			return {}
 		},
 
-	}
+	})
+
+
 </script>
 
 <style lang="scss">

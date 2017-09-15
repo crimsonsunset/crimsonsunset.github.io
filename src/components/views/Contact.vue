@@ -53,8 +53,9 @@
 <script>
 
     import ContactForm from '../ContactForm.vue'
+    import {routeExporter} from '../../helpers'
 
-    export default {
+    export default routeExporter({
         components: {ContactForm},
         props: ['settingsObj'],
         data() {
@@ -68,7 +69,7 @@
             }
         },
 
-    }
+    })
 </script>
 
 <style lang="scss">

@@ -95,10 +95,10 @@
 
 	import {VueTyper} from 'vue-typer'
 	import {find, keys, delay} from 'lodash'
-
+	import {routeExporter} from '../../helpers'
 	let currSliderIndex = 0;
 
-	export default {
+	export default routeExporter({
 		components: {VueTyper},
 		props: ['settingsObj', 'toTop', 'drawer'],
 		data() {
@@ -162,7 +162,7 @@
 			}
 		}
 
-	}
+	})
 </script>
 
 

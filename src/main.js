@@ -4,7 +4,7 @@ import App from './components/App.vue'
 import routes from './config/routes'
 import Vuetify from 'vuetify'
 import 'babel-polyfill'
-import * as helpers from './helpers'
+import * as helpers from './helpersMixin'
 import 'vuetify/dist/vuetify.min.css'
 import './styles/index.scss'
 import 'animate.css/animate.min.css'
@@ -21,6 +21,12 @@ const router = new VueRouter({
 	mode: 'history',
 	routes
 });
+
+// router.afterEach((to, from, next) => {
+// 	console.log(to)
+// 	console.log(this)
+// 	// next();
+// })
 
 const main = new Vue({
 	el: '#app',

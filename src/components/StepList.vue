@@ -72,7 +72,6 @@
 
 		//todo: this is a hack because the stepper component is very picky about data it recieves and gets crippled when its incomplete
 		beforeCreate() {
-			console.log("beforeCreate!", this);
 			this.bio = times(4, () => {
 					return {
 						"name": "",
