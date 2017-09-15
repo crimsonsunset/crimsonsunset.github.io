@@ -87,8 +87,7 @@
 		created() {
 			const {endpoint} = this;
 			const {themeColor} = this.settingsObj;
-			//			axios.get(`http://localhost:3000/api/${endpoint}`)
-			axios.get(`https://crimsonsunset-portfolio.herokuapp.com/api/${endpoint}`)
+			axios.get(`${this.$endpoints.info}${endpoint}`)
 				.then(({data}) => {
 					this[endpoint] = data;
 					this.totalSlideNumber = data.length;

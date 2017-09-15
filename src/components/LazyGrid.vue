@@ -197,11 +197,6 @@
 			}
 
 			this.containerWidth = (this.tileSize * numTiles) + (numTiles * 42);
-			//			console.log('numTiles: ', numTiles);
-			//			console.log('currWidth: ', currWidth);
-			//			console.log('this.containerWidth: ', this.containerWidth);
-			//			console.log('this.tileSize: ', this.tileSize);
-
 		},
 		data() {
 			return {
@@ -246,7 +241,7 @@
 				const that = this;
 				const sanitizedSkill = encodeURIComponent(skill.replace(' ', '_'));
 
-				axios.get(`https://crimsonsunset-portfolio.herokuapp.com/scrape?endPath=${sanitizedSkill}`)
+				axios.get(`${this.$endpoints.scrape}${sanitizedSkill}`)
 					.then(({data}) => {
 						this.pageInfo = data;
 						this.currSkill = skill;
@@ -258,17 +253,7 @@
 						wikiLink: 'https://en.wikipedia.org',
 						jokeLink: 'http://lmgtfy.com/?q=catch+block'
 					}
-				})
-
-				//				this.pageInfo = {
-				//					name: sanitizedSkill,
-				//					websiteUrl : 'https://www.google.com/',
-				//					definitionTxt : 'no definition available',
-				//					wikiLink : 'https://en.wikipedia.org',
-				//					jokeLink: 'http://lmgtfy.com/?q=catch+block'
-				//				}
-
-
+				});
 			}
 		}
 

@@ -80,7 +80,7 @@
 		props: ['endpoint', 'settingsObj'],
 		mounted() {
 			const {endpoint} = this;
-			axios.get(`https://crimsonsunset-portfolio.herokuapp.com/api/${endpoint}`)
+			axios.get(`${this.$endpoints.info}${endpoint}`)
 				.then(({data}) => {
 					this[endpoint] = data;
 					this.$forceUpdate();

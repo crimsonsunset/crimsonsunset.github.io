@@ -34,20 +34,6 @@ export default {
 		},
 	},
 }
-export function routeExporter(inObj) {
-	return {
-		...inObj,
-		beforeRouteEnter(to, from, next) {
-			console.log('aaaa')
-			next((vm) => {
-				if (vm.settingsObj.rememberLocation) {
-					vm.$store.set('location', vm.$route.path)
-				}
-			});
-		},
-	}
-}
-
 
 const animationNames = sortBy([
 	"bounce",

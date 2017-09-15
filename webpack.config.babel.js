@@ -1,6 +1,27 @@
 var path = require('path')
 var webpack = require('webpack')
 
+const LAUNCH_COMMAND = process.env.npm_lifecycle_event;
+const isProduction = LAUNCH_COMMAND === 'build';
+const buildInfoPlugin =
+	new webpack.DefinePlugin({
+		"build.info": {
+			version: JSON.stringify(require(path.resolve(__dirname, 'package.json')).version),
+			date: JSON.stringify(`${new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3")}`),
+			environment: JSON.stringify((isProduction) ? 'PRODUCTION' : 'DEVELOPMENT'),
+			name: JSON.stringify(require(path.resolve(__dirname, 'package.json')).name),
+		}
+	});
+
+const consoleRainbowPlugin =
+	new webpack.DefinePlugin({
+		'console.rainbow': function (color, input) {
+			console.log(`%c${input}`, `color:${color};`);
+		}
+	});
+
+console.log('isprod', isProduction)
+
 module.exports = {
 	entry: './src/main.js',
 	output: {
@@ -80,9 +101,12 @@ module.exports = {
 		// },
 
 	},
+	plugins: [consoleRainbowPlugin, buildInfoPlugin],
 	// performance: 'warning',
 	devtool: '#eval-source-map'
 }
+
+
 
 if (process.env.NODE_ENV === 'production') {
 	module.exports.devtool = '#source-map'
