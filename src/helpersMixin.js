@@ -19,7 +19,6 @@ export default {
 		},
 		getToken(key) {return tokens[key]},
 		emitEvent(event, payload) {
-			console.log('emitz', event, payload)
 			this.$emit(event, payload);
 		},
 		scrollToTop() {

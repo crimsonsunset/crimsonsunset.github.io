@@ -20,11 +20,14 @@ Object.defineProperty(Vue.prototype, '$store', {value: store});
 
 //set up the environment variables
 const {environment} = build.info;
+const localhostBase = 'http://localhost:3000/api/v1/';
+const remoteBase = 'https://crimsonsunset-portfolio.herokuapp.com/api/v1/';
+
 Object.defineProperty(Vue.prototype, '$env', {value: environment});
 Object.defineProperty(Vue.prototype, '$endpoints', {
 	value: {
-		info: (environment == "DEVELOPMENT")? 'http://localhost:3000/api/v1/info/': 'https://crimsonsunset-portfolio.herokuapp.com/api/v1/info/',
-		scrape: (environment == "DEVELOPMENT")? 'http://localhost:3000/api/v1/scrape/': 'https://crimsonsunset-portfolio.herokuapp.com/api/v1/scrape/'
+		info: (environment == "DEVELOPMENT")? `${localhostBase}info/`: `${remoteBase}info/`,
+		scrape: (environment == "DEVELOPMENT")? `${localhostBase}scrape/`: `${remoteBase}scrape/`
 	}
 });
 

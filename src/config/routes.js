@@ -18,8 +18,6 @@ const decoratedViews = mapValues(Views, (e, i) => {
     };
 });
 
-console.log(decoratedViews)
-
 export default [
     {
         path: '/',
