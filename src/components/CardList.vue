@@ -13,7 +13,7 @@
 
                 <v-card
                         transition="slide-x-transition"
-                        v-for="(item,i) in profileData[this.name]"
+                        v-for="(item,i) in this[this.name]"
                         flat light
                         :class="['mb-3',`${settingsObj.themeColor}--text`, `${settingsObj.themeColor} lighten-4`, 'text--darken-3', 'elevation-2']"
                         :key="item[item.key]"
@@ -26,17 +26,35 @@
                     <v-card-title primary-title>
 
 
-                        <div class="headline full-width">
+                        <v-layout fluid class="full-width black--text">
+                            <v-flex
+                                    mb-2
+                                    xs2>
+                                <v-avatar
+                                        :tile="true"
+                                        size="50px"
 
-                            <div v-if="isURL(item.title)">
-                                <a :href="`http://${item.title}`" target="_blank"> {{item.title}}</a>
-                            </div>
-                            <div v-else>
-                                {{item.title}}
-                            </div>
-                        </div>
+                                >
+                                    <img :src="item.img" alt="avatar">
+                                </v-avatar>
+                            </v-flex>
 
-                        <v-layout fluid class="full-width grey--text">
+                            <v-flex
+                                    xs10>
+                                <div class="headline">
+
+                                    <div v-if="isURL(item.title)">
+                                        <a :href="`http://${item.title}`" target="_blank"> {{item.title}}</a>
+                                    </div>
+                                    <div v-else>
+                                        {{item.title}}
+                                    </div>
+                                </div>
+                            </v-flex>
+                        </v-layout>
+
+
+                        <v-layout fluid class="full-width black--text">
                             <v-flex
                                     v-if="item.company"
                                     xs7>
@@ -97,23 +115,64 @@
 
 <script>
 
+	import axios from 'axios'
+
 	export default {
-		props: ['settingsObj', 'name', 'profileData'],
+		props: ['settingsObj', 'name'],
+		mounted() {
+			this.getInfo();
+		},
+        beforeUpdate(e){
+	        const {name} = this;
+	        if (!this[name]) {
+		        this.getInfo();
+	        }
+        },
 		data() {
 			return {
-				expandedItem: ''
+				expandedItem: '',
+				experience: '',
+				projects: ''
 			}
 		},
 		computed: {},
 		methods: {
 			toggleResumeCard(itemName) {
-				console.log('toggz', itemName, this)
+//				console.log('toggz', itemName, this)
 				if (itemName == this.expandedItem) {
 					this.expandedItem = '';
 				} else {
 					this.expandedItem = itemName;
 				}
-			}
+			},
+            getInfo(){
+
+	            const {name} = this;
+	            axios.get(`${this.$endpoints.info}${name}`)
+		            .then(({data}) => {
+			            let currExp = data;
+			            const splitNameArr = ['experience', 'projects'];
+
+			            splitNameArr.forEach((e, i) => {
+				            currExp.map((e2, i2) => {
+
+					            const splitDescription = (description) => {
+						            let descArr = description.split('•').slice(1);
+						            return descArr
+					            };
+
+					            e2.descArr = splitDescription(e2.description);
+					            e2.key = 'title';
+					            e2.img = `../src/assets/logos/${e2.logo.toLowerCase()}.png`
+					            return e2;
+				            });
+				            this[name] = currExp;
+			            });
+			            this.$forceUpdate();
+		            });
+
+
+            }
 		}
 
 	}

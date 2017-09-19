@@ -94,7 +94,7 @@
 			this.defaultSettings = {
 				themeColor: 'red',
 				animation: 'fadeInUp',
-				toTop: true,
+				toTop: false,
 				rememberSettings: false,
 				rememberLocation: false,
 			};

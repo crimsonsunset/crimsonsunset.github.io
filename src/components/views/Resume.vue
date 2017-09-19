@@ -6,8 +6,15 @@
         <v-container fluid class="mt-3 resume-view" >
 
             <card-list
-                    v-if="(currNavItem == 'Experience' || currNavItem == 'Projects') "
-                    :profileData='this.profileData'
+                    v-if="(currNavItem == 'Experience') "
+                    :settingsObj='settingsObj'
+                    :name="currNavItem.toLowerCase()"
+            >
+
+            </card-list>
+
+            <card-list
+                    v-if="(currNavItem == 'Projects') "
                     :settingsObj='settingsObj'
                     :name="currNavItem.toLowerCase()"
             >
@@ -15,7 +22,6 @@
             </card-list>
 
             <lazy-grid
-                    :nameArr='this.profileData.skills || []'
                     :settingsObj='settingsObj'
                     v-if="(currNavItem == 'Skills') "
             >
@@ -55,14 +61,14 @@
                     <v-btn
                             v-for="(item,i) in navItems"
                             flat light
-                            :class="[`${settingsObj.themeColor}--text`, 'text--lighten-2']"
+                            :class="[`${settingsObj.themeColor}--text`, 'text--darken-2']"
                             :key="item.name"
                             :id="`${item.name}`"
                             @click.native="(e)=>{toggleResumeNavItem(e.target.parentElement.id)}"
                             :value="item.name"
                     >
                         <span>{{item.name}}</span>
-                        <v-icon>{{item.icon}}</v-icon>
+                        <v-icon class="">{{item.icon}}</v-icon>
                     </v-btn>
 
                 </v-bottom-nav>

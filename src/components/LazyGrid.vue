@@ -176,27 +176,39 @@
 	import imagesLoaded from 'vue-images-loaded'
 
 	export default {
-		props: ['nameArr', 'settingsObj'],
+		props: ['settingsObj'],
 		directives: {
 			imagesLoaded
 		},
 		components: {isotope},
 		mounted() {
-			//math to calc correct tile/container size
-			const DEFAULT_TILE_WIDTH = 200;
-			const currWidth = window.innerWidth - 28; //account for padding
-			let numTiles;
+			const {endpoint} = this;
+			axios.get(`${this.$endpoints.info}skills`)
+				.then(({data}) => {
+					this.nameArr = data;
 
-			if (currWidth < 600) {
-				this.tileSize = currWidth / 3;
-				numTiles = 2;
-			} else {
-				this.tileSize = DEFAULT_TILE_WIDTH;
-				const offset = (currWidth > 1400) ? 2 : 1;
-				numTiles = Math.floor(currWidth / DEFAULT_TILE_WIDTH) - offset
-			}
+					//math to calc correct tile/container size
+					const DEFAULT_TILE_WIDTH = 200;
+					const currWidth = window.innerWidth - 28; //account for padding
+					let numTiles;
 
-			this.containerWidth = (this.tileSize * numTiles) + (numTiles * 42);
+					if (currWidth < 600) {
+						this.tileSize = currWidth / 3;
+						numTiles = 2;
+					} else {
+						this.tileSize = DEFAULT_TILE_WIDTH;
+						const offset = (currWidth > 1400) ? 2 : 1;
+						numTiles = Math.floor(currWidth / DEFAULT_TILE_WIDTH) - offset
+					}
+
+					this.containerWidth = (this.tileSize * numTiles) + (numTiles * 42);
+
+					this.$forceUpdate();
+				});
+
+
+
+
 		},
 		data() {
 			return {
@@ -213,6 +225,7 @@
 				],
 				currSkill: 'NA',
 				pageInfo: {},
+				nameArr: [],
 				tileSize: '',
 				containerWidth: '',
 				option: {}
