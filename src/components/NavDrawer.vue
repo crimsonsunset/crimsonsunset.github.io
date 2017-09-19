@@ -11,6 +11,21 @@
 
             v-model="localDrawer"
     >
+        <div
+                ref="animator"
+                :class="['loader', `loader--${settingsObj.themeColor}`, 'animation-example', 'loader-ball']"
+        >
+            <!--<v-flex-->
+                    <!--:class="['animation-example__body', `animated infinite ${settingsObj.animation}`, `${settingsObj.themeColor}`]"-->
+                    <!--&gt; </v-flex>-->
+
+            <v-icon
+                    :class="['animation-example__body', `${settingsObj.themeColor}--text`, `animated infinite ${settingsObj.animation}`]"
+            >{{`${getFunIcon()}`}}</v-icon>
+
+
+        </div>
+
         <v-toolbar class="transparent">
             <v-list class="pa-0">
                 <v-list-tile avatar tag="div">
@@ -80,7 +95,9 @@
                         class="controls"
                         label="Select An Animation"
                         v-bind:items="animations"
-                        @input="e => { emitEvent('updateConfigVal', {'animation': e}) }"
+                        @input="e => {
+                        	showAnimation();
+                        	emitEvent('updateConfigVal', {'animation': e}); }"
                         :hint="`Currently: ${settingsObj.animation}`"
 
                         single-line
@@ -141,7 +158,7 @@
 
 <script>
 
-	import {forEach, map, toArray} from 'lodash'
+	import {forEach, map, toArray, delay} from 'lodash'
 	import RouterLink from 'vue-router'
 	import routes from '../config/routes'
 	//
@@ -156,8 +173,11 @@
 			}
 		},
 		methods: {
-			settingsChange(e){
-				console.log('emizz', e)
+			showAnimation(e){
+				this.$refs.animator.classList.add('is-active');
+                delay(() => {
+	                this.$refs.animator.classList.remove('is-active');
+                },3000)
             }
         },
 		computed: {
@@ -192,10 +212,29 @@
         margin-top: 57px !important;
     }
 
-
-    /*.application--light .switch:not(.input-group--dirty) .input-group--selection-controls__container{*/
-        /*color: red !important;*/
-    /*}*/
+    .animation-example{
+        display: flex;
+        align-items: center;
+        &:after{
+            content: none;
+        }
+        &:after, &:before{
+            content: none;
+            /*animation: none ;*/
+            animation-name: flipInX;
+            animation-iteration-count: infinite;
+        }
+        &__body{
+            /*height: 100px;*/
+            /*width: 100px;*/
+            /*border: 2px solid purple;*/
+            margin: 0 auto;
+            margin-top: -50px;
+            font-size: 80px !important;
+            /*border-radius: 60px;*/
+            /*background-color: purple;*/
+        }
+    }
 
 
 </style>

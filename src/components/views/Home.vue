@@ -62,6 +62,7 @@
 
         </v-flex>
 
+
         <!--<v-parallax-->
         <!--src="http://media.advance.net/newyorkupstatecom_national_desk_blog/photo/2016/08/24/suny-binghamton-university-4c06049fab09a429.jpg"-->
         <!--jumbotron-->

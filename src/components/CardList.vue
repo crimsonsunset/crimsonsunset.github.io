@@ -29,7 +29,9 @@
                         <v-layout fluid class="full-width black--text">
                             <v-flex
                                     mb-2
-                                    xs2>
+                                    xs2
+                                    md1
+                            >
                                 <v-avatar
                                         :tile="true"
                                         size="50px"
@@ -40,13 +42,18 @@
                             </v-flex>
 
                             <v-flex
+                                    md11
+                                    pl-2
                                     xs10>
                                 <div class="headline">
 
-                                    <div v-if="isURL(item.title)">
+                                    <div
+                                            class="headline__text"
+                                            v-if="isURL(item.title)">
                                         <a :href="`http://${item.title}`" target="_blank"> {{item.title}}</a>
                                     </div>
-                                    <div v-else>
+                                    <div class="headline__text"
+                                            v-else>
                                         {{item.title}}
                                     </div>
                                 </div>
@@ -122,12 +129,12 @@
 		mounted() {
 			this.getInfo();
 		},
-        beforeUpdate(e){
-	        const {name} = this;
-	        if (!this[name]) {
-		        this.getInfo();
-	        }
-        },
+		beforeUpdate(e) {
+			const {name} = this;
+			if (!this[name]) {
+				this.getInfo();
+			}
+		},
 		data() {
 			return {
 				expandedItem: '',
@@ -138,41 +145,45 @@
 		computed: {},
 		methods: {
 			toggleResumeCard(itemName) {
-//				console.log('toggz', itemName, this)
+				//				console.log('toggz', itemName, this)
 				if (itemName == this.expandedItem) {
 					this.expandedItem = '';
 				} else {
 					this.expandedItem = itemName;
 				}
 			},
-            getInfo(){
+			getInfo() {
 
-	            const {name} = this;
-	            axios.get(`${this.$endpoints.info}${name}`)
-		            .then(({data}) => {
-			            let currExp = data;
-			            const splitNameArr = ['experience', 'projects'];
+				const {name} = this;
+				axios.get(`${this.$endpoints.info}${name}`)
+					.then(({data}) => {
+						let currExp = data;
+						const splitNameArr = ['experience', 'projects'];
 
-			            splitNameArr.forEach((e, i) => {
-				            currExp.map((e2, i2) => {
+						splitNameArr.forEach((e, i) => {
+							currExp.map((e2, i2) => {
 
-					            const splitDescription = (description) => {
-						            let descArr = description.split('•').slice(1);
-						            return descArr
-					            };
+								const splitDescription = (description) => {
+									let descArr = description.split('•').slice(1);
+									return descArr
+								};
 
-					            e2.descArr = splitDescription(e2.description);
-					            e2.key = 'title';
-					            e2.img = `../src/assets/logos/${e2.logo.toLowerCase()}.png`
-					            return e2;
-				            });
-				            this[name] = currExp;
-			            });
-			            this.$forceUpdate();
-		            });
+								e2.descArr = splitDescription(e2.description);
+								e2.key = 'title';
+								e2.img = `../src/assets/logos/${e2.logo.toLowerCase()}.png`
+								return e2;
+							});
+							this[name] = currExp;
+
+							//remove loader
+							this.settingsObj.isLoaded = true;
+							this.settingsObj.loaderRef.classList.remove('is-active');
+						});
+						this.$forceUpdate();
+					});
 
 
-            }
+			}
 		}
 
 	}
@@ -181,16 +192,20 @@
 
 <style lang="scss">
 
-    .card-list{
-        .headline{
+    .card-list {
+        .headline {
             margin-bottom: 5px;
+            &__text{
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
         }
 
         .card__title--primary {
             padding-top: 10px;
 
         }
-        .card__actions{
+        .card__actions {
             padding: 0;
             padding-bottom: 5px;
         }
@@ -199,5 +214,15 @@
     .description-text {
         margin-top: -20px;
     }
+
+    @media only screen and (max-width: 400px) {
+
+        .headline__text {
+            padding-left: 20px;
+            font-size: 18px;
+        }
+    }
+
+
 
 </style>

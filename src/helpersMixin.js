@@ -1,4 +1,4 @@
-import {get, sortBy} from 'lodash'
+import {get, sortBy, sample} from 'lodash'
 import tokens from './config/tokens.json'
 
 export default {
@@ -11,6 +11,32 @@ export default {
 		},
 		getAnimationNames() {
 			return animationNames;
+		},
+		getFunIcon() {
+			return sample([
+				'android',
+				'bug_report',
+				'favorite',
+				'important_devices',
+				'language',
+				'thumb_up',
+				'trending_up',
+				'games',
+				'ring_volume',
+				'vpn_key',
+				'monetization_on',
+				'insert_emoticon',
+				'toys',
+				'videogame_asset',
+				'directions_run',
+				'local_drink',
+				'local_hotel',
+				'local_pizza',
+				'airline_seat_legroom_reduced',
+				'fitness_center',
+				'ac_unit',
+				'star',
+			]);
 		},
 		isURL(str) {
 			const expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;

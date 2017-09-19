@@ -146,7 +146,10 @@
 							imgInd: 0
 						};
 					});
-					this.$forceUpdate()
+					//remove loader
+					this.settingsObj.isLoaded = true;
+					this.settingsObj.loaderRef.classList.remove('is-active');
+					this.$forceUpdate();
 //					console.log(this[endpoint])
 				});
 //			console.log('mounted', mousewheelEvent)

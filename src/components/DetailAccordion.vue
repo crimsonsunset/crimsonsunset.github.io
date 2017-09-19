@@ -83,6 +83,9 @@
 			axios.get(`${this.$endpoints.info}${endpoint}`)
 				.then(({data}) => {
 					this[endpoint] = data;
+					//remove loader
+					this.settingsObj.isLoaded = true;
+					this.settingsObj.loaderRef.classList.remove('is-active');
 					this.$forceUpdate();
 				});
 		},

@@ -5,6 +5,13 @@
 
         <v-container fluid class="mt-3 resume-view" >
 
+            <div
+                    ref="loader"
+                    :class="['loader', `loader--${settingsObj.themeColor}`, 'loader-bar-ping-pong', `${getActiveStatus()}`]"
+                    >
+
+            </div>
+
             <card-list
                     v-if="(currNavItem == 'Experience') "
                     :settingsObj='settingsObj'
@@ -92,25 +99,29 @@
 		props: ['settingsObj'],
 		components: {CardList, LazyGrid, DetailAccordion, ParallaxCardList},
 		mounted() {
-			const splitNameArr = ['experience', 'projects'];
+//			const splitNameArr = ['experience', 'projects'];
+//
+//			splitNameArr.forEach((e, i) => {
+//				let currExp = profileData[e];
+//				currExp.map((e2, i2) => {
+//
+//					const splitDescription = (description) => {
+//						let descArr = description.split('•').slice(1);
+//						//					descArr = descArr.map((e) => `•${e}`).slice(1);
+//						return descArr
+//					};
+//
+//					e2.descArr = splitDescription(e2.description);
+//					e2.key = 'title';
+//					return e2;
+//				});
+//				//				profileData[currExp] = currExp;
+//				this.profileData = profileData;
+//			});
 
-			splitNameArr.forEach((e, i) => {
-				let currExp = profileData[e];
-				currExp.map((e2, i2) => {
+//            console.log('moutnzz', this.$refs)
+            this.settingsObj.loaderRef = this.$refs.loader
 
-					const splitDescription = (description) => {
-						let descArr = description.split('•').slice(1);
-						//					descArr = descArr.map((e) => `•${e}`).slice(1);
-						return descArr
-					};
-
-					e2.descArr = splitDescription(e2.description);
-					e2.key = 'title';
-					return e2;
-				});
-				//				profileData[currExp] = currExp;
-				this.profileData = profileData;
-			});
 		},
 		data() {
 			return {
@@ -145,7 +156,10 @@
 		methods: {
 			toggleResumeNavItem(itemName) {
 				this.currNavItem = itemName;
-			}
+			},
+            getActiveStatus(){
+	            return (!this.settingsObj.isLoaded) ? 'is-active' : '';
+            }
 		}
 	})
 
@@ -155,6 +169,14 @@
 
     $resumeHeight: 88vh !important;
     $bw: 2px;
+    @import "../../styles/colors";
+
+    //to style the loading bar themes
+    @each $value in $colors {
+        .loader--#{map-get($value, 'color')}:after{
+            background-color: #{map-get($value, hexValue)} !important;
+        }
+    }
 
     .border {
         border: $bw solid green;
