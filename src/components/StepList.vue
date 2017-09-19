@@ -99,6 +99,8 @@
 					});
 					delay(() => {
 						this.currStep = 1;
+						this.settingsObj.isLoaded = true;
+						this.settingsObj.loaderRef.classList.remove('is-active');
 						this.$forceUpdate()
 					}, 400)
 
@@ -106,8 +108,6 @@
 
 
 		},
-//		mounted() {
-//		},
 		data() {
 			return {
 				currStep: -1,

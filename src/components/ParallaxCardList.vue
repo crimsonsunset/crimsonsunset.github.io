@@ -198,35 +198,29 @@
 				}else if (evt.changedTouches){
 					delta = lastTouch - evt.changedTouches[0].clientY;
 					lastTouch = evt.changedTouches[0].clientY;
-					isMobile = true;
+					if (Math.sign(delta) == -1) {
+						this.previousItem();
+						return
+					}else{
+						this.nextItem();
+						return
+                    }
                 }
 				else {
 					delta = evt.wheelDelta;
 				}
-//				console.log('parazz', ticking, delta);
 
 				if (ticking != true) {
 					if (delta <= -scrollSensitivitySetting) {
-
-						//Down scroll
-						ticking = true;
-						if (currentSlideNumber !== totalSlideNumber - 1) {
-							currentSlideNumber++;
-							this.nextItem();
-						}
-						this.slideDurationTimeout(slideDurationSetting);
+						this.nextItem();
 					}
 					if (delta >= scrollSensitivitySetting ) {
-
-						//Up scroll
-						ticking = true;
-						if (currentSlideNumber !== 0) {
-							currentSlideNumber--;
-						}
 						this.previousItem();
-						this.slideDurationTimeout(slideDurationSetting);
 					}
 				}
+
+
+
 			},60),
 			slideDurationTimeout(slideDuration) {
 				// ------------- SET TIMEOUT TO TEMPORARILY "LOCK" SLIDES ------------- //
@@ -237,19 +231,36 @@
 			nextItem() {
 //				console.log('next item')
 				// ------------- SLIDE MOTION ------------- //
+
+				//Down scroll
+				ticking = true;
+				if (currentSlideNumber !== totalSlideNumber - 1) {
+					currentSlideNumber++;
+
+				}
+
 				let previousSlide = document.querySelectorAll(".background")[currentSlideNumber - 1];
 
 				if (previousSlide) {
 					previousSlide.classList.remove('up-scroll');
 					previousSlide.classList.add("down-scroll");
 				}
+				this.slideDurationTimeout(slideDurationSetting);
 			},
 			previousItem() {
+				//Up scroll
+				ticking = true;
+				if (currentSlideNumber !== 0) {
+					currentSlideNumber--;
+				}
+
 				let currentSlide = document.querySelectorAll(".background")[currentSlideNumber];
 				if (currentSlide) {
 					currentSlide.classList.remove('down-scroll');
 					currentSlide.classList.add("up-scroll");
 				}
+
+				this.slideDurationTimeout(slideDurationSetting);
 
 			}
 

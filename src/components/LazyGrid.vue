@@ -202,6 +202,8 @@
 					}
 
 					this.containerWidth = (this.tileSize * numTiles) + (numTiles * 42);
+					this.settingsObj.isLoaded = true;
+					this.settingsObj.loaderRef.classList.remove('is-active');
 
 					this.$forceUpdate();
 				});

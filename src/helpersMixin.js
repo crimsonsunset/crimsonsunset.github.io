@@ -57,6 +57,9 @@ export default {
 					else clearInterval(scrollInterval);
 				}, 15);
 		},
+		getActiveStatus(){
+			return (!this.settingsObj.isLoaded) ? 'is-active' : '';
+		}
 	},
 }
 

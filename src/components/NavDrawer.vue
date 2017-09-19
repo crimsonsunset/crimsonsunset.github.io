@@ -225,14 +225,9 @@
             animation-iteration-count: infinite;
         }
         &__body{
-            /*height: 100px;*/
-            /*width: 100px;*/
-            /*border: 2px solid purple;*/
             margin: 0 auto;
             margin-top: -50px;
             font-size: 80px !important;
-            /*border-radius: 60px;*/
-            /*background-color: purple;*/
         }
     }
 

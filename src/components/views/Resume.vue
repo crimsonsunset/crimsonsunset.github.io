@@ -9,7 +9,6 @@
                     ref="loader"
                     :class="['loader', `loader--${settingsObj.themeColor}`, 'loader-bar-ping-pong', `${getActiveStatus()}`]"
                     >
-
             </div>
 
             <card-list
@@ -99,29 +98,7 @@
 		props: ['settingsObj'],
 		components: {CardList, LazyGrid, DetailAccordion, ParallaxCardList},
 		mounted() {
-//			const splitNameArr = ['experience', 'projects'];
-//
-//			splitNameArr.forEach((e, i) => {
-//				let currExp = profileData[e];
-//				currExp.map((e2, i2) => {
-//
-//					const splitDescription = (description) => {
-//						let descArr = description.split('•').slice(1);
-//						//					descArr = descArr.map((e) => `•${e}`).slice(1);
-//						return descArr
-//					};
-//
-//					e2.descArr = splitDescription(e2.description);
-//					e2.key = 'title';
-//					return e2;
-//				});
-//				//				profileData[currExp] = currExp;
-//				this.profileData = profileData;
-//			});
-
-//            console.log('moutnzz', this.$refs)
             this.settingsObj.loaderRef = this.$refs.loader
-
 		},
 		data() {
 			return {
@@ -156,10 +133,7 @@
 		methods: {
 			toggleResumeNavItem(itemName) {
 				this.currNavItem = itemName;
-			},
-            getActiveStatus(){
-	            return (!this.settingsObj.isLoaded) ? 'is-active' : '';
-            }
+			}
 		}
 	})
 
@@ -171,12 +145,6 @@
     $bw: 2px;
     @import "../../styles/colors";
 
-    //to style the loading bar themes
-    @each $value in $colors {
-        .loader--#{map-get($value, 'color')}:after{
-            background-color: #{map-get($value, hexValue)} !important;
-        }
-    }
 
     .border {
         border: $bw solid green;

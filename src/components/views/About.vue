@@ -4,6 +4,12 @@
             mt-1
     >
 
+        <div
+                ref="loader"
+                :class="['loader', `loader--${settingsObj.themeColor}`, 'loader-bar-ping-pong', `${getActiveStatus()}`]"
+        >
+        </div>
+
         <v-layout row wrap>
 
             <step-list
@@ -26,10 +32,12 @@
 	export default routeExporter({
 		components: {StepList},
 		props: ['settingsObj'],
+		mounted() {
+			this.settingsObj.loaderRef = this.$refs.loader
+		},
         data() {
 			return {}
-		},
-
+		}
 	})
 
 

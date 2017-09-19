@@ -1,11 +1,11 @@
 <template>
     <v-container
             class="home-page"
-            fluid mt-4>
-        <v-flex xs12 md6 offset-md3>
+            fluid>
+        <v-flex
+                class="home-page__content"
+                xs12 md6 offset-md3>
             <h1 class="home-page__hello"> Hi, I'm Joe.</h1>
-
-            <!--{{this.items}}-->
 
             <v-carousel
                     cycle
@@ -16,9 +16,6 @@
                     ref="home-carousel"
                     id="home-carousel"
             >
-
-                <!--{{sliderData}}-->
-
 
                 <v-carousel-item
                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -61,33 +58,6 @@
             </div>
 
         </v-flex>
-
-
-        <!--<v-parallax-->
-        <!--src="http://media.advance.net/newyorkupstatecom_national_desk_blog/photo/2016/08/24/suny-binghamton-university-4c06049fab09a429.jpg"-->
-        <!--jumbotron-->
-        <!--&gt;</v-parallax>-->
-
-        <!--<v-alert info-->
-        <!--transition="scale-transition"-->
-        <!--value="true">-->
-        <!--This is a info alert.-->
-        <!--</v-alert>-->
-
-
-        <!--<v-layout row wrap>-->
-        <!--<v-flex xs8 offset-xs2 mt-3>-->
-        <!--<v-card-->
-        <!--:class="[themeColor, 'white&#45;&#45;text', 'home-page__cta']"-->
-        <!--&gt;-->
-        <!--<v-card-title primary-title>-->
-        <!--<div class="headline">Click on the menu to get started!</div>-->
-
-        <!--</v-card-title>-->
-        <!--</v-card>-->
-        <!--</v-flex>-->
-        <!--</v-layout>-->
-
 
     </v-container>
 </template>
@@ -171,6 +141,13 @@
 
 
     .home-page {
+
+        display: flex;
+        align-items: center;
+
+        &__content{
+            margin-top: -5vh;
+        }
 
         &__hello, &__cta .headline {
             text-align: center;
