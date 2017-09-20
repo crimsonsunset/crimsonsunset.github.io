@@ -53,9 +53,7 @@
                 </v-stepper-content>
             </template>
 
-
         </v-stepper>
-
 
     </v-flex>
 

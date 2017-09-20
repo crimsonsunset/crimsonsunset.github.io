@@ -16,7 +16,6 @@ Vue.use(VueRouter);
 
 const helpersMixin = Vue.mixin(helpers.default);
 Vue.mixin(helpersMixin);
-Object.defineProperty(Vue.prototype, '$store', {value: store});
 
 //set up the environment variables
 const {environment} = build.info;
@@ -26,10 +25,13 @@ const remoteBase = 'https://crimsonsunset-portfolio.herokuapp.com/api/v1/';
 Object.defineProperty(Vue.prototype, '$env', {value: environment});
 Object.defineProperty(Vue.prototype, '$endpoints', {
 	value: {
+		base: (environment == "DEVELOPMENT")? `${localhostBase}`: `${remoteBase}`,
 		info: (environment == "DEVELOPMENT")? `${localhostBase}info/`: `${remoteBase}info/`,
 		scrape: (environment == "DEVELOPMENT")? `${localhostBase}scrape/`: `${remoteBase}scrape/`
 	}
 });
+//add a localStorage store
+Object.defineProperty(Vue.prototype, '$store', {value: store});
 
 const router = new VueRouter({
 	mode: 'history',
@@ -38,12 +40,6 @@ const router = new VueRouter({
 
 //stamp the build
 printBuildInfo();
-
-// router.afterEach((to, from, next) => {
-// 	console.log(to)
-// 	console.log(this)
-// 	// next();
-// })
 
 const main = new Vue({
 	el: '#app',

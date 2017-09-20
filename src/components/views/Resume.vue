@@ -64,6 +64,9 @@
                         :active.sync="currNavItem"
                         class="white"
                 >
+
+
+
                     <v-btn
                             v-for="(item,i) in navItems"
                             flat light

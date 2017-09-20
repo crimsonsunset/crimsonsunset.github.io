@@ -40,7 +40,13 @@
         </v-toolbar>
         <v-list class="pt-0">
             <v-divider></v-divider>
-            <v-list-tile v-for="item in items" :key="item.label">
+            <v-list-tile
+                    v-for="item in items"
+                    :key="item.label"
+                    @click="()=>{
+                    	openLink(item.path, true);
+                    }"
+            >
                 <v-list-tile-action>
                     <v-icon
                             :class="[`${settingsObj.themeColor}--text`, 'text--lighten-1']"
@@ -178,7 +184,7 @@
                 delay(() => {
 	                this.$refs.animator.classList.remove('is-active');
                 },3000)
-            }
+            },
         },
 		computed: {
 			localDrawer: {

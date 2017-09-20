@@ -1,14 +1,16 @@
 <template>
-
-
     <transition
 
             name="custom-classes-transition"
             :enter-active-class="`animated ${settingsObj.animation}`"
     >
-
-
         <v-layout row wrap class="masonry-container" :style="{width: `${containerWidth}px`}">
+
+            <div
+                    ref="skillLoader"
+                    :class="['loader', `loader--${settingsObj.themeColor}`, 'loader-bar-ping-pong']"
+            >
+            </div>
 
 
             <v-flex xs12>
@@ -18,7 +20,6 @@
                     <v-btn
                             :class="[`${settingsObj.themeColor}`, 'darken-2', `white--text`]"
                             @click.native="shuffleGrid"
-
                     >
                         Shuffle!
                     </v-btn>
@@ -248,14 +249,12 @@
 			shuffleGrid() {
 				this.$refs.grid.shuffle();
 			},
-			openLink(link) {
-				window.open(link)
-			},
 			skillClicked(skill) {
-				console.log('skill clickedzz', skill);
+//				console.log('skill clickedzz', skill);
 				const that = this;
 				const sanitizedSkill = encodeURIComponent(skill.replace(' ', '_'));
 
+				this.$refs.skillLoader.classList.add('is-active');
 				axios.get(`${this.$endpoints.scrape}${sanitizedSkill}`)
 					.then(({data}) => {
 						this.pageInfo = data;
@@ -268,6 +267,8 @@
 						wikiLink: 'https://en.wikipedia.org',
 						jokeLink: 'http://lmgtfy.com/?q=catch+block'
 					}
+				}).then(() => {
+					this.$refs.skillLoader.classList.remove('is-active');
 				});
 			}
 		}

@@ -1,5 +1,11 @@
 <template>
     <v-layout row justify-center>
+
+        <a
+                ref="mailLink"
+                hidden
+                target="_blank" href="mailto:joe@joesangiorgio.com?"></a>
+
         <v-dialog v-model="isOpen" persistent>
             <v-card>
                 <v-card-title>
@@ -10,6 +16,11 @@
 
                     <v-text-field
                             autofocus
+                            label="Name"
+                            :rules="[rules.required]"
+                            v-model="contactInfo.name"
+                    ></v-text-field>
+                    <v-text-field
                             label="E-mail"
                             v-model="contactInfo.email"
                             :rules="[rules.email]"
@@ -39,9 +50,7 @@
                     ></v-text-field>
 
                     <v-text-field
-                            label="Body"
-                            required
-                            :rules="[rules.required]"
+                            label="Body [leave blank for templated]"
                             v-model.trim="contactInfo.body"
                     ></v-text-field>
 
@@ -52,7 +61,7 @@
                     <v-btn class="blue--text darken-1" flat @click.stop="()=>emitEvent('toggleForm')">Close</v-btn>
                     <v-btn class="blue--text darken-1"
                            :disabled="(!isFormValid())"
-                           flat @click.stop="sendForm()">Send
+                           flat @click.stop="sendForm()">Send (In a New Tab)
                     </v-btn>
                 </v-card-actions>
             </v-card>
@@ -64,9 +73,6 @@
 <script>
 
 	import {sortBy, every, values, omit} from 'lodash'
-	import axios from 'axios';
-
-//	axios.defaults.headers.common['Authorization'] = 'a591d32795940eb0fb84c81c28490aac8c8215bd'
 
 	export default {
 		props: ['isOpen'],
@@ -77,9 +83,10 @@
 					contactReasons: '',
 					subject: '',
 					body: '',
+					name: '',
 				},
 				emailErrorText: 'Invalid e-mail.',
-				optionalFields: ['phone'],
+				optionalFields: ['phone', 'body'],
 				contactReasons: sortBy(['Job Inquiry', 'Contract Inquiry', 'Side Project', 'After Hours Work', 'Tutoring/Teaching', 'RateThatTruck', 'Funzies!']),
 				rules: {
 					required: (value) => {
@@ -100,80 +107,29 @@
 
 				//remove optionalFields, then check that every key has a value
 				const validFields = every(values(omit(contactInfo, optionalFields)), (e) => e != '');
-				//                return validEmail && validFields;
-				return true;
+				return validEmail && validFields;
+				//				return true;
 			},
 			sendForm() {
-				const {body, email, contactReasons, subject} = this.contactInfo;
+				let {body, email, contactReasons, subject, phone, name} = this.contactInfo;
 
+				const bodyTemplate =
+					`Hello, Joe! My name is ${name} [${email}] and I am interested in reaching out to you.
+				Specifically, I would like to ask about ${contactReasons.join(',')}.
+				${(phone)? 'You can reach me at: ' + phone: ''}
+				I look forward to hearing from you soon.
 
-				const data = {
-					"options": {
-						"sandbox": true
-					},
-					recipients: [{"address": "jsangio1@gmail.com"}],
-					content: {
-						"from": "sandbox@sparkpostbox.com",
-						subject,
-						"text": body
-					}
-				}
+				Regards,
+				-${name}`;
 
-//				const headers = {
-//					"Access-Control-Allow-Credentials": true,
-////					"Access-Control-Max-Age": 1728000,
-//					"Authorization": "a591d32795940eb0fb84c81c28490aac8c8215bd",
-//					"Content-Type": "application/json",
-//					"cache-control": "no-cache",
-//				};
-//
-//
-//				console.log(headers)
-////				var instance = axios.create({
-////					headers
-////				});
-//
-//
-//				axios.get('https://api.sparkpost.com/api/v1/transmissions', {
-//					headers
-//				});
+				body = (body) ? body : bodyTemplate;
 
+				const fullStr = `&body=${encodeURIComponent(body)}&subject=${subject}`;
 
-//				instance({
-//					method: 'post',
-//					url: 'https://api.sparkpost.com/api/v1/transmissions',
-//					data,
-//					//                    data2:{
-//					//                        "options": {
-//					//                            "sandbox": true
-//					//                        },
-//					//                        "content": {
-//					//                            "from": "sandbox@sparkpostbox.com",
-//					//                            "subject": "Thundercats arsdfdse GO!!!",
-//					//                            "text": "Sword of Omens, give me dfdfdfsight BEYOND sight"
-//					//                        },
-//					//                        "recipients": [{ "address": "jsangio1@gmail.com" }]
-//					//                    }
-//					//                    headers: {
-//					////                        "Access-Control-Allow-Credentials": true,
-//					////                        "Access-Control-Max-Age": 1728000,
-//					////                        "Authorization": "a591d32795940eb0fb84c81c28490aac8c8215bd",
-//					////                        "Content-Type": "application/json",
-//					////                        "cache-control": "no-cache",
-//					//                    }
-//				})
-//					.then((response) => {
-//						const values = response.data.data;
-//						context.values = values;
-//						dispatch(notification('', true))
-//						dispatch(actions.valuesLoaded(objectType, response.data.data));
-//						context.forceUpdate();
-//					})
-//					.catch((error) => {
-//						context.values = [];
-//						context.forceUpdate();
-//						return errorHappened(error, objectType, dispatch, actions);
-//					});
+				let {mailLink} = this.$refs;
+				mailLink.href += fullStr;
+				mailLink.click();
+				mailLink.href = 'mailto:joe@joesangiorgio.com?';
 			}
 		}
 	}

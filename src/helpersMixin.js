@@ -59,6 +59,14 @@ export default {
 		},
 		getActiveStatus(){
 			return (!this.settingsObj.isLoaded) ? 'is-active' : '';
+		},
+		openLink(link, stay){
+			if (stay) {
+				this.$router.push(link)
+			} else {
+				window.open(link)
+			}
+
 		}
 	},
 }

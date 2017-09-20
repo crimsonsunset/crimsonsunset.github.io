@@ -33,8 +33,10 @@
                                     md1
                             >
                                 <v-avatar
+                                        v-tooltip:right="{ html: 'Right tooltip' }"
                                         :tile="true"
                                         size="50px"
+                                        ref="joe"
 
                                 >
                                     <img :src="item.img" alt="avatar">
@@ -127,6 +129,8 @@
 	export default {
 		props: ['settingsObj', 'name'],
 		mounted() {
+			console.log('this')
+			console.log(this)
 			this.getInfo();
 		},
 		beforeUpdate(e) {
@@ -170,7 +174,7 @@
 
 								e2.descArr = splitDescription(e2.description);
 								e2.key = 'title';
-								e2.img = `../src/assets/logos/${e2.logo.toLowerCase()}.png`
+								e2.img = `../src/assets/logos/${e2.logo.toLowerCase()}.png`;
 								return e2;
 							});
 							this[name] = currExp;

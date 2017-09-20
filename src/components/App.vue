@@ -67,7 +67,36 @@
                 fixed
                 :class="['pa-3',settingsObj.themeColor, 'darken-4', 'footer']"
         >
+
+            <div
+            class="icon-holder"
+            >
+                <v-avatar
+                        @click="openLink('https://github.com/crimsonsunset')"
+                        :tile="false"
+                        size="50px"
+                        :class="['icon', 'social']"
+                >
+
+                    <img :src="iconGithub"/>
+
+                </v-avatar>
+
+                <v-avatar
+                        @click="openLink('https://www.linkedin.com/in/josephsangiorgio/')"
+                        :tile="true"
+                        size="50px"
+                        :class="['icon', 'social']"
+                >
+
+                    <img :src="iconLinkedin"/>
+
+                </v-avatar>
+            </div>
+
             <v-spacer></v-spacer>
+
+
             <div>Joe Sangiorgio © {{ new Date().getFullYear() }}</div>
         </v-footer>
 
@@ -86,6 +115,9 @@
 	import NavBar from './NavBar.vue'
 	import RouterView from 'vue-router'
 
+	const iconGithub = require('../assets/icons/github.svg');
+	const iconLinkedin = require('../assets/icons/linkedin.svg');
+
 
 	export default {
 		components: {NavDrawer, NavBar},
@@ -100,11 +132,11 @@
 			};
 			this.settingsObj = (this.$store.get('settings') || {});
 
-//            console.log(this)
-            //navigate to last page if you're on homePage
+			//            console.log(this)
+			//navigate to last page if you're on homePage
 			const {rememberLocation} = this.settingsObj;
 			if (rememberLocation) {
-//				console.log('about to', rememberLocation)
+				//				console.log('about to', rememberLocation)
 				this.$router.push(this.$store.get('location'));
 			}
 		},
@@ -115,7 +147,8 @@
 					...this.defaultSettings,
 					...this.settingsObj,
 				},
-
+				iconGithub,
+				iconLinkedin,
 				drawer: false
 			}
 		},
@@ -132,8 +165,7 @@
 				if (state != this.drawer) {
 					this.drawer = state || !this.drawer;
 				}
-			}
-			,
+			},
 			updateConfigVal(payload) {
 				const firstKey = keys(payload)[0];
 
@@ -178,7 +210,7 @@
 
 <style lang="scss">
 
-    $minHeight: 89vh !important;
+    $minHeight: 90vh !important;
 
     .info-accordion {
         background-color: white;
@@ -200,6 +232,16 @@
     .footer {
         color: white;
         height: 5vh;
+
+
+        .icon-holder{
+            margin-left: -10px;
+        }
+        .social {
+            filter: invert(100%);
+            height: 3vh !important;
+            cursor: pointer;
+        }
     }
 
     .full-width {

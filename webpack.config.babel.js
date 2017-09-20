@@ -58,9 +58,14 @@ module.exports = {
 				// 	presets: ['es2015', 'stage-0']
 				// }
 			},
+			// {
+			// 	test: /\.svg$/,
+			// 	loader: 'file-loader'
+			// },
 			{
-				test: /\.(eot|svg|ttf|woff|woff2)$/,
-				loader: 'file?name=/public/fonts/[name].[ext]'
+				test: /\.(eot|ttf|woff|woff2)$/,
+				// loader: 'file?name=/public/fonts/[name].[ext]',
+				loaders: ['url-loader']
 			},
 			{
 				test: /\.scss$/,

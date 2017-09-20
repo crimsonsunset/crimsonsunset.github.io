@@ -18,7 +18,6 @@
 
             <v-container
                     grid-list-md
-                    @click="(e)=>{nextImg(i)}"
             >
 
                 <v-layout row wrap class="content-wrapper">
@@ -37,7 +36,8 @@
                                     <v-avatar
                                             :tile="false"
                                             size="100px"
-
+                                            class="elevation-15"
+                                            @click="(e)=>{nextImg(i)}"
                                     >
                                         <img :src="item.img" alt="avatar">
                                     </v-avatar>
@@ -310,7 +310,6 @@
         position: fixed;
         width: 100%;
         transform: translateY($parallax-offset);
-        cursor: pointer;
         @include transition($transition-speed, all, cubic-bezier(0.22, 0.44, 0, 1));
         &:before {
             content: "";
@@ -336,6 +335,10 @@
         }
         &:nth-child(3) {
             /*background-image: url("https://i.redd.it/4vqygabli4mx.jpg");*/
+        }
+
+        .avatar{
+            cursor: pointer;
         }
     }
 
