@@ -7,6 +7,7 @@
     >
 
         <nav-drawer
+
                 :colors='colors'
                 :animations='animations'
 
@@ -15,6 +16,7 @@
 
                 v-on:toggleDrawer="toggleDrawer"
                 v-on:updateConfigVal="updateConfigVal"
+                v-on:startTour="startTour()"
         ></nav-drawer>
 
 
@@ -64,12 +66,13 @@
 
 
         <v-footer
+
                 fixed
                 :class="['pa-3',settingsObj.themeColor, 'darken-4', 'footer']"
         >
 
             <div
-            class="icon-holder"
+                    class="icon-holder"
             >
                 <v-avatar
                         @click="openLink('https://github.com/crimsonsunset')"
@@ -114,6 +117,7 @@
 	import NavDrawer from './NavDrawer.vue'
 	import NavBar from './NavBar.vue'
 	import RouterView from 'vue-router'
+	import {introJs} from 'intro.js'
 
 	const iconGithub = require('../assets/icons/github.svg');
 	const iconLinkedin = require('../assets/icons/linkedin.svg');
@@ -126,6 +130,7 @@
 			this.defaultSettings = {
 				themeColor: 'red',
 				animation: 'fadeInUp',
+				showInfo: true,
 				toTop: false,
 				rememberSettings: false,
 				rememberLocation: false,
@@ -140,7 +145,11 @@
 				this.$router.push(this.$store.get('location'));
 			}
 		},
-
+		mounted() {
+			if (!this.$store.get('tourFinished')) {
+				this.startTour();
+			}
+		},
 		data() {
 			return {
 				settingsObj: {
@@ -161,6 +170,92 @@
 			},
 		},
 		methods: {
+			startTour() {
+				console.log('about to start tour')
+
+				//todo: remove
+				this.$router.push('/');
+
+
+				//since this app uses a UI toolkit, don't have direct access to all of the HTML.
+				// Instead, have to inject tags by selecting, which is obviously less than ideal.
+				const intro = introJs();
+				const that = this;
+				intro.setOptions({
+					showBullets: false,
+					showProgress: true,
+					hidePrev: true,
+					overlayOpacity: 0.4,
+					steps: [
+						{
+							intro: "Welcome to My Portfolio Site!"
+						},
+						{
+							element: $('.toolbar__side-icon'),
+							intro: "Click here to access the menu.",
+							highlightClass: 'tour__step--2h',
+							beforeNextStep() {
+								if (!that.drawer) {
+									$('.toolbar__side-icon').click();
+								}
+							}
+						},
+						{
+							element: $('#to-top'),
+							intro: "Alter settings as you'd like!",
+							tooltipClass: 'tour__step--3',
+							highlightClass: 'tour__step--3h',
+							beforeNextStep() {
+								$('#to-top label').click()
+							}
+
+						},
+						{
+							element: $('#contact'),
+							intro: "Click an item to navigate to the corresponding page",
+							highlightClass: 'tour__step--4h',
+
+						},
+						{
+							element: $('nav .info-btn'),
+							intro: "Click on the info button for page-specific instructions",
+							highlightClass: 'tour__step--5h',
+							beforeNextStep() {
+								$('#resume').click();
+							}
+						},
+						{
+							intro: "The Resume page has multiple sections",
+							highlightClass: 'tour__step--6'
+						},
+						{
+							element: $('.bottom-nav--active'),
+							intro: "The bottom navigation bar will take you to the different sections",
+							tooltipClass: 'tour__step--7',
+							highlightClass: 'tour__step--7h',
+						},
+						{
+							intro: "Restart this tour at any time from the menu. Enjoy!",
+							tooltipClass: 'tour__step--8',
+							beforeNextStep() {
+								that.$store.set('tourFinished', true);
+							}
+						}
+					]
+				});
+
+				//set up pre-step listeners that will interact with the app directly
+				intro.onbeforechange(() => {
+					const {_currentStep, _introItems} = intro;
+					const {beforeNextStep} = _introItems[_currentStep];
+					if (beforeNextStep) {
+						beforeNextStep();
+					}
+				});
+
+				intro.start();
+
+			},
 			toggleDrawer(state) {
 				if (state != this.drawer) {
 					this.drawer = state || !this.drawer;
@@ -208,6 +303,7 @@
 	}
 </script>
 
+
 <style lang="scss">
 
     $minHeight: 90vh !important;
@@ -233,8 +329,7 @@
         color: white;
         height: 5vh;
 
-
-        .icon-holder{
+        .icon-holder {
             margin-left: -10px;
         }
         .social {
@@ -254,6 +349,76 @@
         }
         &--center {
             text-align: center;
+        }
+    }
+
+    //tour elem styling
+    .introjs-helperNumberLayer {
+    }
+
+    .introjs-prevbutton {
+        display: none;
+    }
+
+    .introjs-helperLayer {
+        opacity: 0.4 !important;
+    }
+
+    .tour__step {
+        &--2h ~ div {
+            //the number badge
+            span {
+                top: 34px !important;
+                left: 34px !important;
+            }
+        }
+        &--3 {
+            margin-top: -143px !important;
+            &h ~ div {
+                span {
+                    left: 262px !important;
+                    top: -13px !important;
+                }
+            }
+        }
+        &--4h {
+            top: 155px !important;
+            left: -5px !important;
+            width: 303px !important;
+            & ~ div {
+                span {
+                    left: 297px !important;
+                    top: -43px !important;
+                }
+            }
+        }
+
+        &--5h {
+            width: 50px !important;
+            height: 44px !important;
+            top: 5px !important;
+            left: 409px !important;
+
+            & ~ div {
+                span {
+                    top: 41px !important;
+                    left: -11px !important;
+                }
+            }
+        }
+        &--7 {
+            top: -100% !important;
+            &h ~ div {
+                span {
+                    left: 382px !important;
+                    top: -138px !important;
+                }
+            }
+        }
+        &--8 {
+            .introjs-nextbutton {
+                display: none;
+            }
         }
     }
 

@@ -3,6 +3,7 @@ import tokens from './config/tokens.json'
 
 export default {
 	methods: {
+		//getters [mainly config]
 		getSassConfig(key) {
 			const fullConfig = JSON.parse(JSON.parse(window.getComputedStyle(
 				document.getElementById('sassData'), '::before'
@@ -38,12 +39,52 @@ export default {
 				'star',
 			]);
 		},
+		getActiveStatus(){
+			return (!this.settingsObj.isLoaded) ? 'is-active' : '';
+		},
+		getToken(key) {return tokens[key]},
+		getIntroSteps() {
+			return {
+				steps: [
+					{
+						intro: "Hello world!"
+					},
+					{
+						element: document.querySelector('#step1'),
+						intro: "This is a tooltip."
+					},
+					{
+						element: document.querySelectorAll('#step2')[0],
+						intro: "Ok, wasn't that fun?",
+						position: 'right'
+					},
+					{
+						element: '#step3',
+						intro: 'More features, more fun.',
+						position: 'left'
+					},
+					{
+						element: '#step4',
+						intro: "Another step.",
+						position: 'bottom'
+					},
+					{
+						element: '#step5',
+						intro: 'Get it, use it.'
+					}
+				]
+			}
+		},
+
+
+		//testers
 		isURL(str) {
 			const expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
 			const regex = new RegExp(expression);
 			return str.match(regex);
 		},
-		getToken(key) {return tokens[key]},
+
+		//general use functions
 		emitEvent(event, payload) {
 			this.$emit(event, payload);
 		},
@@ -57,16 +98,12 @@ export default {
 					else clearInterval(scrollInterval);
 				}, 15);
 		},
-		getActiveStatus(){
-			return (!this.settingsObj.isLoaded) ? 'is-active' : '';
-		},
 		openLink(link, stay){
 			if (stay) {
 				this.$router.push(link)
 			} else {
 				window.open(link)
 			}
-
 		}
 	},
 }

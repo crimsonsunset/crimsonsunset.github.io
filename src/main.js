@@ -41,6 +41,10 @@ const router = new VueRouter({
 //stamp the build
 printBuildInfo();
 
+//cute aliases
+window.$ = document.querySelector.bind(document);
+window.$all = document.querySelectorAll.bind(document);
+
 const main = new Vue({
 	el: '#app',
 	router,

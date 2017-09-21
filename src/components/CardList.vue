@@ -33,7 +33,6 @@
                                     md1
                             >
                                 <v-avatar
-                                        v-tooltip:right="{ html: 'Right tooltip' }"
                                         :tile="true"
                                         size="50px"
                                         ref="joe"
@@ -197,6 +196,7 @@
 <style lang="scss">
 
     .card-list {
+        cursor: pointer;
         .headline {
             margin-bottom: 5px;
             &__text{

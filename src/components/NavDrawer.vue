@@ -26,7 +26,10 @@
 
         </div>
 
-        <v-toolbar class="transparent">
+        <v-toolbar
+
+
+                class="transparent">
             <v-list class="pa-0">
                 <v-list-tile avatar tag="div">
                     <v-list-tile-avatar>
@@ -43,6 +46,7 @@
             <v-list-tile
                     v-for="item in items"
                     :key="item.label"
+                    :id="snakeCase(item.label.toLowerCase())"
                     @click="()=>{
                     	openLink(item.path, true);
                     }"
@@ -126,6 +130,7 @@
                 <v-switch
                         class="controls"
                         :color="settingsObj.themeColor"
+                        id='to-top'
                         label='Return To Top Button'
                         v-model="settingsObj.toTop"
                         @change="e => { emitEvent('updateConfigVal', {'toTop': e}) }"
@@ -156,6 +161,27 @@
                 </v-switch>
             </v-flex>
 
+            <v-flex px-3 >
+                <v-switch
+                        class="controls"
+                        :color="settingsObj.themeColor"
+                        label='Show Info Button'
+                        v-model="settingsObj.showInfo"
+                        @change="e => { emitEvent('updateConfigVal', {'showInfo': e}) }"
+                >
+                </v-switch>
+            </v-flex>
+
+            <v-flex
+                  class="tour-container"
+            >
+                <v-btn
+                        :class="[settingsObj.themeColor, 'darken-2', 'white--text']"
+                        @click="e => { emitEvent('startTour', true) }"
+                > Start the Tour!
+                </v-btn>
+            </v-flex>
+
 
         </v-list>
     </v-navigation-drawer>
@@ -164,7 +190,7 @@
 
 <script>
 
-	import {forEach, map, toArray, delay} from 'lodash'
+	import {forEach, map, toArray, delay, snakeCase} from 'lodash'
 	import RouterLink from 'vue-router'
 	import routes from '../config/routes'
 	//
@@ -175,7 +201,8 @@
 		props: ['drawer', 'colors', 'animations', 'settingsObj'],
 		data() {
 			return {
-				items: routes
+				items: routes,
+				snakeCase
 			}
 		},
 		methods: {
@@ -216,6 +243,12 @@
 
     .navigation-drawer {
         margin-top: 57px !important;
+    }
+
+    .tour-container{
+        justify-content: center;
+        display: flex !important;
+        padding-right: 20px;
     }
 
     .animation-example{
