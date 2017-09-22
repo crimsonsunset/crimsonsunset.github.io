@@ -1,11 +1,7 @@
 <template>
 
-
-
-
         <v-toolbar
                 fixed
-
                 :class="[settingsObj.themeColor, 'darken-4', 'primary']" dark>
             <v-toolbar-side-icon @click.stop="()=>emitEvent('toggleDrawer')"></v-toolbar-side-icon>
             <v-toolbar-title>{{this.getRouteName()}}</v-toolbar-title>
@@ -22,10 +18,6 @@
             </v-fab-transition>
 
         </v-toolbar>
-
-
-
-
 
 
 </template>

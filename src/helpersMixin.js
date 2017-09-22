@@ -106,11 +106,11 @@ export default {
 			//if routehash is empty string, its the first time on resume page
 			// routeHash = (routeHash == '') ? 'Experience' : routeHash;
 
-			if (routeHash == '') {
-				routeHash = 'Experience';
-
-				this.$router.push(`/${routeBase}#${routeHash}`)
-			}
+			// if (routeHash == '') {
+			// 	routeHash = 'Experience';
+			//
+			// 	this.$router.push(`/${routeBase}#${routeHash}`)
+			// }
 
 			const ret = (routeHash) ? pageInfoObj[routeBase][routeHash] : pageInfoObj[routeBase];
 			// console.log('ret', routeBase, routeHash)

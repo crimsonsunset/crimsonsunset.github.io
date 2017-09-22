@@ -21,6 +21,7 @@
 
 
         <nav-bar
+                ref="navBar"
                 :settingsObj='settingsObj'
                 v-on:toggleDrawer="toggleDrawer"
                 v-on:toggleInfo="toggleKey"
@@ -34,7 +35,7 @@
                     name="custom-classes-transition"
                     :enter-active-class="`animated ${settingsObj.animation}`"
             >
-                <keep-alive>
+                <!--<keep-alive>-->
                     <router-view
                             ref="currView"
                             :settingsObj='settingsObj'
@@ -42,7 +43,7 @@
                     >
 
                     </router-view>
-                </keep-alive>
+                <!--</keep-alive>-->
             </transition>
 
 
@@ -68,7 +69,7 @@
 
 
         <v-footer
-
+                v-show="!$route.fullPath.includes('Resume')"
                 fixed
                 :class="['pa-3',settingsObj.themeColor, 'darken-4', 'footer']"
         >
@@ -183,6 +184,9 @@
 			if (!this.$store.get('tourFinished')) {
 				this.startTour();
 			}
+			console.log(this)
+//			navBar = this.$refs.navBar;
+//			Object.defineProperty(this.$vnode, '$navBar', {value: this.$refs.navBar});
 		},
 		data() {
 			return {
@@ -220,7 +224,7 @@
 						{
 							intro: "Welcome to My Portfolio Site!",
 							beforeNextStep() {
-//								that.$router.push('/');
+
 							}
 						},
 						{
@@ -229,7 +233,6 @@
 							highlightClass: 'tour__step--2h',
 							beforeNextStep() {
 								that.$router.push('/');
-
 								if (!that.drawer) {
 									$('.toolbar__side-icon').click();
 								}
@@ -245,10 +248,10 @@
 							beforeNextStep() {
 								const label = $('#to-top label');
 								label.click();
-//								const elem = $('.carousel');
-//								if (elem) {
-//									elem.style.visibility = 'hidden';
-//								}
+								//								const elem = $('.carousel');
+								//								if (elem) {
+								//									elem.style.visibility = 'hidden';
+								//								}
 							}
 
 						},
@@ -261,7 +264,7 @@
 						},
 						{
 							element: $('nav .info-btn'),
-							intro: "Click on the info button for page-specific instructions",
+							intro: "Click on the help button for page-specific instructions",
 							highlightClass: 'tour__step--5h',
 							beforeNextStep() {
 								$('#resume').click();
@@ -272,8 +275,7 @@
 							highlightClass: 'tour__step--6'
 						},
 						{
-							element: $('.bottom-nav--active'),
-							intro: "The bottom navigation bar will take you to the different sections",
+							intro: "The bottom navigation bar will take you to the different Resume sections",
 							tooltipClass: 'tour__step--7',
 							highlightClass: 'tour__step--7h',
 						},
@@ -291,6 +293,9 @@
 				intro.onbeforechange(() => {
 					const {_currentStep, _introItems} = intro;
 					const {beforeNextStep} = _introItems[_currentStep];
+//					forEach($all('.introjs-button'), (e, i) => {
+//						e.style['background-color'] = that.settingsObj.themeColor;
+//					});
 					if (beforeNextStep) {
 						beforeNextStep();
 					}
@@ -387,117 +392,13 @@
         }
     }
 
-    .full-width {
-        width: 100%;
-    }
 
-    .text-align {
-        &--right {
-            text-align: right;
-        }
-        &--center {
-            text-align: center;
+    @media only screen and (max-width: 400px) {
+        .toolbar__title {
+            font-size: 19px ;
+             margin-left: 0px ;
         }
     }
 
-    //tour elem styling
-    .introjs-helperNumberLayer {
-    }
-
-    .introjs-prevbutton {
-        display: none;
-    }
-
-    .introjs-helperLayer {
-        opacity: 0.4 !important;
-    }
-
-    .tour__step {
-        &--2h ~ div {
-            //the number badge
-            span {
-                top: 34px !important;
-                left: 34px !important;
-            }
-        }
-        &--3 {
-            margin-top: 17px !important;
-            &h ~ div {
-                span {
-                    left: 262px !important;
-                    top: -13px !important;
-                }
-            }
-        }
-
-        &--4 {
-            &h ~ div {
-                span {
-                    left: 296px !important;
-                    top: -15px !important;
-                }
-            }
-        }
-
-        &--5h {
-            width: 50px !important;
-            height: 44px !important;
-            top: 5px !important;
-            margin-left: 6px !important;
-            & ~ div {
-                span {
-                    top: 41px !important;
-                    left: -11px !important;
-                }
-            }
-        }
-        &--7 {
-            &h {
-                left: 6px !important;
-            }
-            &h ~ div {
-                span {
-                    top: -16px !important;
-                    left: 96px !important;
-                }
-            }
-        }
-
-        &--8 {
-            .introjs-nextbutton {
-                display: none;
-            }
-        }
-    }
-
-    @media only screen and (max-width: 523px) {
-        .tour__step {
-            &--3 {
-                margin-top: -143px !important;
-            }
-        }
-    }
-
-    @media only screen and (max-width: 623px) {
-
-        .tour__step {
-
-            &--4 {
-                top: 127px !important;
-            }
-
-        }
-    }
-
-    @media only screen and (max-width: 680px) {
-
-        .tour__step {
-
-            &--7 {
-                margin-top: -160px !important;
-
-            }
-        }
-    }
 
 </style>

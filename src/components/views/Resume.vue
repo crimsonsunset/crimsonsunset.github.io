@@ -1,5 +1,4 @@
 <template>
-    <!--<h2> Resume</h2>-->
 
     <section>
 
@@ -58,8 +57,9 @@
                 row xs12 class="resume-view__nav">
 
 
-            <v-card class="resume-view__nav">
+            <v-card class="cardz">
                 <v-bottom-nav
+                        id="resume-nav"
                         :value="true"
                         :active.sync="currNavItem"
                         class="white"
@@ -77,7 +77,7 @@
                             :value="item.name"
                     >
                         <span>{{item.name}}</span>
-                        <v-icon class="">{{item.icon}}</v-icon>
+                        <v-icon :id="`icon-${item.name}`">{{item.icon}}</v-icon>
                     </v-btn>
 
                 </v-bottom-nav>
@@ -108,6 +108,9 @@
 			this.settingsObj.loaderRef = this.$refs.loader;
 			this.$router.push(`/Resume#${this.currNavItem}`);
 		},
+//		activated(e) {
+//			this.$router.push(`/Resume#${this.currNavItem}`);
+//		},
 
 		data() {
 			return {
