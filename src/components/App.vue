@@ -184,7 +184,6 @@
 			if (!this.$store.get('tourFinished')) {
 				this.startTour();
 			}
-			console.log(this)
 //			navBar = this.$refs.navBar;
 //			Object.defineProperty(this.$vnode, '$navBar', {value: this.$refs.navBar});
 		},
