@@ -98,23 +98,7 @@
 			}
 		},
 		computed: {},
-		methods: {
-
-			test(e) {
-				console.log('ss', e)
-			},
-		},
-		//		render(createElement) {
-		//			return createElement(
-		//				'div',
-		//				{
-		//					attrs: {
-		//						'class': 'title'
-		//					}
-		//				},
-		//				['helszz']
-		//			);
-		//        }
+		methods: {}
 	}
 
 </script>

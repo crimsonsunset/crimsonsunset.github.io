@@ -43,7 +43,7 @@ export default [
 	{
 		path: '/Documentation',
 		component: Views.Docs,
-		icon: 'info',
+		icon: 'settings_ethernet',
 		label: 'API Documentation'
 	}
 ];

@@ -24,7 +24,6 @@
 		props: ['settingsObj'],
 		beforeCreate() {
 			axios.get(`${this.$endpoints.base}`).then((e, i) => {
-				console.log('done loading', this.$endpoints.base)
 				this.isLoaded = true;
 			});
 		},

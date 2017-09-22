@@ -124,12 +124,11 @@
 <script>
 
 	import axios from 'axios'
+	import {startCase} from 'lodash'
 
 	export default {
 		props: ['settingsObj', 'name'],
 		mounted() {
-			console.log('this')
-			console.log(this)
 			this.getInfo();
 		},
 		beforeUpdate(e) {

@@ -23,6 +23,7 @@
         <nav-bar
                 :settingsObj='settingsObj'
                 v-on:toggleDrawer="toggleDrawer"
+                v-on:toggleInfo="toggleKey"
         ></nav-bar>
 
 
@@ -35,6 +36,7 @@
             >
                 <keep-alive>
                     <router-view
+                            ref="currView"
                             :settingsObj='settingsObj'
                             :drawer='drawer'
                     >
@@ -104,9 +106,41 @@
         </v-footer>
 
 
-        <!--<v-footer :absolute="footer.fixed">-->
-        <!--<span>© {{ new Date().getFullYear() }}</span>-->
-        <!--</v-footer>-->
+        <div class="text-xs-center">
+            <v-bottom-sheet
+                    v-if="(showInfo == true)"
+                    v-model="showInfo"
+                    transition="dialog-bottom-transition"
+                    inset>
+
+                <v-card tile>
+                    <v-list
+                            three-line
+                    >
+                        <v-list-tile>
+
+
+                            <v-icon
+                                    class="blue--text mr-3">info
+                            </v-icon>
+
+
+                            <v-list-tile-content>
+                                <v-list-tile-title
+                                        :class="[`${settingsObj.themeColor}--text`, 'darken-5']"
+                                >Page Info: {{getRouteName()}}
+                                </v-list-tile-title>
+                                <v-list-tile-sub-title
+                                >{{this.settingsObj.pagePrompt}}
+                                </v-list-tile-sub-title>
+                            </v-list-tile-content>
+
+                        </v-list-tile>
+                    </v-list>
+                </v-card>
+            </v-bottom-sheet>
+        </div>
+
 
     </v-app>
 </template>
@@ -128,9 +162,9 @@
 		beforeCreate() {
 
 			this.defaultSettings = {
-				themeColor: 'red',
+				themeColor: 'indigo',
 				animation: 'fadeInUp',
-				showInfo: true,
+				infoBtn: true,
 				toTop: false,
 				rememberSettings: false,
 				rememberLocation: false,
@@ -158,7 +192,8 @@
 				},
 				iconGithub,
 				iconLinkedin,
-				drawer: false
+				drawer: false,
+				showInfo: false,
 			}
 		},
 		computed: {
@@ -171,14 +206,9 @@
 		},
 		methods: {
 			startTour() {
-				console.log('about to start tour')
-
-				//todo: remove
-				this.$router.push('/');
-
 
 				//since this app uses a UI toolkit, don't have direct access to all of the HTML.
-				// Instead, have to inject tags by selecting, which is obviously less than ideal.
+				// Instead, have to inject tags by selecting, which is obviously less than ideal in a vue world.
 				const intro = introJs();
 				const that = this;
 				intro.setOptions({
@@ -188,31 +218,44 @@
 					overlayOpacity: 0.4,
 					steps: [
 						{
-							intro: "Welcome to My Portfolio Site!"
+							intro: "Welcome to My Portfolio Site!",
+							beforeNextStep() {
+//								that.$router.push('/');
+							}
 						},
 						{
 							element: $('.toolbar__side-icon'),
 							intro: "Click here to access the menu.",
 							highlightClass: 'tour__step--2h',
 							beforeNextStep() {
+								that.$router.push('/');
+
 								if (!that.drawer) {
 									$('.toolbar__side-icon').click();
 								}
+
 							}
 						},
 						{
 							element: $('#to-top'),
 							intro: "Alter settings as you'd like!",
+							position: 'top',
 							tooltipClass: 'tour__step--3',
 							highlightClass: 'tour__step--3h',
 							beforeNextStep() {
-								$('#to-top label').click()
+								const label = $('#to-top label');
+								label.click();
+								const elem = $('.carousel');
+								if (elem) {
+									elem.style.visibility = 'hidden';
+								}
 							}
 
 						},
 						{
-							element: $('#contact'),
+							element: $('#resume'),
 							intro: "Click an item to navigate to the corresponding page",
+							tooltipClass: 'tour__step--4',
 							highlightClass: 'tour__step--4h',
 
 						},
@@ -261,6 +304,10 @@
 					this.drawer = state || !this.drawer;
 				}
 			},
+			toggleKey(payload) {
+				const firstKey = keys(payload)[0];
+				this[firstKey] = !this[firstKey];
+			},
 			updateConfigVal(payload) {
 				const firstKey = keys(payload)[0];
 
@@ -269,6 +316,7 @@
 				} else {
 					this.settingsObj[payload] = !this.settingsObj[payload]
 				}
+
 
 				//settings that require further action after toggled
 				const save = this.settingsObj[firstKey];
@@ -373,7 +421,7 @@
             }
         }
         &--3 {
-            margin-top: -143px !important;
+            margin-top: 17px !important;
             &h ~ div {
                 span {
                     left: 262px !important;
@@ -381,14 +429,12 @@
                 }
             }
         }
-        &--4h {
-            top: 155px !important;
-            left: -5px !important;
-            width: 303px !important;
-            & ~ div {
+
+        &--4 {
+            &h ~ div {
                 span {
-                    left: 297px !important;
-                    top: -43px !important;
+                    left: 296px !important;
+                    top: -15px !important;
                 }
             }
         }
@@ -397,8 +443,7 @@
             width: 50px !important;
             height: 44px !important;
             top: 5px !important;
-            left: 409px !important;
-
+            margin-left: 6px !important;
             & ~ div {
                 span {
                     top: 41px !important;
@@ -407,14 +452,17 @@
             }
         }
         &--7 {
-            top: -100% !important;
+            &h {
+                left: 6px !important;
+            }
             &h ~ div {
                 span {
-                    left: 382px !important;
-                    top: -138px !important;
+                    top: -16px !important;
+                    left: 96px !important;
                 }
             }
         }
+
         &--8 {
             .introjs-nextbutton {
                 display: none;
@@ -422,5 +470,34 @@
         }
     }
 
+    @media only screen and (max-width: 523px) {
+        .tour__step {
+            &--3 {
+                margin-top: -143px !important;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 623px) {
+
+        .tour__step {
+
+            &--4 {
+                top: 127px !important;
+            }
+
+        }
+    }
+
+    @media only screen and (max-width: 680px) {
+
+        .tour__step {
+
+            &--7 {
+                margin-top: -160px !important;
+
+            }
+        }
+    }
 
 </style>

@@ -116,7 +116,6 @@
 		computed: {},
 		methods: {
 			nextStep(n) {
-				console.log('nextstep', this.currStep, n);
 				this.currStep = n + 1
 
 			},

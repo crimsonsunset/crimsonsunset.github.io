@@ -167,7 +167,7 @@
                         :color="settingsObj.themeColor"
                         label='Show Info Button'
                         v-model="settingsObj.showInfo"
-                        @change="e => { emitEvent('updateConfigVal', {'showInfo': e}) }"
+                        @change="e => { emitEvent('updateConfigVal', {'infoBtn': e}) }"
                 >
                 </v-switch>
             </v-flex>

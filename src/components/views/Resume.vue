@@ -101,8 +101,14 @@
 		props: ['settingsObj'],
 		components: {CardList, LazyGrid, DetailAccordion, ParallaxCardList},
 		mounted() {
-            this.settingsObj.loaderRef = this.$refs.loader
+			const hash = this.$router.currentRoute.hash.substring(1);
+            if (hash) {
+	            this.currNavItem = hash;
+			}
+			this.settingsObj.loaderRef = this.$refs.loader;
+			this.$router.push(`/Resume#${this.currNavItem}`);
 		},
+
 		data() {
 			return {
 				navItems: [
@@ -136,6 +142,10 @@
 		methods: {
 			toggleResumeNavItem(itemName) {
 				this.currNavItem = itemName;
+				this.$router.push(`/Resume#${itemName}`);
+				this.settingsObj.pagePrompt = this.getPageInfo();
+				//				this.settingsObj.resumeSection = itemName;
+//				this.$forceUpdate();
 			}
 		}
 	})

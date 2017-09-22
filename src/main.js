@@ -11,9 +11,11 @@ import './styles/index.scss'
 import 'animate.css/animate.min.css'
 import store from 'store'
 
+//use our main framework libraries
 Vue.use(Vuetify);
 Vue.use(VueRouter);
 
+//import global functions to all components
 const helpersMixin = Vue.mixin(helpers.default);
 Vue.mixin(helpersMixin);
 
@@ -21,6 +23,7 @@ Vue.mixin(helpersMixin);
 const {environment} = build.info;
 const localhostBase = 'http://localhost:3000/api/v1/';
 const remoteBase = 'https://crimsonsunset-portfolio.herokuapp.com/api/v1/';
+
 
 Object.defineProperty(Vue.prototype, '$env', {value: environment});
 Object.defineProperty(Vue.prototype, '$endpoints', {
@@ -41,7 +44,7 @@ const router = new VueRouter({
 //stamp the build
 printBuildInfo();
 
-//cute aliases
+//cute aliases [mainly for tour feature]
 window.$ = document.querySelector.bind(document);
 window.$all = document.querySelectorAll.bind(document);
 

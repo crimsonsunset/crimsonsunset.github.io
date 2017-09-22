@@ -3,6 +3,7 @@ export function routeExporter(inObj) {
 		...inObj,
 		beforeRouteEnter(to, from, next) {
 			next((vm) => {
+				vm.settingsObj.pagePrompt = vm.getPageInfo();
 				if (vm.settingsObj.rememberLocation) {
 					vm.$store.set('location', vm.$route.path)
 				}

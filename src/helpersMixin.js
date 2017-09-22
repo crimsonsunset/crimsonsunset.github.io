@@ -86,6 +86,7 @@ export default {
 
 		//general use functions
 		emitEvent(event, payload) {
+			// console.log('about to emiz', event, payload)
 			this.$emit(event, payload);
 		},
 		scrollToTop() {
@@ -97,6 +98,37 @@ export default {
 					}
 					else clearInterval(scrollInterval);
 				}, 15);
+		},
+		getPageInfo() {
+			let routeArr = this.getRouteName().split(' | ');
+			let [routeBase, routeHash] = routeArr;
+
+			//if routehash is empty string, its the first time on resume page
+			// routeHash = (routeHash == '') ? 'Experience' : routeHash;
+
+			if (routeHash == '') {
+				routeHash = 'Experience';
+
+				this.$router.push(`/${routeBase}#${routeHash}`)
+			}
+
+			const ret = (routeHash) ? pageInfoObj[routeBase][routeHash] : pageInfoObj[routeBase];
+			// console.log('ret', routeBase, routeHash)
+			// console.log(ret)
+			return ret;
+
+		},
+		getRouteName(e) {
+			const {$route} = this;
+			let routeName = $route.path.substring(1);
+
+			if (routeName == '') {
+				routeName = 'Welcome!'
+			} else if(routeName.includes('Resume')) {
+				const hash = $route.hash.substring(1);
+				routeName += ` | ${hash}`
+			}
+			return routeName;
 		},
 		openLink(link, stay){
 			if (stay) {
@@ -185,3 +217,16 @@ const animationNames = sortBy([
 	"slideOutLeft",
 	"slideOutRight",
 	"slideOutUp"]);
+const pageInfoObj = {
+	'Welcome!': 'This is a landing page featuring a typer component. It lists out some information about who I am, and what interests me.',
+	'Resume': {
+		Experience: `Information about Jobs I've held, and the responsibilities therein. Click on a card to learn more.`,
+		Projects: `Information about projects I've worked on, and specific technologies used in each. Click on a card to learn more.`,
+		Skills: `A listing of Technologies I'm familiar with, showcased in a interactive masonry grid list component. Click on a tile to learn more about that technology.`,
+		References: `A listing of recommendations I've received from my Peers. Click on a listing to read the content.`,
+		Education: `A parallax-style view of the schools I've attended. Click on the school icon for a surprise.`
+	},
+	'About': 'A step-list component that has even more information regarding my background. The content here is meant to be only semi-serious =)',
+	'Contact': 'A form that will allow you to contact me directly',
+	'Documentation': 'Here you will find Swagger-style API documentation for the Express server that powers this website.'
+}
