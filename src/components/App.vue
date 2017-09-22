@@ -245,10 +245,10 @@
 							beforeNextStep() {
 								const label = $('#to-top label');
 								label.click();
-								const elem = $('.carousel');
-								if (elem) {
-									elem.style.visibility = 'hidden';
-								}
+//								const elem = $('.carousel');
+//								if (elem) {
+//									elem.style.visibility = 'hidden';
+//								}
 							}
 
 						},

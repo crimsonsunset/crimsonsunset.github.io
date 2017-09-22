@@ -11,6 +11,7 @@
                     cycle
                     dark
                     class="elevation-0"
+                    v-show='!drawer'
                     :interval='6000000'
                     :leftControlIcon='false'
                     ref="home-carousel"
@@ -48,7 +49,9 @@
             </v-carousel>
 
 
-            <div class="home-page__btn-container">
+            <div
+                    v-show='!drawer'
+                    class="home-page__btn-container">
                 <v-btn
                         :class="[settingsObj.themeColor, 'darken-2', 'white--text', 'home-page__btn-next', 'text-lg-right']"
                         ref="btn-next"

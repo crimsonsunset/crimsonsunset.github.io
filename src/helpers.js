@@ -15,4 +15,5 @@ export function routeExporter(inObj) {
 export function printBuildInfo() {
 	console.rainbow('red', `${build.info.name} v${build.info.version} - ${build.info.environment}`)
 	console.rainbow('blue', `Built at: ${build.info.date}`)
+	console.rainbow('green', `Want a look under the hood? Visit https://github.com/crimsonsunset/crimsonsunset.github.io`)
 }

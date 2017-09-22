@@ -16,12 +16,13 @@
                 :class="['loader', `loader--${settingsObj.themeColor}`, 'animation-example', 'loader-ball']"
         >
             <!--<v-flex-->
-                    <!--:class="['animation-example__body', `animated infinite ${settingsObj.animation}`, `${settingsObj.themeColor}`]"-->
-                    <!--&gt; </v-flex>-->
+            <!--:class="['animation-example__body', `animated infinite ${settingsObj.animation}`, `${settingsObj.themeColor}`]"-->
+            <!--&gt; </v-flex>-->
 
             <v-icon
-                    :class="['animation-example__body', `${settingsObj.themeColor}--text`, `animated infinite ${settingsObj.animation}`]"
-            >{{`${getFunIcon()}`}}</v-icon>
+                    :class="['animation-example__body', `${settingsObj.themeColor}--text`, `animated ${settingsObj.animation} infinite`]"
+            >{{`${getFunIcon()}`}}
+            </v-icon>
 
 
         </div>
@@ -139,7 +140,7 @@
                 </v-switch>
             </v-flex>
 
-            <v-flex px-3 >
+            <v-flex px-3>
                 <v-switch
                         class="controls"
                         :color="settingsObj.themeColor"
@@ -150,7 +151,7 @@
                 </v-switch>
             </v-flex>
 
-            <v-flex px-3 >
+            <v-flex px-3>
                 <v-switch
                         class="controls"
                         :color="settingsObj.themeColor"
@@ -161,19 +162,19 @@
                 </v-switch>
             </v-flex>
 
-            <v-flex px-3 >
+            <v-flex px-3>
                 <v-switch
                         class="controls"
                         :color="settingsObj.themeColor"
                         label='Show Info Button'
-                        v-model="settingsObj.showInfo"
+                        v-model="settingsObj.infoBtn"
                         @change="e => { emitEvent('updateConfigVal', {'infoBtn': e}) }"
                 >
                 </v-switch>
             </v-flex>
 
             <v-flex
-                  class="tour-container"
+                    class="tour-container"
             >
                 <v-btn
                         :class="[settingsObj.themeColor, 'darken-2', 'white--text']"
@@ -206,13 +207,13 @@
 			}
 		},
 		methods: {
-			showAnimation(e){
+			showAnimation(e) {
 				this.$refs.animator.classList.add('is-active');
-                delay(() => {
-	                this.$refs.animator.classList.remove('is-active');
-                },3000)
-            },
-        },
+				delay(() => {
+					this.$refs.animator.classList.remove('is-active');
+				}, 3000)
+			},
+		},
 		computed: {
 			localDrawer: {
 				get() {
@@ -245,25 +246,27 @@
         margin-top: 57px !important;
     }
 
-    .tour-container{
+    .tour-container {
         justify-content: center;
         display: flex !important;
         padding-right: 20px;
     }
 
-    .animation-example{
+    .animation-example {
         display: flex;
         align-items: center;
-        &:after{
+        width: 300px !important;
+        &:after {
             content: none;
         }
-        &:after, &:before{
+        &:after, &:before {
             content: none;
             /*animation: none ;*/
             animation-name: flipInX;
+            -webkit-animation-name: flipInX;
             animation-iteration-count: infinite;
         }
-        &__body{
+        &__body {
             margin: 0 auto;
             margin-top: -50px;
             font-size: 80px !important;
