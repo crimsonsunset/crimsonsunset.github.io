@@ -357,7 +357,7 @@
             justify-content: center;
             text-align: center;
             flex-flow: column nowrap;
-            color: #fff;
+            color: white;
             transform: translateY($content-offset);
             will-change: transform;
             backface-visibility: hidden;

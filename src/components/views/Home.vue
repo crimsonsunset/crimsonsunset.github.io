@@ -52,6 +52,14 @@
             <div
                     v-show='!drawer'
                     class="home-page__btn-container">
+
+                <v-btn
+                        :class="[settingsObj.themeColor, 'darken-2', 'white--text', 'home-page__btn-next', 'text-lg-right']"
+                        @click.native.stop="infoModal = true">Who?
+                </v-btn>
+
+
+                <v-spacer></v-spacer>
                 <v-btn
                         :class="[settingsObj.themeColor, 'darken-2', 'white--text', 'home-page__btn-next', 'text-lg-right']"
                         ref="btn-next"
@@ -59,6 +67,49 @@
                 >Tell me more!
                 </v-btn>
             </div>
+
+            <v-dialog
+                    width="70%"
+                    v-model="infoModal">
+                <v-card>
+                    <v-card-title
+                            :class="[settingsObj.themeColor, 'lighten-1', 'headline', 'white--text', 'home-page__btn-next', 'text-lg-right']"
+                            class="headline">About Me
+                    </v-card-title>
+                    <v-card-text>
+                        <p>
+                            Hello and welcome to my Portfolio site! My name is Joe Sangiorgio and I'm currently a Web Interface Developer for Marvel Entertainment. I have a passion for all things Javascript, and love creating meaningful data-driven web applications.</p>
+
+                        <p>
+                            I made this app in order to have an interesting space to showcase the type of work I love doing. My goal was to create an environment that would present my professional products in a unique and compelling way. I also just wanted to play with some flashy cutting-edge web technologies! 🤓</p>
+
+                        <p>
+                            Do I realize the same content housed within this site could have been communicated in a 3kb javascript-free HTML file with a few CSS styles? Sure. Are some of the customization controls in the sidebar completely over the top? Absolutely. Should there be a need for a tour around a portfolio? Oh God no. But where's the fun in making something like that?!</p>
+
+                        <p>
+                            I hope you have as much fun exploring this app as I did building it. Thanks for visiting!</p>
+
+                        <p>-Joe</p>
+
+                        <v-flex
+                                class="home-page__profile-photo"
+                        >
+                            <div>
+                                <img
+                                        width="90%"
+                                        src="../../assets/pics/joe.jpg" alt="joe">
+                            </div>
+                        </v-flex>
+
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                                :class="['darken-2', `${settingsObj.themeColor}--text`]"
+                                flat="flat" @click.native="infoModal = false">Cool!</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
 
         </v-flex>
 
@@ -70,6 +121,7 @@
 	import {VueTyper} from 'vue-typer'
 	import {find, keys, delay} from 'lodash'
 	import {routeExporter} from '../../helpers'
+
 	let currSliderIndex = 0;
 
 	export default routeExporter({
@@ -77,6 +129,7 @@
 		props: ['settingsObj', 'toTop', 'drawer'],
 		data() {
 			return {
+				infoModal: false,
 				sliderData: {
 					build: ["Websites", "Web Apps", "Native Apps", "Servers", "Layouts", "Wireframes", "Raspberry Pi Hacks", "Home Automation Systems"],
 					teach: ["Front End Development", "Full Stack Development", "Servers", "Comp Sci Concepts"],
@@ -120,7 +173,7 @@
 				nextBtn = nextBtn.children[0];
 
 				//clicking button will close the drawer, so block it here
-				if (!this.drawer) {
+				if (!this.drawer && !this.infoModal) {
 					nextBtn.click();
 					delay(this.restartTyper, 100)
 				}
@@ -142,13 +195,14 @@
 
 <style lang="scss">
 
+    @import "../../styles/colors";
 
     .home-page {
 
         display: flex;
         align-items: center;
 
-        &__content{
+        &__content {
             margin-top: -5vh;
         }
 
@@ -157,15 +211,28 @@
             margin: 0 auto;
         }
         &__btn-container {
+            /*border: 2px solid red;*/
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
         }
+        &__profile-photo {
+            display: flex;
+            justify-content: center;
+            div{
+                align-self: center;
+            }
+            img {
+                max-width: 500px;
+            }
+
+        }
+
     }
 
     #home-carousel {
         height: 200px;
 
-        .btn__content{
+        .btn__content {
             visibility: hidden;
         }
 
@@ -184,18 +251,21 @@
     }
 
     .vue-typer .custom.char {
-        color: #D4D4BD;
-        background-color: #1E1E1E;
+        color: $typer-gray;
+        background-color: $typer-black;
     }
 
     .vue-typer .custom.char.selected {
-        background-color: #264F78;
+        background-color: $typer-selected;
     }
 
     .vue-typer .custom.caret {
         width: 10px;
-        background-color: #3F51B5;
+        background-color: $typer-carat;
     }
 
 
 </style>
+
+
+

@@ -112,7 +112,7 @@
                     v-if="(showInfo == true)"
                     v-model="showInfo"
                     transition="dialog-bottom-transition"
-                    inset>
+                    >
 
                 <v-card tile>
                     <v-list
@@ -196,7 +196,7 @@
 				iconGithub,
 				iconLinkedin,
 				drawer: false,
-				showInfo: false,
+				showInfo: false
 			}
 		},
 		computed: {
@@ -213,7 +213,6 @@
 				//since this app uses a UI toolkit, don't have direct access to all of the HTML.
 				// Instead, have to inject tags by selecting, which is obviously less than ideal in a vue world.
 				const intro = introJs();
-				const that = this;
 				intro.setOptions({
 					showBullets: false,
 					showProgress: true,
@@ -231,8 +230,8 @@
 							intro: "Click here to access the menu.",
 							highlightClass: 'tour__step--2h',
 							beforeNextStep() {
-								that.$router.push('/');
-								if (!that.drawer) {
+								this.$router.push('/');
+								if (!this.drawer) {
 									$('.toolbar__side-icon').click();
 								}
 
@@ -247,10 +246,6 @@
 							beforeNextStep() {
 								const label = $('#to-top label');
 								label.click();
-								//								const elem = $('.carousel');
-								//								if (elem) {
-								//									elem.style.visibility = 'hidden';
-								//								}
 							}
 
 						},
@@ -282,21 +277,19 @@
 							intro: "Restart this tour at any time from the menu. Enjoy!",
 							tooltipClass: 'tour__step--8',
 							beforeNextStep() {
-								that.$store.set('tourFinished', true);
+								this.$store.set('tourFinished', true);
 							}
 						}
 					]
+
 				});
 
 				//set up pre-step listeners that will interact with the app directly
 				intro.onbeforechange(() => {
 					const {_currentStep, _introItems} = intro;
 					const {beforeNextStep} = _introItems[_currentStep];
-//					forEach($all('.introjs-button'), (e, i) => {
-//						e.style['background-color'] = that.settingsObj.themeColor;
-//					});
 					if (beforeNextStep) {
-						beforeNextStep();
+						beforeNextStep.bind(this)();
 					}
 				});
 
@@ -360,6 +353,7 @@
 
     $minHeight: 90vh !important;
 
+
     .info-accordion {
         background-color: white;
     }
@@ -396,6 +390,17 @@
         .toolbar__title {
             font-size: 19px ;
              margin-left: 0px ;
+        }
+
+        .bottom-sheet{
+
+            .list__tile__sub-title{
+                font-size: 12px;
+            }
+
+            i{
+                display: none;
+            }
         }
     }
 

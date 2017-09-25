@@ -20,7 +20,6 @@ const consoleRainbowPlugin =
 		}
 	});
 
-console.log('isprod', isProduction)
 
 module.exports = {
 	entry: './src/main.js',
