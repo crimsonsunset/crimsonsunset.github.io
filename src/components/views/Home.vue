@@ -69,9 +69,12 @@
             </div>
 
             <v-dialog
+                    class="home-page__dialog"
                     width="70%"
                     v-model="infoModal">
-                <v-card>
+                <v-card
+                        class="home-page__info-modal"
+                >
                     <v-card-title
                             :class="[settingsObj.themeColor, 'lighten-1', 'headline', 'white--text', 'home-page__btn-next', 'text-lg-right']"
                             class="headline">About Me
@@ -82,9 +85,6 @@
 
                         <p>
                             I made this app in order to have an interesting space to showcase the type of work I love doing. My goal was to create an environment that would present my professional products in a unique and compelling way. I also just wanted to play with some flashy cutting-edge web technologies! 🤓</p>
-
-                        <p>
-                            Do I realize the same content housed within this site could have been communicated in a 3kb javascript-free HTML file with a few CSS styles? Sure. Are some of the customization controls in the sidebar completely over the top? Absolutely. Should there be a need for a tour around a portfolio? Oh God no. But where's the fun in making something like that?!</p>
 
                         <p>
                             I hope you have as much fun exploring this app as I did building it. Thanks for visiting!</p>
@@ -215,18 +215,27 @@
             display: flex;
             justify-content: space-between;
         }
+        &__info-modal{
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
         &__profile-photo {
             display: flex;
             justify-content: center;
             div{
+                display: grid;
                 align-self: center;
             }
             img {
+                margin: 0 auto;
                 max-width: 500px;
             }
 
         }
+    }
 
+    .dialog{
+        box-shadow: none !important;
     }
 
     #home-carousel {

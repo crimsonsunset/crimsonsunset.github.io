@@ -4,7 +4,7 @@
         <a
                 ref="mailLink"
                 hidden
-                target="_blank" href="mailto:joe@joesangiorgio.com?"></a>
+                target="_blank" href="mailto:jsangio1@gmail.com?"></a>
 
         <v-dialog v-model="isOpen" persistent>
             <v-card>
