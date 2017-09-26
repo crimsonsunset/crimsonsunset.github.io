@@ -2,12 +2,12 @@
 
     <section>
 
-        <v-container fluid class="mt-3 resume-view" >
+        <v-container fluid class="mt-3 resume-view">
 
             <div
                     ref="loader"
                     :class="['loader', `loader--${settingsObj.themeColor}`, 'loader-bar-ping-pong', `${getActiveStatus()}`]"
-                    >
+            >
             </div>
 
             <card-list
@@ -61,10 +61,9 @@
                 <v-bottom-nav
                         id="resume-nav"
                         :value="true"
-                        :active.sync="currNavItem"
                         class="white"
+                        :active.sync="currNavItem"
                 >
-
 
 
                     <v-btn
@@ -73,7 +72,7 @@
                             :class="[`${settingsObj.themeColor}--text`, 'text--darken-2']"
                             :key="item.name"
                             :id="`${item.name}`"
-                            @click.native="(e)=>{toggleResumeNavItem(e.target.parentElement.id)}"
+                            @click="(e)=>{toggleResumeNavItem(e)}"
                             :value="item.name"
                     >
                         <span>{{item.name}}</span>
@@ -102,15 +101,18 @@
 		components: {CardList, LazyGrid, DetailAccordion, ParallaxCardList},
 		mounted() {
 			const hash = this.$router.currentRoute.hash.substring(1);
-            if (hash) {
-	            this.currNavItem = hash;
+
+			if (hash) {
+				console.log('hash exists', hash)
+				this.currNavItem = hash;
 			}
+			console.log('hash isz', hash)
 			this.settingsObj.loaderRef = this.$refs.loader;
 			this.$router.push(`/Resume#${this.currNavItem}`);
 		},
-//		activated(e) {
-//			this.$router.push(`/Resume#${this.currNavItem}`);
-//		},
+		//		activated(e) {
+		//			this.$router.push(`/Resume#${this.currNavItem}`);
+		//		},
 
 		data() {
 			return {
@@ -143,12 +145,12 @@
 		},
 		computed: {},
 		methods: {
-			toggleResumeNavItem(itemName) {
+			toggleResumeNavItem(e) {
+				let itemName = (e.target.nodeName == 'DIV') ? e.target.parentElement.id : e.target.id;
 				this.currNavItem = itemName;
 				this.$router.push(`/Resume#${itemName}`);
 				this.settingsObj.pagePrompt = this.getPageInfo();
-				//				this.settingsObj.resumeSection = itemName;
-//				this.$forceUpdate();
+				this.$forceUpdate();
 			}
 		}
 	})
@@ -160,7 +162,6 @@
     $resumeHeight: 88vh !important;
     $bw: 2px;
     @import "../../styles/colors";
-
 
     .border {
         border: $bw solid green;
@@ -179,22 +180,20 @@
         color: black
     }
 
-
     @media only screen and (max-width: 400px) {
 
         .resume-view {
             &__nav {
-                .btn__content span{
+                .btn__content span {
                     display: none;
                 }
-                .btn{
+                .btn {
                     min-width: 10px !important;
                 }
             }
 
         }
     }
-
 
 
 </style>
