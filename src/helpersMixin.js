@@ -1,5 +1,5 @@
 import {get, sortBy, sample} from 'lodash'
-import tokens from './config/tokens.json'
+// import tokens from './config/tokens.json'
 
 export default {
 	methods: {
@@ -19,7 +19,7 @@ export default {
 		getActiveStatus(){
 			return (!this.settingsObj.isLoaded) ? 'is-active' : '';
 		},
-		getToken(key) {return tokens[key]},
+		// getToken(key) {return tokens[key]},
 		getIntroSteps(that) {
 			return introSteps
 		},

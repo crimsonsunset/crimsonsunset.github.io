@@ -103,10 +103,10 @@
 			const hash = this.$router.currentRoute.hash.substring(1);
 
 			if (hash) {
-				console.log('hash exists', hash)
+				// console.log('hash exists', hash)
 				this.currNavItem = hash;
 			}
-			console.log('hash isz', hash)
+			// console.log('hash isz', hash)
 			this.settingsObj.loaderRef = this.$refs.loader;
 			this.$router.push(`/Resume#${this.currNavItem}`);
 		},
