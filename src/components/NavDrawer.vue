@@ -83,7 +83,7 @@
                         hide-details
 
                 >
-                    <template slot="item" scope="data">
+                    <template slot="item" slot-scope="data">
                         <template>
                             <v-list-tile-content>
                                 <v-btn fab
@@ -116,7 +116,7 @@
                         hide-details
 
                 >
-                    <template slot="item" scope="data">
+                    <template slot="item" slot-scope="data">
                         <template>
                             <v-list-tile-content>
                                 <v-list-tile-title v-text="data.item"></v-list-tile-title>

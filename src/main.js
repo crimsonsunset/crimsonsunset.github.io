@@ -21,7 +21,7 @@ Vue.mixin(helpersMixin);
 
 //set up the environment variables
 const {environment} = build.info;
-const localhostBase = 'http://localhost:4000/api/v1/';
+const localhostBase = 'http://localhost:3000/api/v1/';
 const remoteBase = 'https://crimsonsunset-portfolio.herokuapp.com/api/v1/';
 
 

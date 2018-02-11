@@ -23,26 +23,29 @@
                         v-for="(item,i) in sliderData"
                         :key="i"
                 >
-                    <h2> I {{i}}
+                    <div class="home-page__typer-container">
+                        <h2>I {{i}} </h2>
 
-
-                        <vue-typer
-                                :text='sliderData[i]'
-                                :shuffle='false'
-                                initial-action='typing'
-                                :pre-type-delay='70'
-                                :type-delay='60'
-                                :pre-erase-delay='750'
-                                :erase-delay='200'
-                                erase-style='select-all'
-                                caret-animation='blink'
-                                ref="home-typer"
-                                @erased='(e)=>{
+                        <div>
+                            <vue-typer
+                                    :text='sliderData[i]'
+                                    :shuffle='false'
+                                    initial-action='typing'
+                                    :pre-type-delay='70'
+                                    :type-delay='60'
+                                    :pre-erase-delay='750'
+                                    :erase-delay='200'
+                                    erase-style='select-all'
+                                    caret-animation='blink'
+                                    ref="home-typer"
+                                    @erased='(e)=>{
                                 	onErased(e,i);
                                 }'
-                        ></vue-typer>
+                            ></vue-typer>
+                        </div>
 
-                    </h2>
+
+                    </div>
 
                 </v-carousel-item>
 
@@ -81,13 +84,19 @@
                     </v-card-title>
                     <v-card-text>
                         <p>
-                            Hello and welcome to my Portfolio site! My name is Joe Sangiorgio and I'm currently a Web Interface Developer for Marvel Entertainment. I have a passion for all things Javascript, and love creating meaningful data-driven web applications.</p>
+                            Hello and welcome to my Portfolio site! My name is Joe Sangiorgio and I'm currently a Senior
+                            Front End Engineer at Marvel Entertainment. I have a passion for all things Javascript, and
+                            love creating meaningful data-driven web applications.</p>
 
                         <p>
-                            I made this app in order to have an interesting space to showcase the type of work I love doing. My goal was to create an environment that would present my professional products in a unique and compelling way. I also just wanted to play with some flashy cutting-edge web technologies! 🤓</p>
+                            I made this app in order to have an interesting space to showcase the type of work I love
+                            doing. My goal was to create an environment that would present my professional products in a
+                            unique and compelling way. I also just wanted to play with some flashy cutting-edge web
+                            technologies! 🤓</p>
 
                         <p>
-                            I hope you have as much fun exploring this app as I did building it. Thanks for visiting!</p>
+                            I hope you have as much fun exploring this app as I did building it. Thanks for
+                            visiting!</p>
 
                         <p>-Joe</p>
 
@@ -106,7 +115,8 @@
                         <v-spacer></v-spacer>
                         <v-btn
                                 :class="['darken-2', `${settingsObj.themeColor}--text`]"
-                                flat="flat" @click.native="infoModal = false">Cool!</v-btn>
+                                flat="flat" @click.native="infoModal = false">Cool!
+                        </v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -118,78 +128,78 @@
 
 <script>
 
-	import {VueTyper} from 'vue-typer'
-	import {find, keys, delay} from 'lodash'
-	import {routeExporter} from '../../helpers'
+    import {VueTyper} from 'vue-typer'
+    import {find, keys, delay} from 'lodash'
+    import {routeExporter} from '../../helpers'
 
-	let currSliderIndex = 0;
+    let currSliderIndex = 0;
 
-	export default routeExporter({
-		components: {VueTyper},
-		props: ['settingsObj', 'toTop', 'drawer'],
-		data() {
-			return {
-				infoModal: false,
-				sliderData: {
-					build: ["Websites", "Web Apps", "Native Apps", "Servers", "Layouts", "Wireframes", "Raspberry Pi Hacks", "Home Automation Systems"],
-					teach: ["Front End Development", "Full Stack Development", "Servers", "Comp Sci Concepts"],
-					know: ["Javascript [ES6/7]", "HTML5", "Sass", "CSS3", "JSON", "Python", "React", "Redux/Flux", "Vue", "Bootstrap", "Material UI", "Lodash", "Webpack", "Gulp", "Grunt"],
-					like: ["Coding", "Teaching", "Racquetball", "Snowboarding", "Smart Homes", "Tinkering", "Learning", "Live Music", "Food Trucks"]
+    export default routeExporter({
+        components: {VueTyper},
+        props: ['settingsObj', 'toTop', 'drawer'],
+        data() {
+            return {
+                infoModal: false,
+                sliderData: {
+                    build: ["Websites", "Web Apps", "Native Apps", "Servers", "Layouts", "Wireframes", "Raspberry Pi Hacks", "Home Automation Systems"],
+                    teach: ["Front End Development", "Full Stack Development", "Servers", "Comp Sci Concepts"],
+                    know: ["Javascript [ES6/7]", "HTML5", "Sass", "CSS3", "JSON", "Python", "React", "Redux/Flux", "Vue", "Bootstrap", "Material UI", "Lodash", "Webpack", "Gulp", "Grunt"],
+                    like: ["Coding", "Teaching", "Racquetball", "Snowboarding", "Smart Homes", "Tinkering", "Learning", "Live Music", "Food Trucks"]
 
-					//					build: ["Websites", "Web Apps"],
-					//					teach: ["Front End Development", 'joe things'],
-					//					know: ["Javascript [ES6/7]", "HTML5"],
-					//					like: ["Coding", "Teaching"]
-				}
-			}
-		},
-		computed: {
-			sliderKeys() {
-				return keys(this.sliderData)
-			}
-		},
-		methods: {
-			onErased: function (string, currKey) {
+                    //					build: ["Websites", "Web Apps"],
+                    //					teach: ["Front End Development", 'joe things'],
+                    //					know: ["Javascript [ES6/7]", "HTML5"],
+                    //					like: ["Coding", "Teaching"]
+                }
+            }
+        },
+        computed: {
+            sliderKeys() {
+                return keys(this.sliderData)
+            }
+        },
+        methods: {
+            onErased: function (string, currKey) {
 
-				let {sliderData, sliderKeys} = this;
-				const currArr = sliderData[currKey];
-				//other typers that are already going, ignore.
-				if (sliderKeys[currSliderIndex] != currKey) {
-					return
-				} else {
-					const {length} = currArr;
-					if (currArr[length - 1] == string) {
-						this.clickNext();
-					}
-				}
-			},
-			test() {
-				//                console.log('hey compelzzz', this)
-			},
-			clickNext() {
-				currSliderIndex++;
-				const children = this.$refs['home-carousel'].$el.children;
-				let nextBtn = find(children, (e) => e.className.includes('right'));
-				nextBtn = nextBtn.children[0];
+                let {sliderData, sliderKeys} = this;
+                const currArr = sliderData[currKey];
+                //other typers that are already going, ignore.
+                if (sliderKeys[currSliderIndex] != currKey) {
+                    return
+                } else {
+                    const {length} = currArr;
+                    if (currArr[length - 1] == string) {
+                        this.clickNext();
+                    }
+                }
+            },
+            test() {
+                //                console.log('hey compelzzz', this)
+            },
+            clickNext() {
+                currSliderIndex++;
+                const children = this.$refs['home-carousel'].$el.children;
+                let nextBtn = find(children, (e) => e.className.includes('right'));
+                nextBtn = nextBtn.children[0];
 
-				//clicking button will close the drawer, so block it here
-				if (!this.drawer && !this.infoModal) {
-					nextBtn.click();
-					delay(this.restartTyper, 100)
-				}
-			},
-			restartTyper() {
-				//have past the bounds of the array
-				if (!this.$refs['home-typer'][currSliderIndex]) {
-					currSliderIndex = 0;
-					this.$refs['home-typer'][currSliderIndex].reset();
-				} else {
-					this.$refs['home-typer'][currSliderIndex].reset();
-				}
-			}
-		}
+                //clicking button will close the drawer, so block it here
+                if (!this.drawer && !this.infoModal) {
+                    nextBtn.click();
+                    delay(this.restartTyper, 100)
+                }
+            },
+            restartTyper() {
+                //have past the bounds of the array
+                if (!this.$refs['home-typer'][currSliderIndex]) {
+                    currSliderIndex = 0;
+                    this.$refs['home-typer'][currSliderIndex].reset();
+                } else {
+                    this.$refs['home-typer'][currSliderIndex].reset();
+                }
+            }
+        }
 
-	})
+    })
 </script>
 
 
@@ -215,14 +225,23 @@
             display: flex;
             justify-content: space-between;
         }
-        &__info-modal{
+        &__typer-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            h2 {
+                margin-right: 10px;
+            }
+        }
+
+        &__info-modal {
             margin-top: 50px;
             margin-bottom: 30px;
         }
         &__profile-photo {
             display: flex;
             justify-content: center;
-            div{
+            div {
                 display: grid;
                 align-self: center;
             }
@@ -234,7 +253,7 @@
         }
     }
 
-    .dialog{
+    .dialog {
         box-shadow: none !important;
     }
 
