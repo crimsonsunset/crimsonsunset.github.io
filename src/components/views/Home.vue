@@ -7,6 +7,7 @@
                 xs12 md6 offset-md3>
             <h1 class="home-page__hello"> Hi, I'm Joe.</h1>
 
+            
             <v-carousel
                     cycle
                     dark
