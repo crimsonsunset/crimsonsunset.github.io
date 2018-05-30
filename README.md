@@ -1,4 +1,4 @@
-# Joe Sangiorgio Portfolio
+# Joe Sangiorgio Portfolio Site
 
 Hello and welcome to my Portfolio site! My name is Joe Sangiorgio and I'm currently a Web Interface Developer for Marvel Entertainment. I have a passion for all things Javascript, and love creating meaningful data-driven web applications.
 
