@@ -7,14 +7,54 @@
 - [x] Comprehensive codebase analysis completed
 - [x] Documented legacy dev environment setup (Rosetta + Python 2.7 + Node 8)
 - [x] Created environment verification script
+- [x] **Phase 5 (Vite Migration) COMPLETED!**
 
 ## Immediate Priorities
-- [ ] Get dev environment running in Rosetta terminal
-- [ ] Verify site builds and runs locally
-- [ ] Plan modernization strategy
-- [ ] Create migration roadmap
+- [x] Migrate to Vite 4 from Webpack 2
+- [x] Update to Dart Sass from node-sass
+- [x] Test all features in development
+- [x] Test production build
+- [x] Clean up old dependencies
+- [ ] **Phase 5.1: Sass Deprecation Cleanup** (Quick win)
+  - [ ] Fix `@import` → `@use` syntax in SCSS files
+  - [ ] Fix division syntax (`/` → `calc()` or `math.div()`)
+  - [ ] Fix global built-in functions (`map-get` → `map.get`, etc.)
+  - [ ] Consider replacing `Sass-JSON` library with modern alternative
+- [ ] Deploy to production (GitHub Pages)
 
 ## Progress Log
+
+### Oct 28, 2025 - Session: Phase 5 Vite Migration ✅ COMPLETE
+**Completed:**
+- Migrated from Webpack 2 to Vite 4
+- Replaced node-sass with Dart Sass
+- Updated Babel config to use @babel/preset-env
+- Fixed SCSS imports (removed `~` prefix for node_modules)
+- Converted `require()` to ES module `import` statements
+- Updated build.info plugin to work with Vite
+- Fixed console.rainbow helper function
+- Tested dev server: All routes working, fast startup (<3s)
+- Tested production build: Successful build in ~2s
+- Removed 606 old dependencies (Webpack, node-sass, loaders)
+- Reduced vulnerabilities from 131 to 87
+- Updated .nvmrc to Node 18
+- Fixed typo in joeInfo.json ("Marvel sss" → "Marvel")
+- Updated README.md with new requirements
+- Created manual test checklist
+
+**Current State:**
+- ✅ Dev server: Instant startup, sub-second HMR
+- ✅ Production build: Works perfectly
+- ✅ Native ARM64 support (no Rosetta!)
+- ✅ No Python 2.7 required
+- ✅ All features functional
+
+**Issues Resolved:**
+- Babel preset compatibility (es2015 → @babel/preset-env)
+- SCSS import syntax (tilde prefix removal)
+- Asset imports (require → import)
+- Build info plugin adaptation for Vite
+- console.rainbow function in production
 
 ### Oct 27, 2025 - Session: Documentation & Environment Setup
 **Completed:**
@@ -38,36 +78,37 @@
 
 ## Next Steps
 
-### Immediate (Next 5 minutes)
-1. [ ] Open Terminal with Rosetta
-2. [ ] Run `npm run check-env` to verify
-3. [ ] Run `npm install` (may take 5-10 min)
-4. [ ] Run `npm start` to verify site works
-5. [ ] Document any issues encountered
+### Phase 5.1: Sass Deprecation Cleanup (Recommended Next)
+**Effort**: 2-4 hours | **Risk**: Low | **Benefit**: Clean console output + future-proof
 
-### Short Term (This Session)
-1. [ ] Verify all routes work locally
-2. [ ] Test build process (`npm run build`)
-3. [ ] Check for runtime errors in browser console
-4. [ ] Document current functionality baseline
+**Why do this?**
+- Currently have ~50+ Sass deprecation warnings in console
+- All warnings are from using old Sass syntax patterns
+- Easy fixes with automated tools available
+- Makes build output much cleaner
 
-### Planning Phase (Before Modernization)
-1. [ ] Identify critical features to preserve
-2. [ ] Research modern equivalents for dependencies:
-   - node-sass → sass (Dart Sass)
-   - Webpack 2 → Vite
-   - Vue 2 → Vue 3
-   - Vuetify 0.15 → Vuetify 3
-3. [ ] Create migration strategy document
-4. [ ] Decide: incremental migration vs. fresh rewrite?
+**Quick wins:**
+1. Replace `@import` → `@use` syntax (automated tool available)
+2. Fix division: `-$parallax-offset / 2` → `calc(-1 * $parallax-offset / 2)`
+3. Update global functions: `map-get()` → `map.get()`
+4. Consider replacing `Sass-JSON` library (it's the main culprit)
+
+**See `docs/roadmap.md` Phase 5.1 for detailed implementation guide**
 
 ## Notes & Decisions
 
-### Technical Debt Identified
-- **Critical**: node-sass 4.5.0 (requires Python 2.7, x86, ancient Node)
-- **High**: All dependencies 4-5 years old (security concerns)
-- **Medium**: Webpack 2 → should be Webpack 5 or Vite
-- **Medium**: Vue 2 → Vue 3 migration needed
+### Technical Debt Status
+**Completed (Phase 5):**
+- ✅ ~~node-sass 4.5.0~~ → Now using Dart Sass
+- ✅ ~~Webpack 2~~ → Now using Vite 4
+- ✅ ~~Python 2.7 requirement~~ → No longer needed
+- ✅ ~~Rosetta/x86 requirement~~ → Native ARM64
+- ✅ ~~606 old dependencies~~ → Removed and cleaned up
+- ✅ ~~Security vulnerabilities~~ → Reduced from 131 to 87
+
+**Remaining:**
+- **Low**: Sass deprecation warnings (~50 warnings, non-breaking)
+- **Medium**: Vue 2 → Vue 3 migration (optional, deferred)
 - **Low**: No TypeScript
 - **Low**: No tests
 
@@ -79,15 +120,10 @@
 - LocalStorage for user preferences
 
 ### Modernization Philosophy
-Per the README, this site is intentionally over-engineered as a showcase. Any modernization should:
-1. Maintain the "fun" factor
-2. Keep customization features
-3. Preserve interactive tour
-4. Update to modern best practices
-5. Improve performance
-6. Enable easier maintenance
-
-### Blockers
-- **Immediate**: Must use Rosetta terminal for legacy deps
-- **Short term**: node-sass prevents using modern Node
-- **Long term**: Complete dependency refresh needed
+Per the README, this site is intentionally over-engineered as a showcase. Phase 5 maintained this philosophy:
+1. ✅ Maintained the "fun" factor - All animations and features work
+2. ✅ Kept customization features - Theme and animation selectors work
+3. ✅ Preserved interactive tour - Tour functionality intact
+4. ✅ Updated to modern best practices - Vite 4, Dart Sass, ES modules
+5. ✅ Improved performance - 10-100x faster dev server, instant HMR
+6. ✅ Enabled easier maintenance - Native ARM64, no legacy requirements

@@ -5,21 +5,19 @@
   "author": "Joe Sangiorgio",
   "private": true,
   "scripts": {
-    "check-env": "./scripts/check-env.sh",
-    "setup": "./scripts/check-env.sh && npm install",
-    "start": "./scripts/check-env.sh && cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --colors",
-    "dev": "./scripts/check-env.sh && cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --colors",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "vue": "^2.3.3"
   },
   "devDependencies": {
-    "Sass-JSON": "^1.0.0",
+    "@babel/preset-env": "^7.28.5",
     "animate.css": "^3.5.2",
     "axios": "^0.16.2",
     "babel-core": "^6.0.0",
-    "babel-loader": "^6.0.0",
     "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-vue-jsx": "^3.5.0",
@@ -27,29 +25,24 @@
     "babel-preset-env": "^1.5.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "cross-env": "^3.0.0",
-    "css-loader": "^0.25.0",
     "express": "^4.15.4",
-    "file-loader": "^0.9.0",
     "intro.js": "^2.8.0-alpha.1",
     "isotope-layout": "^3.0.4",
     "lodash": "^4.17.4",
-    "node-sass": "^4.5.0",
     "pure-css-loader": "^3.0.1",
-    "sass-loader": "^5.0.1",
+    "sass": "^1.93.2",
+    "Sass-JSON": "^1.0.0",
     "store": "^2.0.12",
-    "style-loader": "^0.18.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
-    "url-loader": "^0.5.9",
+    "vite": "^4.5.14",
+    "vite-plugin-vue2": "^2.0.3",
     "vue-images-loaded": "^1.1.2",
     "vue-loader": "^12.1.0",
     "vue-router": "^2.7.0",
     "vue-template-compiler": "^2.3.3",
     "vue-typer": "^1.2.0",
     "vueisotope": "^3.1.0",
-    "vuetify": "^0.15.7",
-    "webpack": "^2.6.1",
-    "webpack-dev-server": "^2.4.5"
+    "vuetify": "^0.15.7"
   }
 }

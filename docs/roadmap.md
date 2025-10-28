@@ -56,12 +56,14 @@ Update this document when major milestones are reached or project direction chan
 
 **Decision**: Go straight to Phase 5 (Vite) which will migrate sass + bundler together
 
-### Phase 5: Build Tool Migration (Current - In Progress)
+### Phase 5: Build Tool Migration ✅ COMPLETED (Oct 28, 2025)
 **Goal**: Migrate from Webpack 2 to Vite for 10-100x faster dev experience + modern sass handling
 
 **Prerequisites:**
 - ✅ Legacy baseline working and tested (Node 14, Rosetta)
 - ✅ Phase 4 skipped (will be handled by Vite)
+
+**Status**: ✅ COMPLETE - All migration tasks finished and verified
 
 **Changes:**
 - 🎯 Install Vite and `vite-plugin-vue2`
@@ -92,11 +94,47 @@ Update this document when major milestones are reached or project direction chan
 **Breaking Changes**: Build process only (not user-facing)  
 **Bonus**: Also eliminates all Phase 4 issues (Rosetta, Python, node-sass)
 
+### Phase 5.1: Sass Deprecation Cleanup (Next - Quick Win)
+**Goal**: Eliminate Sass deprecation warnings by modernizing SCSS syntax
+
+**Prerequisites:**
+- ✅ Phase 5 completed (Vite + Dart Sass working)
+
+**Changes:**
+- 🎯 Replace `@import` with `@use` and `@forward` in SCSS files
+- 🎯 Fix division operators (`/` → `calc()` or `math.div()`)
+- 🎯 Update global built-in functions:
+  - `map-get()` → `map.get()`
+  - `type-of()` → `meta.type-of()`
+  - `function-exists()` → `meta.function-exists()`
+  - `call()` → `meta.call()`
+- 🎯 Replace or update `Sass-JSON` library (legacy, uses deprecated features)
+- 🎯 Add `@use "sass:map"` and `@use "sass:meta"` where needed
+
+**Benefits:**
+- ✅ Clean console output (no warnings)
+- ✅ Future-proof for Dart Sass 2.0 and 3.0
+- ✅ Better performance with modern Sass module system
+- ✅ Improved code organization with explicit imports
+
+**Effort**: 2-4 hours (mostly find/replace)
+**Risk**: Low (non-breaking changes, easy to test)
+**Breaking Changes**: None (purely internal SCSS improvements)
+
+**Files to Update:**
+- `src/styles/index.scss` (main entry, Sass-JSON usage)
+- `src/styles/colors.scss` (map-get usage)
+- `src/components/views/Home.vue` (style block)
+- `src/components/views/Resume.vue` (style block)
+- `src/components/ParallaxCardList.vue` (division operators)
+- Consider: Replace `Sass-JSON` with custom JSON output solution
+
 ### Phase 6: Framework Upgrade (Optional - High Risk)
 **Goal**: Migrate Vue 2 → Vue 3 for long-term support and modern features
 
 **Prerequisites:**
 - ✅ Phase 5 completed (Phase 4 skipped)
+- ✅ Phase 5.1 completed (Sass cleanup)
 - ✅ Comprehensive testing in place
 
 **Changes:**
@@ -397,15 +435,17 @@ Benefit:   Vite handles sass automatically + all other wins
 | Phase | Effort | Risk | Benefit | Priority | Status |
 |-------|--------|------|---------|----------|--------|
 | **4: Sass** | Low (2h) | Low | Medium | High | ❌ SKIPPED |
-| **5: Vite** | Medium (1-2d) | Medium | **Very High** | **Urgent** | 🔄 **IN PROGRESS** |
+| **5: Vite** | Medium (1-2d) | Medium | **Very High** | **Urgent** | ✅ **COMPLETE** |
+| **5.1: Sass Cleanup** | Low (2-4h) | Low | Medium | High | 🎯 **NEXT** |
 | **6: Vue 3** | High (1-2w) | High | Medium | Low | ⚠️ MAYBE |
 
-**Updated Recommendation**: 
+**Current Recommendation**: 
 - ❌ **Phase 4 Skipped** - Doesn't work with Webpack 2
-- ✅ **Do Phase 5 NOW** - Includes all Phase 4 benefits + massive DX improvement
+- ✅ **Phase 5 COMPLETE** - Includes all Phase 4 benefits + massive DX improvement
+- 🎯 **Do Phase 5.1 Next** - Quick win to eliminate Sass warnings
 - ⚠️ **Evaluate Phase 6 later** - Only if long-term support critical
 
-**The winner**: **Phase 5 (Vite)** - Does everything Phase 4 promised + 10-100x faster dev experience.
+**Next up**: **Phase 5.1 (Sass Cleanup)** - 2-4 hours to modernize SCSS syntax and eliminate all deprecation warnings.
 
 
 
