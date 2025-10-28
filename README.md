@@ -40,6 +40,19 @@ npm run build
 - **Architecture**: x86_64/i386 (Rosetta terminal required on Apple Silicon)
 - **Platform**: macOS with Rosetta 2 support
 
-## Modernization
+## 🚀 Modernization Roadmap
 
-This codebase is intentionally kept in legacy state for now. See `docs/roadmap.md` for modernization plans.
+This codebase uses **2017-era dependencies** (Vue 2, Webpack 2, node-sass). We're doing a single-step modernization:
+
+- **Phase 4**: ~~Replace `node-sass` → `sass`~~ ❌ **Skipped** - Doesn't work with Webpack 2
+  
+- **Phase 5**: Migrate Webpack → Vite - **1-2 days, medium risk** 🔄 **IN PROGRESS**  
+  ✨ 10-100x faster dev server, instant HMR, modern DX  
+  ✨ Includes sass migration + eliminates Rosetta/Python requirements
+  
+- **Phase 6**: Upgrade Vue 2 → Vue 3 - **1-2 weeks, high risk** (optional, later)  
+  ⚠️ Major refactor due to Vuetify 0→3 breaking changes
+
+**Current Status**: Phase 5 (Vite migration) in progress  
+**Benefits**: All Phase 4 + Phase 5 benefits in one migration  
+**Full Details**: See [`docs/roadmap.md`](docs/roadmap.md) for complete implementation guide

@@ -74,10 +74,33 @@ npm run dev
 | Slow/hanging builds | Clean cache: `npm cache clean --force` |
 | nvm not found in scripts | Script auto-loads nvm (fixed) |
 
-## 🔮 Next Steps
+## 🔮 Modernization Path
 
-Once baseline is working (✅ done!):
-1. Consider modernizing (replace node-sass → sass)
-2. Or stick with legacy for now
-3. See `docs/roadmap.md` for migration path
+Once baseline is working (✅ done!), we're doing a single-step modernization:
+
+### Phase 4: Sass Migration ❌ SKIPPED
+- **Status**: Attempted but doesn't work with Webpack 2.x
+- **Issue**: sass-loader compatibility hell
+- **Decision**: Skip and go straight to Phase 5
+
+### Phase 5: Vite Migration 🔄 IN PROGRESS
+- **Effort**: 1-2 days
+- **Benefit**: 10-100x faster dev server + all Phase 4 benefits!
+- **Risk**: Medium (requires testing)
+- **Includes**: 
+  - ✅ Webpack → Vite
+  - ✅ node-sass → sass (automatically)
+  - ✅ No more Rosetta/Python/x64 Node
+  - ✅ Build on Node 18+ in regular ARM terminal
+  - ✅ Instant dev server + HMR
+
+### Phase 6: Vue 3 Upgrade (Optional, Later)
+- **Effort**: 1-2 weeks
+- **Benefit**: Long-term support, better performance
+- **Risk**: High (Vuetify 0→3 is major breaking change)
+- **Result**: Future-proof stack
+
+**Recommendation**: Phase 5 (Vite) gets everything in one migration!
+
+**Full Details**: See [`docs/roadmap.md`](docs/roadmap.md) for step-by-step implementation guide with commands, configs, and rollback plans.
 
