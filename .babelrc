@@ -1,11 +1,8 @@
 {
   "presets": [
-    ["env", { "modules": false }],
-    "es2015",
-    "stage-0"
+    ["@babel/preset-env", {
+      "modules": false
+    }]
   ],
-  "plugins": [
-    "transform-vue-jsx",
-    "transform-class-properties"
-  ]
+  "plugins": []
 }

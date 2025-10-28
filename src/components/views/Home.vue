@@ -205,8 +205,7 @@
 
 
 <style lang="scss">
-
-    @import "../../styles/colors";
+    @use "../../styles/colors" as *;
 
     .home-page {
 

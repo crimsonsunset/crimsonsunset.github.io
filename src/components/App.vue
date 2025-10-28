@@ -153,9 +153,8 @@
 	import NavBar from './NavBar.vue'
 	import RouterView from 'vue-router'
 	import {introJs} from 'intro.js'
-
-	const iconGithub = require('../assets/icons/github.svg');
-	const iconLinkedin = require('../assets/icons/linkedin.svg');
+	import iconGithub from '../assets/icons/github.svg'
+	import iconLinkedin from '../assets/icons/linkedin.svg'
 
 
 	export default {

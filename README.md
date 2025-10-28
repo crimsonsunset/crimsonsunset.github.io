@@ -8,15 +8,38 @@ Do I realize the same content housed within this site could have been communicat
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
-yarn
-
+npm install
 
 # serve with hot reload at localhost:8080
 npm start
 
-
 # build for production with minification
 npm run build
+
+# preview production build
+npm run preview
 ```
+
+## Requirements
+
+- **Node.js**: v18+ (recommended) or v22+
+- **npm**: v8+
+- **Platform**: macOS, Linux, or Windows (native ARM64 support on Apple Silicon)
+
+## 🎉 Modernization Complete!
+
+This project has been successfully migrated to modern tooling:
+
+- ✅ **Build Tool**: Vite 4 (10-100x faster than Webpack 2)
+- ✅ **Styling**: Dart Sass (modern, maintained)
+- ✅ **Framework**: Vue 2.x (compatible with Vite)
+- ✅ **Native Support**: ARM64 Apple Silicon (no Rosetta required!)
+- ✅ **No Python**: No longer requires Python 2.7
+- ✅ **Fast HMR**: Sub-second hot module replacement
+
+**Previous stack** (2017): Webpack 2, node-sass, Python 2.7, Rosetta required  
+**Current stack** (2025): Vite 4, Dart Sass, Node 18+, native ARM64
+
+**Migration Details**: See [`docs/roadmap.md`](docs/roadmap.md) for full history

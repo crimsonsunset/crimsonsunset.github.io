@@ -158,10 +158,10 @@
 </script>
 
 <style lang="scss">
+    @use "../../styles/colors" as *;
 
     $resumeHeight: 88vh !important;
     $bw: 2px;
-    @import "../../styles/colors";
 
     .border {
         border: $bw solid green;
