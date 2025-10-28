@@ -39,6 +39,7 @@ function buildInfoPlugin() {
 }
 
 export default defineConfig({
+  base: '/',
   plugins: [
     createVuePlugin(),
     buildInfoPlugin()
@@ -61,6 +62,7 @@ export default defineConfig({
         assetFileNames: '[name].[ext]'
       }
     }
-  }
+  },
+  publicDir: 'public'
 })
 
