@@ -10,3 +10,4 @@ src/config/tokens.json
 *.ntvs*
 *.njsproj
 *.sln
+.specstory
