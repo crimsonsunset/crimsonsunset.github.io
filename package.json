@@ -5,8 +5,10 @@
   "author": "Joe Sangiorgio",
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --colors",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --colors",
+    "check-env": "./scripts/check-env.sh",
+    "setup": "./scripts/check-env.sh && npm install",
+    "start": "./scripts/check-env.sh && cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --colors",
+    "dev": "./scripts/check-env.sh && cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --colors",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {

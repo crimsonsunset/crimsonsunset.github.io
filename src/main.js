@@ -22,17 +22,18 @@ Vue.mixin(helpersMixin);
 //set up the environment variables
 const {environment} = build.info;
 const localhostBase = 'http://localhost:3000/api/v1/';
-const remoteBase = 'https://crimsonsunset-portfolio.herokuapp.com/api/v1/';
+const remoteBase = 'https://resume.joesangiorgio.com/api/v0/';
 
 
 Object.defineProperty(Vue.prototype, '$env', {value: environment});
 Object.defineProperty(Vue.prototype, '$endpoints', {
 	value: {
-		base: (environment == "DEVELOPMENT")? `${localhostBase}`: `${remoteBase}`,
-		info: (environment == "DEVELOPMENT")? `${localhostBase}info/`: `${remoteBase}info/`,
-		scrape: (environment == "DEVELOPMENT")? `${localhostBase}scrape/`: `${remoteBase}scrape/`
+		base: `${remoteBase}`,
+		info: `${remoteBase}info/`,
+		scrape: `${remoteBase}scrape/`
 	}
 });
+
 //add a localStorage store
 Object.defineProperty(Vue.prototype, '$store', {value: store});
 
