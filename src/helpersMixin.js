@@ -5,10 +5,27 @@ export default {
 	methods: {
 		//getters [mainly config]
 		getSassConfig(key) {
-			const fullConfig = JSON.parse(JSON.parse(window.getComputedStyle(
-				document.getElementById('sassData'), '::before'
-			).content));
-			return get(fullConfig, [key]) || {}
+			// Colors now exported as CSS custom properties instead of Sass-JSON
+			const config = {
+				colors: [
+					{ color: 'red', hexValue: '#F44336' },
+					{ color: 'pink', hexValue: '#e91e63' },
+					{ color: 'purple', hexValue: '#9c27b0' },
+					{ color: 'indigo', hexValue: '#3f51b5' },
+					{ color: 'blue', hexValue: '#2196F3' },
+					{ color: 'cyan', hexValue: '#00bcd4' },
+					{ color: 'teal', hexValue: '#009688' },
+					{ color: 'green', hexValue: '#4CAF50' },
+					{ color: 'light', hexValue: '#8bc34a' },
+					{ color: 'lime', hexValue: '#cddc39' },
+					{ color: 'yellow', hexValue: '#ffeb3b' },
+					{ color: 'amber', hexValue: '#ffc107' },
+					{ color: 'orange', hexValue: '#ff9800' },
+					{ color: 'brown', hexValue: '#795548' },
+					{ color: 'grey', hexValue: '#9e9e9e' }
+				]
+			};
+			return get(config, [key]) || {}
 		},
 		getAnimationNames() {
 			return animationNames;

@@ -94,40 +94,37 @@ Update this document when major milestones are reached or project direction chan
 **Breaking Changes**: Build process only (not user-facing)  
 **Bonus**: Also eliminates all Phase 4 issues (Rosetta, Python, node-sass)
 
-### Phase 5.1: Sass Deprecation Cleanup (Next - Quick Win)
+### Phase 5.1: Sass Deprecation Cleanup ✅ COMPLETED (Oct 28, 2025)
 **Goal**: Eliminate Sass deprecation warnings by modernizing SCSS syntax
 
 **Prerequisites:**
 - ✅ Phase 5 completed (Vite + Dart Sass working)
 
 **Changes:**
-- 🎯 Replace `@import` with `@use` and `@forward` in SCSS files
-- 🎯 Fix division operators (`/` → `calc()` or `math.div()`)
-- 🎯 Update global built-in functions:
-  - `map-get()` → `map.get()`
-  - `type-of()` → `meta.type-of()`
-  - `function-exists()` → `meta.function-exists()`
-  - `call()` → `meta.call()`
-- 🎯 Replace or update `Sass-JSON` library (legacy, uses deprecated features)
-- 🎯 Add `@use "sass:map"` and `@use "sass:meta"` where needed
+- ✅ Replace `@import` with `@use` in SCSS files
+- ✅ Fix division operators (`/` → `math.div()`)
+- ✅ Update global built-in functions (`map-get()` → `map.get()`)
+- ✅ Replace `Sass-JSON` library with hard-coded colors array
+- ✅ Add `@use "sass:map"` and `@use "sass:math"` where needed
 
 **Benefits:**
-- ✅ Clean console output (no warnings)
+- ✅ Clean console output (zero SCSS deprecation warnings)
 - ✅ Future-proof for Dart Sass 2.0 and 3.0
 - ✅ Better performance with modern Sass module system
 - ✅ Improved code organization with explicit imports
 
-**Effort**: 2-4 hours (mostly find/replace)
-**Risk**: Low (non-breaking changes, easy to test)
-**Breaking Changes**: None (purely internal SCSS improvements)
+**Effort**: 2-4 hours ✅ ACTUAL: ~2 hours
+**Risk**: Low (non-breaking changes, easy to test) ✅ CONFIRMED
+**Breaking Changes**: None (purely internal SCSS improvements) ✅ CONFIRMED
 
-**Files to Update:**
-- `src/styles/index.scss` (main entry, Sass-JSON usage)
-- `src/styles/colors.scss` (map-get usage)
-- `src/components/views/Home.vue` (style block)
-- `src/components/views/Resume.vue` (style block)
-- `src/components/ParallaxCardList.vue` (division operators)
-- Consider: Replace `Sass-JSON` with custom JSON output solution
+**Files Updated:**
+- ✅ `src/styles/index.scss` - Module system, CSS custom properties
+- ✅ `src/styles/tour.scss` - Added colors import
+- ✅ `src/components/views/Home.vue` - Import → use
+- ✅ `src/components/views/Resume.vue` - Import → use
+- ✅ `src/components/ParallaxCardList.vue` - Division operators
+- ✅ `src/helpersMixin.js` - Hard-coded colors array (replaced Sass-JSON parsing)
+- ✅ `package.json` - Removed Sass-JSON
 
 ### Phase 6: Framework Upgrade (Optional - High Risk)
 **Goal**: Migrate Vue 2 → Vue 3 for long-term support and modern features

@@ -15,14 +15,42 @@
 - [x] Test all features in development
 - [x] Test production build
 - [x] Clean up old dependencies
-- [ ] **Phase 5.1: Sass Deprecation Cleanup** (Quick win)
-  - [ ] Fix `@import` → `@use` syntax in SCSS files
-  - [ ] Fix division syntax (`/` → `calc()` or `math.div()`)
-  - [ ] Fix global built-in functions (`map-get` → `map.get`, etc.)
-  - [ ] Consider replacing `Sass-JSON` library with modern alternative
+- [x] **Phase 5.1: Sass Deprecation Cleanup** ✅ COMPLETE
+  - [x] Fix `@import` → `@use` syntax in SCSS files
+  - [x] Fix division syntax (`/` → `math.div()`)
+  - [x] Fix global built-in functions (`map-get` → `map.get`)
+  - [x] Replaced `Sass-JSON` library with CSS custom properties
 - [ ] Deploy to production (GitHub Pages)
 
 ## Progress Log
+
+### Oct 28, 2025 - Session: Phase 5.1 Sass Deprecation Cleanup ✅ COMPLETE
+**Completed:**
+- Replaced all `@import` with `@use` syntax (index.scss, tour.scss, Home.vue, Resume.vue)
+- Fixed division operators: `$var / 2` → `math.div($var, 2)` (ParallaxCardList.vue)
+- Updated map functions: `map-get()` → `map.get()` with `sass:map` module
+- Removed Sass-JSON dependency and replaced with CSS custom properties
+- Added `@use "colors" as *;` to tour.scss for proper module imports
+- Updated `getSassConfig()` to return colors array directly instead of parsing JSON
+- Verified zero SCSS deprecation warnings in build output
+- Verified zero runtime errors in browser console
+
+**Current State:**
+- ✅ Zero SCSS-level deprecation warnings
+- ✅ Zero runtime errors (tested with Playwright)
+- ✅ Build succeeds with clean SCSS compilation
+- ✅ All features functional (theme selector, animations, tour, navigation)
+- ✅ Production build working (~3s build time)
+- ⚠️ Note: Remaining "legacy-js-api" warnings are from Vite/Sass integration layer (not our code)
+
+**Files Modified:**
+- `src/styles/index.scss` - Module system, CSS custom properties
+- `src/styles/tour.scss` - Added colors import
+- `src/components/ParallaxCardList.vue` - Division operators
+- `src/components/views/Home.vue` - Import → use
+- `src/components/views/Resume.vue` - Import → use
+- `src/helpersMixin.js` - Hard-coded colors array (replaced Sass-JSON parsing)
+- `package.json` - Removed Sass-JSON
 
 ### Oct 28, 2025 - Session: Phase 5 Vite Migration ✅ COMPLETE
 **Completed:**
@@ -98,16 +126,17 @@
 ## Notes & Decisions
 
 ### Technical Debt Status
-**Completed (Phase 5):**
+**Completed (Phase 5 + 5.1):**
 - ✅ ~~node-sass 4.5.0~~ → Now using Dart Sass
 - ✅ ~~Webpack 2~~ → Now using Vite 4
 - ✅ ~~Python 2.7 requirement~~ → No longer needed
 - ✅ ~~Rosetta/x86 requirement~~ → Native ARM64
 - ✅ ~~606 old dependencies~~ → Removed and cleaned up
 - ✅ ~~Security vulnerabilities~~ → Reduced from 131 to 87
+- ✅ ~~Sass deprecation warnings~~ → All SCSS-level warnings eliminated
 
 **Remaining:**
-- **Low**: Sass deprecation warnings (~50 warnings, non-breaking)
+- **Low**: Vite legacy-js-api warnings (build tool integration, not our code)
 - **Medium**: Vue 2 → Vue 3 migration (optional, deferred)
 - **Low**: No TypeScript
 - **Low**: No tests

@@ -256,15 +256,8 @@
         display: flex;
         align-items: center;
         width: 300px !important;
-        &:after {
-            content: none;
-        }
         &:after, &:before {
-            content: none;
-            /*animation: none ;*/
-            animation-name: flipInX;
-            -webkit-animation-name: flipInX;
-            animation-iteration-count: infinite;
+            display: none !important;
         }
         &__body {
             margin: 0 auto;

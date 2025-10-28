@@ -270,6 +270,7 @@
 </script>
 
 <style lang="scss">
+    @use "sass:math";
 
     .resume-view .container {
         padding: 0px;
@@ -325,9 +326,9 @@
         }
         &:first-child {
             background-image: url(http://az616578.vo.msecnd.net/files/2017/02/26/6362373673602705401797046446_1280_profile.jpg);
-            transform: translateY(-$parallax-offset / 2);
+            transform: translateY(math.div(-$parallax-offset, 2));
             .content-wrapper {
-                transform: translateY($parallax-offset /2);
+                transform: translateY(math.div($parallax-offset, 2));
             }
         }
         &:nth-child(2) {
@@ -395,9 +396,9 @@
     // ------------- SET TRANSFORM VALUES ------------- //
 
     .background.up-scroll {
-        transform: translate3d(0, -$parallax-offset / 2, 0);
+        transform: translate3d(0, math.div(-$parallax-offset, 2), 0);
         .content-wrapper {
-            transform: translateY($parallax-offset / 2);
+            transform: translateY(math.div($parallax-offset, 2));
         }
         + .background {
             transform: translate3d(0, $parallax-offset, 0);
@@ -413,9 +414,9 @@
             transform: translateY($content-offset);
         }
         + .background:not(.down-scroll) {
-            transform: translate3d(0, -$parallax-offset / 2, 0);
+            transform: translate3d(0, math.div(-$parallax-offset, 2), 0);
             .content-wrapper {
-                transform: translateY($parallax-offset / 2);
+                transform: translateY(math.div($parallax-offset, 2));
             }
         }
     }

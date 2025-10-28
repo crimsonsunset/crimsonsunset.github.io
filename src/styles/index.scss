@@ -1,20 +1,22 @@
-@import "Sass-JSON/src/_sass-json.scss";
+@use "sass:map";
+@use "sass:math";
+@use "colors" as *;
+@use "globals" as *;
+@use "tour" as *;
+
 @import "pure-css-loader/dist/css-loader.css";
 @import "intro.js/minified/introjs.min.css";
-@import "colors";
-@import "globals";
-@import "tour";
 
-$export: (
-        'colors': $colors
-);
-
-//to style the loading bar themes
-@each $value in $colors {
-  .loader--#{map-get($value, 'color')}:after{
-    background-color: #{map-get($value, hexValue)} !important;
+// Export colors as CSS custom properties
+:root {
+  @each $value in $colors {
+    --color-#{map.get($value, 'color')}: #{map.get($value, hexValue)};
   }
 }
 
-@debug json-encode;
-@include json-encode($value: $export, $selector: '#sassData');
+//to style the loading bar themes
+@each $value in $colors {
+  .loader--#{map.get($value, 'color')}:before{
+    background-color: #{map.get($value, hexValue)} !important;
+  }
+}
