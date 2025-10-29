@@ -322,5 +322,27 @@
         z-index: 300 !important;
     }
 
+    .skill-card__wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .skill-card__label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #333;
+        font-size: 14px;
+        font-weight: 600;
+        text-align: center;
+        padding: 8px;
+        word-wrap: break-word;
+        max-width: 90%;
+        pointer-events: none;
+    }
+
 
 </style>
