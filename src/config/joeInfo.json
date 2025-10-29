@@ -2,92 +2,345 @@
   "profileData": {
     "experience": [
       {
-        "company": "Marvel",
+        "company": "FORA · Freelance",
+        "title": "Principal Engineer (Founding Team)",
+        "timeFrame": "Jan 2024 - Present · 1 yr 9 mos",
+        "logo": "fora",
+        "description": "• Pioneered enterprise-grade AI-assisted development practices, establishing quality standards and systematic workflows that transform AI chaos into production-ready code meeting rigorous review standards• Architected foundational technology stack by selecting and integrating key services (Statsig, Netlify, Rollbar, etc), enabling seamless deployment and scalable infrastructure• Influenced product strategy and technical direction by creating comprehensive product requirements, contributing to roadmap planning, and bridging product-engineering collaboration gaps• Orchestrated cross-platform development strategy across web frontend, serverless backend, administrative systems, and iOS app coordination, ensuring technical cohesion and scalability• Developed enterprise-grade tour platform with guided onboarding, dynamic configuration, and integrated analytics for user engagement tracking• Implemented marketing site with Prismic CMS integration, enabling dynamic content creation/management, sophisticated blog functionality, and proper social sharing• Developed progressive web app infrastructure and coordinated iOS development, delivering cross-platform mobile solutions with OneSignal notification architecture• Architected and developed developer experience platforms, including testing frameworks, custom administrative tooling, and automated release management"
+      },
+      {
+        "company": "iCIMS",
+        "title": "Director of Engineering",
+        "timeFrame": "Jan 2023 - Aug 2024 · 1 yr 8 mos",
+        "logo": "icims",
+        "description": "• Expanded scope of management to oversee multiple projects, managers, and geographically distributed teams throughout the company• Directed implementation of Apostrophe CMS for career site customization within Attract product, enabling clients to build branded recruitment experiences through visual editing and structured content management, working closely with vendor's product team to leverage emerging platform features• Led successful rollout of Mabl end-to-end testing framework, creating standardized processes which enabled team adoption of automated testing across development workflow• Created comprehensive playbook for unprecedented complex data migration for key customer, coordinating across multiple stakeholders organization-wide to synthesize expertise and establish a repeatable framework for similar initiatives• Accelerated progress on critical long-term project to modernize aging Node.js infrastructure across all Jibe products, executing methodical migration to NestJS while maintaining operational continuity of both systems"
+      },
+      {
+        "company": "iCIMS",
+        "title": "Senior Manager of Engineering",
+        "timeFrame": "Feb 2021 - Mar 2023 · 2 yrs 2 mos",
+        "logo": "icims",
+        "description": "• Broadened responsibilities to include managing all teams supporting backend services in iCIMS Attract line of business• Responsible for absorbing and integrating a newly-acquired budding marketing automation application into the CRM; marrying two projects of vastly different maturity levels into one cohesive, enterprise-ready product • Brought all projects into A-level grades within the SonarQube, Dependency Track, and Veracode quality analysis tools• Partnered with the service side of iCIMS to create an easy-to-use bug reporting system that encouraged implementation partners to call-out and queue-up defects in real-time for rapid fixes • Created Team-level dashboards that combined information from various platforms (bitbucket, allstacks, jira, etc) and provided a ground-level picture of sprint over sprint performance both at the individual and combined point of view• Oversaw, managed, and led to completion complex cross-department initiatives such as: universal login solution via Auth0, integration into customized analytics service, robust logging via Sumo Logic, and metrics reporting via NewRelic"
+      },
+      {
+        "company": "iCIMS",
+        "title": "Manager of Engineering",
+        "timeFrame": "Jun 2019 - Feb 2021 · 1 yr 9 mos",
+        "logo": "icims",
+        "description": "• The CRM application is one of the main reasons Jibe is acquired by iCIMS - The product immediately replaces iCIMS’• Breadth of management doubled overnight, inherited a group of developers of varied experience and skill sets• Lead newly formed, larger team through delivery of a multi-month build out of a brand new event management module• Extracted customized angular material component library into satellite application (Storybook) that could be maintained alongside core codebase• Became WCAG 2.2AA compliant by focusing team energy and dev hours on augmenting existing accessibility features• Introduced internationalization to the CRM, by completing a massive effort to extract & translate all user visible wording • Created highly customized Jira tooling that streamlined ticket management for a rapidly-growing CRM team"
+      },
+      {
+        "company": "Jibe, an iCIMS Company",
+        "title": "Manager of Frontend Engineering (acquired by iCIMS)",
+        "timeFrame": "Apr 2019 - Jun 2019 · 3 mos",
+        "logo": "icims",
+        "description": "• CRM product grew swiftly and began to appeal to a much larger market share as a direct result of prior work• Was given a team of [distributed] junior level developers to mentor, upskill, and nurture into a high-functioning unit• Grew this diverse team of developers into valuable, mature individual contributors who provided ongoing value to CRM• Took on sole responsibility for all pull request reviews for several months, as junior level employees came up to speed• Personally built out most complex integrations with external systems, such as SSO, scheduling, and resume importing• Introduced unit testing to all parts of the codebase, utilizing different strategies and test harnesses for each stack layer• CRM product was a major catalyst that triggered the Jibe/iCIMS acquisition; it enticed a much larger company to buy this more fully-featured, user-friendly, modern application rather than reworking their older piece of software"
+      },
+      {
+        "company": "Jibe, an iCIMS Company",
+        "title": "Lead Frontend Software Engineer",
+        "timeFrame": "Jun 2018 - Apr 2019 · 11 mos",
+        "logo": "icims",
+        "description": "• Initially brought on to single-handedly rewrite an underdeveloped CRM product from the outdated angularJS framework to a modern typescript/component-based Angular version• Was responsible for maintaining a “hybrid” angular app (ie: running both versions simultaneously) while the upgrade process elapsed• Successfully migrated the entire CRM application to modern angular/express/typescript stack, one view at a time• Worked closely with external freelance contractors to create an end-to-end testing suite that provided a safety net for the upgrade process; allowed for testing feature parity as each view completed migration• Worked with DevOps engineers to reconfigure the CI/CD pipeline; allowed for faster/modern build processes, CDN deploys, and coordination/gating with the end-to-end test suite"
+      },
+      {
+        "company": "Marvel Entertainment",
+        "title": "Senior Front End Engineer",
+        "timeFrame": "Jan 2018 - Jun 2018 · 6 mos",
+        "logo": "marvel",
+        "description": "• Lead developer for Marvel.com sitewide overhaul, responsible for creating a future facing ES6/7 React codebase • Head of Front End Development for custom Content Management System built on React/Redux • Utilized ESHint, StyleLint, Husky, and JSDoc to enforce company-wide front end coding standards for all contributors• Implemented test-driven development by creating a full test suite for Marvel.com components using jest and enzyme• Managed interns through fundamentals of web development by familiarizing them with Marvel.com codebase and introducing them to other projects within the company• Mentored interns through code review sessions in order to ensure that they produced quality work"
+      },
+      {
+        "company": "Marvel Entertainment",
         "title": "Web Interface Developer",
-        "timeFrame": "Jun 2015 - Present",
-        "description": "• Head of Front End development for custom Content Management System built from scratch on React/Redux • Spearheaded development on Marvel’s first React project which utilized highly structured components for optimal reusability • Responsible for creating a structured intern program that taught fundamentals of web development, and introduced assorted ongoing projects • Managed interns and mentored them through code review sessions in order to assure that they produced quality work • Created thorough documentation for on-boarding processes, all React projects, and within each codebase • Primary stakeholder in supporting and developing the internal digital comic authoring tool, built on Angular • Designed/developed core components of read.marvel.com, Marvel Unlimited's web interface, written in Backbone • Built assorted different static and dynamic pages for the Marvel.com website, utilizing jQuery, Backbone, and other custom-built internal libraries"
+        "timeFrame": "Jun 2015 - Dec 2017 · 2 yrs 7 mos",
+        "logo": "marvel",
+        "description": "• Lead development on Marvel’s first React project, utilizing ES6 syntax, Webpack build chain, Block Element Modifier Sass styling, and highly structured components for optimal reusability.• Primary stakeholder in supporting and developing the internal digital comic authoring tool, built on Angular • Designed/developed core components of read.marvel.com, the Marvel Unlimited web interface, written in Backbone• Created thorough documentation within each codebase and on Confluence for general stakeholders to view• Built assorted different static and dynamic pages for the Marvel.com website, utilizing jQuery, Backbone, and other proprietary internal JavaScript libraries"
       },
       {
         "company": "Rutgers University",
         "title": "Full Stack Web Development Instructor",
-        "timeFrame": "Feb 2017 - Present",
-        "description": "• Taught a six-month long intensive full stack bootcamp to students with no prior coding experience • Lesson plans covered a multitude of javascript-centric topics which spanned the entire stack • Topics included: HTML5, CSS, Javascript, jQuery, Git, Node, Express, MySQL, MongoDB, React, Computer Science, Deployment, and more • Provided ongoing assistance to students as they progressed through the course, both remotely and inside the classroom • Served as a mentor and senior developer to students, course correcting and explaining concepts as they learned • Rewrote the entire React portion of the curriculum, switching from deprecated ES5 syntax to more future-friendly ES6 code Contributed to a nationwide shared lesson plan by submitting merge requests to shared repository"
+        "timeFrame": "Feb 2017 - Aug 2017 · 7 mos",
+        "logo": "rutgers",
+        "description": "• Taught a six-month long intensive full stack bootcamp to students with no prior coding experience • Lesson plans covered a multitude of JavaScript topics which spanned the entire stack Topics included: HTML5, CSS, Javascript, jQuery, Git, Node, Express, MySQL, MongoDB, React, Computer Science, Deployment, and more • Provided ongoing assistance to students as they progressed through the course, both remotely and inside the classroom • Served as a mentor and senior developer to students, course correcting and explaining concepts as they learned • Rewrote the entire React portion of the curriculum, switching from deprecated ES5 syntax to more future-friendly ES6• Contributed to a nationwide shared lesson plan by submitting merge requests to shared repository• Provide ongoing support as a substitute teacher as the need arises from other cohorts"
       },
       {
         "company": "ScrollMotion",
         "title": "Front End Developer",
-        "timeFrame": "June 2012 - June 2015",
-        "description": "• Built highly interactive iPad applications from scratch for a variety of enterprise customers • Utilized high-level JavaScript to marry complex backend structures with pixel-perfect front end design • Spearheaded development that brought fully functional charting solution to the platform, allowing the company to reach new customers and adding value and depth to the product • Worked with assorted APIs to incorporate external data and advanced functionality into apps • Developed a suite of python scripts to help workflow and reduce latency in the build process"
+        "timeFrame": "Jun 2012 - Jun 2015 · 3 yrs 1 mo",
+        "logo": "scrollmotion",
+        "description": "• Built highly interactive iPad applications from scratch for a variety of enterprise customers• Utilized high-level JavaScript to marry complex backend structures with pixel-perfect front end design• Spearheaded development that brought fully functional charting solution to the platform, allowing the company to reach new customers and adding value and depth to the product• Worked with assorted APIs to incorporate external data and advanced functionality into apps• Developed a suite of python scripts to help workflow and reduce latency in the build process"
+      },
+      {
+        "company": "Vendome Group",
+        "title": "Junior Web Developer",
+        "timeFrame": "Sep 2011 - Jun 2012 · 10 mos",
+        "logo": "vendome",
+        "description": "• Created a variety of different pages featured on flagship websites using HTML, CSS, and Javascript• Used Photoshop to design custom content for prominent display on front page of corporate website• Utilized putty command-line interface to update Apache back-end server on a regular basis"
+      },
+      {
+        "company": "Sesame Workshop",
+        "title": "Consultant/Microsoft Exchange Administrator",
+        "timeFrame": "Jun 2011 - Sep 2011 · 4 mos",
+        "logo": "sesame",
+        "description": "• Assisted with company-wide migration from Novell Groupwise to Microsoft Outlook 2010• Guided users through the intricacies of Outlook, answering questions on a case-by-case basis• Personally configured multiple computers for the new email client on both Mac and Windows PCs"
+      },
+      {
+        "company": "State University of New York at Binghamton",
+        "title": "Microsoft Office Specialist",
+        "timeFrame": "Aug 2010 - Dec 2010 · 5 mos",
+        "logo": "js",
+        "description": "• Taught a semester-long class that stressed the essentials of computing• Obtained Microsoft Office Specialist certifications throughout the course of the semester• Communicated with a diverse background of people, ranging from 16 to 65 years old"
+      },
+      {
+        "company": "Port Authority of New York and New Jersey",
+        "title": "Technology Services Department - Database Intern",
+        "timeFrame": "Jun 2010 - Aug 2010 · 3 mos",
+        "logo": "js",
+        "description": "• Learned database programming with no prior experience• Worked in a team to create a web-based application embedded in the Port Authority website• Made use of many modern day industry standards such as XML and JQuery• Witnessed an entire software lifecycle, from requirements analysis to maintenance"
+      },
+      {
+        "company": "Port Authority of New York and New Jersey",
+        "title": "Technology Services Department - Management Intern",
+        "timeFrame": "Jun 2009 - Aug 2009 · 3 mos",
+        "logo": "js",
+        "description": "• Developed a fully functional web-based crime mapping solution for use within the Port Authority Police Dept• Built GIS data layers from the ground up, overlaying blueprints on satellite imagery• Learned two professional-use software suites within a small amount of time• Performed field analysis of specific sites in order to verify blueprint data• Contributed to a major ongoing Port Authority project"
+      },
+      {
+        "company": "Best Buy",
+        "title": "Computer Customer Specialist",
+        "timeFrame": "Oct 2006 - Jul 2008 · 1 yr 10 mos",
+        "logo": "js",
+        "description": "• Developed customer service and communication skills by assisting customers in purchasing new computers• Came in contact with many different types of people, often handling several at once• Generated store revenue by selling services based on customers needs"
+      },
+      {
+        "company": "Staten Island Advance",
+        "title": "Teen Correspondent – Fl!p Section",
+        "timeFrame": "Sep 2004 - Oct 2007 · 3 yrs 2 mos",
+        "logo": "js",
+        "description": "• Learned to hone in on inner thoughts and express them through written word• Published over thirty articles over times in the Sunday Advance• All articles of differing subject matter, with varying styles• Most published teen correspondent for the year of 2005"
+      },
+      {
+        "company": "New York Board of Trade",
+        "title": "Commodities Floor Clerk",
+        "timeFrame": "Jun 2005 - Sep 2006 · 1 yr 4 mos",
+        "logo": "js",
+        "description": "• Established a sense of responsibility, handling the company’s daily finances.• Took down and completed over 100 orders a day, filling at the client’s desired prices• Checked Victory’s daily trades, making sure every trade went through correctly• Repeatedly saved firm revenue by accurately checking statements"
       }
     ],
     "projects": [
       {
-        "title": "Custom Content Management System for Marvel Cinematic Universe",
-        "company": "Marvel Entertainment",
-        "description": "• From-scratch React project, allowed for autosaving and utilized Redux-Form to track changes from within the view • Architected project in a way that allowed for maximum extensibility for future development, drastically reducing development time in future phases • Wrote 25+ custom configurable components to properly model complex data structures stored in graph database • Implemented complex state management utilizing asynchronous Redux actions and reducers • Took full advantage of ES6/ES7 syntax, embracing component classes, spread operators, arrow functions, etc. • Extended several open source component libraries, adapting existing structures to meet the requirements laid out by product stakeholders"
+        "title": "Fora Suite of Products",
+        "company": "FORA",
+        "logo": "fora",
+        "description": "• Architected comprehensive error boundary system with automatic component wrapping via custom Vite plugin, Rollbar integration, error classification, and context-aware reporting with feature flag data• Developed Instagram story-style UI system for meeting content navigation with multi-panel architecture, read/unread tracking, advanced interactions, and deep-linking capabilities• Built enterprise-grade tour platform with guided onboarding, dynamic configuration, and integrated analytics for user engagement tracking• Extended admin platform capabilities with robust error handling, dynamic form validation components, and enhanced onboarding user experience"
       },
       {
-        "title": "Internal Tool: Code Generating/ Administrative Tagging System",
-        "company": "Marvel Entertainment",
-        "description": "• Marvel's first React project, allows employees to create comic promo codes, administer website ad tags, etc. • Shepherded project through three drastically different phases ( jQuery to ES5-style ReactJS, to ES6 [class based] ReactJS) • Created configuration-based architecture, which allows developers to add new pages and forms with simple JSON structures • Learned Webpack to provide deeper understanding into build complex chain processes (plugins, dev-server with proxy, loaders) • Utilized React-Router to provide consistent user-facing routing across the application • Implemented Block Element Modifier (BEM) Sass styling throughout all views and components"
-      },
-      {
-        "title": "Marvel Insider Program Stylistic Overhaul",
-        "company": "Marvel Entertainment",
-        "description": "• Interfaced with third party vendor to implement user-facing points economy that allowed users redeem points for prizes • Primarily tasked with drastic re-skinning of vendor's unstyled embedded dashboard widgets • Could only style widgets utilizing plain CSS and pseudo selectors (content locked in iframe) • Drastic creativity was necessary to match designs to locked HTML structure in embedded widgets"
-      },
-      {
-        "title": "RateThatTruck.com",
+        "title": "Home Automation Platform",
         "company": "Personal",
-        "description": "• Turned personal passion into a prominent food truck blog that brings ratings and reviews to food enthusiasts • Version 1.0 was built using JavaScript, and PHP, heavily customizing a Wordpress theme • Utilized Wordpress, JavaScript, and PHP to create a cohesive site that is up to modern web standards• Version 2.0 added authentication, user interaction components, and was built from scratch on MERN stack • Utilizes headless Wordpress API to maintain blog functionality and conform to standard RESTful practices • Learned sketch to create wireframes for redesign, followed self-contained agile methodology to implement changes"
+        "logo": "homeassistant",
+        "description": "• Configured a heavily customized version of Home Assistant, an python-based open source home automation platform• Utilized Jinja2 templates to create actions, scripts and automations that link together several IoT devices• Wrote YAML configuration to enable communication across entities to one centralized Raspberry Pi3 server• Made server frontend globally accessible by enabling port forwarding and adding SSL certificate from LetsEncrypt.org• Created several different home-grown utility scripts and frontend widgets to further tailor and extend the platform • Contributed to Home Assistant community, posted aforementioned utility scripts for other members to use"
       },
       {
         "title": "JoeSangiorgio.com",
         "company": "Personal",
-        "description": "• Portfolio site built from scratch utilizing VueJS • Aggregates all professional/personal information and serves and entry point for hiring managers • Driven by publicly available API hosted on Google Cloud Engine • Uses many VueJS addon libraries, such as Vuetify for UI components, and vue-router for native browser routing"
+        "logo": "js",
+        "description": "• Data driven dashboard style portfolio site built on Vue; complete with user preference menu and sitewide tour prompt• Aggregates all professional/personal information and serves and entry point for hiring managers• Driven by publicly available API: written in Node.js, documented with Swagger, and hosted on Heroku • Uses many Vue addon libraries, such as Vuetify for UI components, and vue-router for native browser routing"
+      },
+      {
+        "title": "Multi-Service JavaScript-Based Home Assistant Add-on",
+        "company": "Personal",
+        "logo": "js",
+        "description": "• Developed comprehensive Home Assistant add-on to master containerized service orchestration utilizing Docker and s6-overlay supervision system• Implemented sophisticated container lifecycle management including initialization scripts, inter-service dependency resolution, and graceful shutdown orchestration• Architected full-stack solution (SvelteKit/Node.js/MongoDB) within Home Assistant ecosystem, navigating undocumented integration patterns to successfully deploy JavaScript technologies in an addon environment• Created sophisticated headless browser automation tool using Cypress to handle complex web workflows including reservation interactions, waitlist management operations, and detailed status reporting within the addon UI"
+      },
+      {
+        "title": "CMS-Driven Career Site Pages",
+        "company": "iCIMS",
+        "logo": "icims",
+        "description": "• Directed development of comprehensive visual page builder enabling HR teams to create branded career sites with custom recruitment widgets, template systems, and drag-and-drop content management capabilities• Oversaw headless CMS architecture deployment requiring significant API development through modernized Node.js infrastructure and coordinated job data integration• Established strategic partnership with Apostrophe product team as a key enterprise customer, contributing to platform roadmap, including i18n features, and maintained regular collaboration on product roadmap initiatives• Led phased rollout beginning with pilot customers waiting for CMS capabilities, established regular feedback sessions for product refinement, and oversaw transition to full-scale deployment"
+      },
+      {
+        "title": "iCIMS Attract Backend Services: Importer, Job, Event, Document",
+        "company": "iCIMS",
+        "logo": "icims",
+        "description": ""
+      },
+      {
+        "title": "iCIMS CRM",
+        "company": "Jibe, Inc.",
+        "logo": "jibe",
+        "description": "• The Candidate Relationship Management application is a flagship product within the iCIMS Talent Cloud software suite• Mainly targeted at recruiters, the multilingual iCIMS CRM allows users to build talent pipelines that can reach candidates anywhere in the world via job alerts, text, and email campaigns • Communication administration enables users to search, create & configure automated follow-up emails and text promotions based on candidate action and engagement• Industry-leading AI engine fuels discovery of best-fit talent, using either the job description or “ideal candidate” resume • Advanced filtering and sorting capabilities also allow for a more manual, traditional approach to candidate searches• Contains tools for in-person and virtual sourcing events such as job fairs; Works with sister mobile apps to bring event attendees directly into the CRM (affording for seamless, trackable future communication)• Tight integration with iCIMS analytics platform enables admin users to keep track of valuable metrics about both internal and external usage• Advanced permissioning affords administrators granular-level control over the entire CRM feature set; customers can configure and protect all aspects of the application across large recruiter user base"
+      },
+      {
+        "title": "iCIMS Admin Application",
+        "company": "iCIMS",
+        "logo": "icims",
+        "description": "• Managed a team of full stack offshore developers to create an admin application spanning the breadth of iCIMS • Built from the ground up, the Admin Application communicates with microservices across all of iCIMS infrastructure• Web-based interface allows users to quickly stand up new clients, alter configurations, and centralizes error reports• First app of its kind to utilize customized react material componentry, icims continuous integration / deployment pipeline• Deprecated antiquated piecemeal processes that cost developer hours, saving the company significant yearly costs"
+      },
+      {
+        "title": "Gumbit.xyz",
+        "company": "Personal",
+        "logo": "js",
+        "description": "• Co-founded and became technical lead of NYC-based NFT creation company: Programmed Success Incorporated• Partnered with influencer street artist PJ O’Rourke to create three diverse NFT collections, released over several months• Single-handedly responsible for all development and design related tasks such as Gumbit styleguide/ design language, custom minting website, NFT generation, smart contract creation, and connection to ethereum network• Utilized industry standard software tooling, and agile best practices to allocate/assign work to different team members• Self-taught concepts, fundamentals, and libraries of blockchain development that became backbone of the project• Minting website utilized cutting-edge technology such as sveltekit, netlify CMS, thirdweb, serverless functions, etc• NFT Collection creation process made use of an existing open-source generation tool, but required heavy custom script development (via node.js) and feature addition due to complexity of desired output (920 total layers, 5 different poses)"
+      },
+      {
+        "title": "Allclear.app",
+        "company": "Personal",
+        "logo": "js",
+        "description": "• Co-founded a nonprofit dedicated to fighting COVID-19 by empowering communities with technology and data• The service, the first of its kind, is a free web application that was the most comprehensive database available in the country at that time for locating COVID-19 tests• Head developer for the front end application; powered by React, custom CRA, Context API, Google Places & Maps API• Lead a team of diverse volunteers through an entire product lifecycle, from ideation through feature-complete delivery• Top commit contributor to the overall application, responsible for heavy organization, optimization, and SEO efforts• Allclear application and work therein was featured on medium blogs, allclear socials, and even the New York Times"
+      },
+      {
+        "title": "Jessandjoe.co",
+        "company": "Personal",
+        "logo": "js",
+        "description": "• Repurposed heavily customized gatsby template for website that conveys information about destination wedding• Project doubled as an early adoption experiment that made use of upcoming tech such as typescript and CSS-in-JS• Implemented SEO best practices, custom animated transitions, photo grid, fetching via graphQL, as well as other features• Static information on the website is translated from markdown, and can be updated without the need for complex code changes• Progressive Web App technology allowed for offline and low-service usage situations (IE: parts of the CO mountains)• Implemented Text message updates via third party API for automated day-of-event notifications to all wedding guests"
+      },
+      {
+        "title": "Marvel.com Site Overhaul",
+        "company": "Marvel Entertainment",
+        "logo": "marvel",
+        "description": "• Worked on a team of 15 developers on a drastic ground-up revamp of Marvel.com• All aspects of the website were completely rebuilt: Drupal CMS, PHP Backend, Node.js Layer, React/Redux Application• Project had an extremely short timeline, which necessitated strong collaboration from all members of a large team• Defined extensible JSON structures for component API by working closely with back end developers• Responsible for building complex multi-variant components that relied heavily on user interaction• Contributed to elaborate webpack scripting setup which allowed the application to run in several different environments• Improved SEO by utilizing Next.js to implement server-side rendering from the node layer of the stack• Collaborated with a team that spanned several disciplines and countries to create a polished finished product• Made extensive use of Atlassian project software (Jira, Confluence) to document, track, and coordinate"
+      },
+      {
+        "title": "www.RateThatTruck.com",
+        "company": "Personal",
+        "logo": "js",
+        "description": "• Turned personal passion into a prominent food truck blog that brings ratings and reviews to food enthusiasts• Utilized Wordpress, JavaScript, and PHP to create a cohesive site that is up to modern web standards"
+      },
+      {
+        "title": "Custom Content Management System for Marvel Cinematic Universe",
+        "company": "Marvel Entertainment",
+        "logo": "marvel",
+        "description": "• React project built from scratch, featured autosaving and utilized Redux-Form to track changes within a given view • Created project architecture that allowed for maximum extensibility and drastically reduced future development time• Wrote 25+ configurable components to properly model and display complex data structures stored in graph database • Implemented application level state management utilizing asynchronous Redux actions and reducers • Took full advantage of ES6/ES7 syntax, embracing component classes, spread operators, arrow functions, etc.• Incorporated several open source component libraries, adapting their existing codebase to meet the requirements laid out by project stakeholders"
+      },
+      {
+        "title": "Internal Tool: Code Generating/ Administrative Tagging System",
+        "company": "Marvel Entertainment",
+        "logo": "marvel",
+        "description": "• Marvel's first React project, allowed employees to create comic promo codes, administer website ad tags, etc• Shepherded project through three drastically different phases ( jQuery to ES5 React to ES6 React) • Created configuration-based architecture, which allows developers to add new pages and forms with simple JSON • Learned Webpack to provide deeper understanding into build complex build chain processes (plugins, dev-server with proxy, loaders) • Utilized React-Router (v2-4) to provide consistent user-facing routing across the application • Implemented Block Element Modifier (BEM) Sass styling throughout all views and components"
+      },
+      {
+        "title": "Marvel Insider Program",
+        "company": "Marvel Entertainment",
+        "logo": "marvel",
+        "description": "• Interfaced with third party vendor, implemented sitewide points economy that allowed users to redeem points for prizes • Primarily tasked with drastic re-skinning of vendor's unstyled embedded dashboard widgets • Could only style widgets utilizing plain CSS and pseudo selectors because content was locked in iframe• Drastic creativity was necessary to match designs to static HTML structure in embedded widgets"
+      },
+      {
+        "title": "CEO Organizational App",
+        "company": "ScrollMotion",
+        "logo": "scrollmotion",
+        "description": "• Created a robust front end that allowed users to view calendars, appointments, and talking points• Interfaced with Django CMS to populate JSON objects that were used as data stores for the app• Built in offline functionality that handled data mismatches, ensuring freshest information was on the CMS"
+      },
+      {
+        "title": "Highcharts.js Plugin/Interface Layer",
+        "company": "ScrollMotion",
+        "logo": "scrollmotion",
+        "description": "• Solely responsible for creating JavaScript communication medium from JSON to Highcharts.js• Brought robust charting solution to the ScrollMotion platform, adding an integral layer that is used in several apps today• Exposed all useful design and configuration properties, translating them to interact natively with Highcharts.js API"
+      },
+      {
+        "title": "Pension Risk Calculator App",
+        "company": "ScrollMotion",
+        "logo": "scrollmotion",
+        "description": "• Implemented a graphical version of a pension modeler, ported over directly from an excel spreadsheet• Used ScrollMotion’s platform to create graphs using rudimentary composition elements• Effectively handled assorted input variables and used them to calculate desired visual and numerical output"
+      },
+      {
+        "title": "Quiz App (In App Store)",
+        "company": "ScrollMotion",
+        "logo": "scrollmotion",
+        "description": "• Worked in a small team to create a visually stunning sales enablement app under a very tight deadline• Creatively brought together design and function, producing an efficient backend and a beautiful display layer"
       }
     ],
     "skills": [
       "JavaScript",
-      "HTML",
       "CSS",
-      "ReactJS",
-      "jQuery",
-      "AngularJS",
-      "Vue.js",
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-      "Git",
-      "JSON",
-      "Webpack",
-      "Backbone.js",
-      "GruntJS",
-      "Gulp.js",
-      "Underscore.js",
-      "Vagrant (software)",
       "Web Development",
-      "Teaching",
-      "Mentoring",
-      "Tutoring",
-      "Writing",
-      "User Interface",
       "XML",
-      "Database",
-      "Python (programming_language)",
+      "jQuery",
+      "HTML",
+      "Microsoft Office",
+      "Git",
+      "Databases",
+      "Python",
+      "JSON",
       "SQL",
-      "Mac OS",
-      "Windows",
       "Linux",
-      "Android (operating_system)",
       "WordPress",
-      "Java (programming_language)",
-      "Sketch (application)",
       "Photoshop",
+      "Node.js",
+      "Java",
+      "Windows",
       "PHP",
-      "c++",
+      "Android",
+      "Mac OS",
+      "MongoDB",
+      "React.js",
+      "C++",
+      "Unix",
+      "Express.js",
+      "Drupal",
       "Mobile Applications",
-      "Microsoft Office"
+      "Excel",
+      "Web Services",
+      "Content Management",
+      "Amazon Web Services (AWS)",
+      "Test Automation",
+      "Requirements Analysis",
+      "Software Development Life Cycle (SDLC)",
+      "AI Software Development",
+      "Stakeholder Management",
+      "Agile Methodologies",
+      "Docker Products",
+      "Data Visualization",
+      "WebSocket",
+      "Offline Development",
+      "3rd Party Integrations",
+      "User Interface Design",
+      "Iframes",
+      "React Router",
+      "SASS",
+      "Block Element Modifier (BEM)",
+      "DaisyUI",
+      "Bulma (CSS Framework)",
+      "Graph Databases",
+      "Redux Thunk",
+      "Redux.js",
+      "Next.js",
+      "Vue.js",
+      "Swagger API",
+      "API Development",
+      "Vuetify",
+      "YAML",
+      "Raspberry Pi",
+      "Product Management",
+      "Cross-team Collaboration",
+      "Angular",
+      "Internationalization",
+      "Material-UI",
+      "Team Management",
+      "Back-End Web Development",
+      "Data Synchronization",
+      "Vite Plugins",
+      "ChakraUI",
+      "React Query",
+      "Statsig",
+      "Google Maps API",
+      "Search Engine Optimization (SEO)",
+      "Svelte",
+      "Blockchain",
+      "Non-Fungible Tokens (NFTs)",
+      "GatsbyJS",
+      "TypeScript",
+      "GraphQL",
+      "Progressive Web Applications (PWAs)",
+      "Home Automation Platform",
+      "Docker",
+      "s6",
+      "Cypress.io",
+      "Artificial Intelligence (AI)",
+      "Product Strategy",
+      "Content Management Systems (CMS)",
+      "Teaching",
+      "Mentoring"
     ],
     "references": [
       {

@@ -21,16 +21,21 @@ Vue.mixin(helpersMixin);
 
 //set up the environment variables
 const {environment} = build.info;
-const localhostBase = 'http://localhost:3000/api/v1/';
+const localhostBase = 'http://localhost:3000/api/v0/';
 const remoteBase = 'https://resume.joesangiorgio.com/api/v0/';
 
+// Use localhost in development (Vite dev server), remote in production
+const isDev = import.meta.env.DEV;
+const apiBase = isDev ? localhostBase : remoteBase;
+
+console.log('🔧 Environment:', {isDev, apiBase, viteMode: import.meta.env.MODE});
 
 Object.defineProperty(Vue.prototype, '$env', {value: environment});
 Object.defineProperty(Vue.prototype, '$endpoints', {
 	value: {
-		base: `${remoteBase}`,
-		info: `${remoteBase}info/`,
-		scrape: `${remoteBase}scrape/`
+		base: `${apiBase}`,
+		info: `${apiBase}info/`,
+		scrape: `${apiBase}scrape/`
 	}
 });
 

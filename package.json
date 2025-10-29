@@ -4,11 +4,13 @@
   "version": "1.5.5",
   "author": "Joe Sangiorgio",
   "private": true,
+  "type": "module",
   "scripts": {
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "migrate-content": "node scripts/migrate-content.js"
   },
   "dependencies": {
     "vue": "^2.3.3"
