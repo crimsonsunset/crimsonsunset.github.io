@@ -33,8 +33,15 @@
                         <v-list-tile>
                             <v-list-tile-avatar>
                                 <img
+                                        v-if="!imageErrors[i]"
                                         :src="item.img"
-                                        alt="avatar">
+                                        alt="avatar"
+                                        @error="handleImageError(i)">
+                                <colored-avatar 
+                                        v-else
+                                        :text="item.name" 
+                                        mode="initials"
+                                />
 
                             </v-list-tile-avatar>
 
@@ -75,14 +82,18 @@
 <script>
 
 	import axios from 'axios'
+	import ColoredAvatar from './ColoredAvatar.vue'
 
 	export default {
+		components: { ColoredAvatar },
 		props: ['endpoint', 'settingsObj'],
 		mounted() {
 			const {endpoint} = this;
 			axios.get(`${this.$endpoints.info}${endpoint}`)
 				.then(({data}) => {
 					this[endpoint] = data;
+					// Initialize error tracking for each item
+					this.imageErrors = new Array(data.length).fill(false);
 					//remove loader
 					this.settingsObj.isLoaded = true;
 					this.settingsObj.loaderRef.classList.remove('is-active');
@@ -95,10 +106,15 @@
 			return {
 				currRef: '',
 				references: [],
+				imageErrors: []
 			}
 		},
 		computed: {},
-		methods: {}
+		methods: {
+			handleImageError(index) {
+				this.$set(this.imageErrors, index, true);
+			}
+		}
 	}
 
 </script>
