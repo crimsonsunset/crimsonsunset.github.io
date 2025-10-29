@@ -170,10 +170,10 @@
 									return descArr
 								};
 
-								e2.descArr = splitDescription(e2.description);
-								e2.key = 'title';
-								e2.img = `../src/assets/logos/${e2.logo.toLowerCase()}.png`;
-								return e2;
+							e2.descArr = splitDescription(e2.description);
+							e2.key = 'title';
+							e2.img = `/assets/logos/${e2.logo.toLowerCase()}.png`;
+							return e2;
 							});
 							this[name] = currExp;
 

@@ -251,7 +251,7 @@ export default {
     },
     getFileName(item) {
       item = item.replace(' ', '_');
-      return `../src/assets/skills/${item.toLowerCase()}.png`;
+      return `/assets/skills/${item.toLowerCase()}.png`;
     },
     handleImageError(skillName) {
       this.$set(this.imageErrors, skillName, true);
