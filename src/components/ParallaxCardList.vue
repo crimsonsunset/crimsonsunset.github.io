@@ -400,6 +400,8 @@ $slide-number: 3;
   }
 }
 
+
+
 // ------------- SET TRANSFORM VALUES ------------- //
 
 .background.up-scroll {
