@@ -68,20 +68,20 @@
 	export default {
 		props: ['settingsObj', 'endpoint'],
 
-		//todo: this is a hack because the stepper component is very picky about data it recieves and gets crippled when its incomplete
-		beforeCreate() {
-			this.bio = times(4, () => {
-					return {
-						"name": "",
-						"location": "",
-						"date": "",
-						"icon": "",
-						"descriptionArr": []
-					}
+	//todo: this is a hack because the stepper component is very picky about data it recieves and gets crippled when its incomplete
+	beforeCreate() {
+		this.bio = times(7, () => {
+				return {
+					"name": "",
+					"location": "",
+					"date": "",
+					"icon": "",
+					"descriptionArr": []
 				}
-			);
-			//            			debugger;
-		},
+			}
+		);
+		//            			debugger;
+	},
 		created() {
 			const {endpoint} = this;
 			const {themeColor} = this.settingsObj;
