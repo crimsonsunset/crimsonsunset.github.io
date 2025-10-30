@@ -217,5 +217,5 @@ const pageInfoObj = {
 	},
 	'About': 'A step-list component that has even more information regarding my background. The content here is meant to be only semi-serious =)',
 	'Contact': 'A form that will allow you to contact me directly',
-	'Documentation': 'Here you will find Swagger-style API documentation for the Express server that powers this website.'
+	// 'Documentation': 'Here you will find Swagger-style API documentation for the Express server that powers this website.'
 }

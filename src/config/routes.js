@@ -40,10 +40,10 @@ export default [
         icon: 'phone',
         label: 'Contact'
     },
-	{
-		path: '/Documentation',
-		component: Views.Docs,
-		icon: 'settings_ethernet',
-		label: 'API Documentation'
-	}
+	// {
+	// 	path: '/Documentation',
+	// 	component: Views.Docs,
+	// 	icon: 'settings_ethernet',
+	// 	label: 'API Documentation'
+	// }
 ];
