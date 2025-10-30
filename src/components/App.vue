@@ -353,6 +353,10 @@
     $minHeight: 90vh !important;
 
 
+    main{
+      padding-bottom: 20px;
+    }
+
     .info-accordion {
         background-color: white;
     }
@@ -371,6 +375,7 @@
     }
 
     .footer {
+      min-height: 65px;
         color: white;
         height: 5vh;
 

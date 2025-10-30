@@ -161,6 +161,7 @@
             width: 50px;
             i {
                 font-size: 35px !important;
+                transform: scale(0.55);
             }
         }
     }

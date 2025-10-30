@@ -31,7 +31,7 @@
             :list="nameArr"
             ref="grid"
             :options='option'
-            @layout="'masonry'"
+            @layout="'fitRows'"
             v-images-loaded:on.progress="layout"
         >
 
@@ -245,7 +245,7 @@ export default {
   methods: {
     layout() {
       if (this.$refs.grid) {
-        this.$refs.grid.layout('masonry');
+        this.$refs.grid.layout('fitRows');
       }
 
     },
@@ -308,25 +308,28 @@ export default {
 }
 
 .skill-card {
-  /*background: no-repeat center center fixed;*/
-  /*height: 200px;*/
-  /*width: 200px;*/
-  /*border: 1px solid red;*/
   cursor: pointer;
   display: flex;
   padding: 10px;
   margin: 10px;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  max-height: 220px;
+  width: 200px;
 
   &__title {
     padding: 0px;
     text-align: center;
     padding: 2px;
-    //border: $bw solid red;
   }
 
   &__image {
     margin-top: 10px;
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
   }
 }
 
