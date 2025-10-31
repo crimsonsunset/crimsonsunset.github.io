@@ -1,0 +1,19 @@
+{
+  "name": "crimsonsunset.github.io",
+  "description": "Personal portfolio website showcasing projects, experience, and technical skills",
+  "topics": [
+    "portfolio",
+    "vue",
+    "vite",
+    "javascript",
+    "personal-website",
+    "resume",
+    "web-development"
+  ],
+  "website": "https://joesangiorgio.com",
+  "visibility": "public",
+  "has_issues": true,
+  "has_wiki": false,
+  "has_projects": false
+}
+
